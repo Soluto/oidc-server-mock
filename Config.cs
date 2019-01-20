@@ -26,7 +26,7 @@ namespace OpenIdConnectServer
                 },
                 AllowAccessTokensViaBrowser = true,
                 RedirectUris = Environment.GetEnvironmentVariable("REDIRECT_URIS").Split(","),
-                
+                IdentityTokenLifetime = 60 * 60,
             }
         };
 
