@@ -10,13 +10,15 @@ namespace OpenIdConnectServer
 {
     public static class Config
     {
-        public static IEnumerable<ApiResource> GetApiResources() => new List<ApiResource>{};
+        public static IEnumerable<ApiResource> GetApiResources() => new List<ApiResource>{
+            new ApiResource(Environment.GetEnvironmentVariable("API_RESOURCE")),
+        };
 
         public static IEnumerable<Client> GetClients() => new List<Client>
         {
             new Client
             {
-                ClientId = Environment.GetEnvironmentVariable("CLIENT_ID"),
+                ClientId = Environment.GetEnvironmentVariable("OIDC_CLIENT_ID"),
                 AllowedGrantTypes = GrantTypes.Implicit,
                 AllowedScopes = new List<string>
                 {
@@ -27,6 +29,17 @@ namespace OpenIdConnectServer
                 AllowAccessTokensViaBrowser = true,
                 RedirectUris = Environment.GetEnvironmentVariable("REDIRECT_URIS").Split(","),
                 IdentityTokenLifetime = 60 * 60,
+            },
+
+            new Client
+            {
+                ClientId = Environment.GetEnvironmentVariable("CLIENT_CREDENTIALS_CLIENT_ID"),
+                AllowedGrantTypes = GrantTypes.ClientCredentials,
+                ClientSecrets = {
+                    new Secret(Environment.GetEnvironmentVariable("CLIENT_CREDENTIALS_CLIENT_SECRET").Sha256()),
+                },
+
+                AllowedScopes = { Environment.GetEnvironmentVariable("API_RESOURCE") },
             }
         };
 
