@@ -24,7 +24,7 @@ namespace OpenIdConnectServer
                     .AddInMemoryApiResources(Config.GetApiResources())
                     .AddInMemoryClients(Config.GetClients())
                     .AddTestUsers(Config.GetUsers());
-            
+
             services.AddMvc();
             services.AddCors();
         }
