@@ -5,6 +5,7 @@ using IdentityServer4;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
 using Newtonsoft.Json;
+using OpenIdConnectServer.Utils;
 
 namespace OpenIdConnectServer
 {
@@ -14,34 +15,21 @@ namespace OpenIdConnectServer
             new ApiResource(Environment.GetEnvironmentVariable("API_RESOURCE")),
         };
 
-        public static IEnumerable<Client> GetClients() => new List<Client>
+        public static IEnumerable<Client> GetClients()
         {
-            new Client
+            string configStr = Environment.GetEnvironmentVariable("CLIENTS_CONFIGURATION_INLINE");
+            if (string.IsNullOrWhiteSpace(configStr))
             {
-                ClientId = Environment.GetEnvironmentVariable("OIDC_CLIENT_ID"),
-                AllowedGrantTypes = GrantTypes.Implicit,
-                AllowedScopes = new List<string>
+                var configFilePath = Environment.GetEnvironmentVariable("CLIENTS_CONFIGURATION_PATH");
+                if (string.IsNullOrWhiteSpace(configFilePath))
                 {
-                    IdentityServerConstants.StandardScopes.OpenId,
-                    IdentityServerConstants.StandardScopes.Profile,
-                    IdentityServerConstants.StandardScopes.Email,
-                },
-                AllowAccessTokensViaBrowser = true,
-                RedirectUris = Environment.GetEnvironmentVariable("REDIRECT_URIS").Split(","),
-                IdentityTokenLifetime = 60 * 60,
-            },
-
-            new Client
-            {
-                ClientId = Environment.GetEnvironmentVariable("CLIENT_CREDENTIALS_CLIENT_ID"),
-                AllowedGrantTypes = GrantTypes.ClientCredentials,
-                ClientSecrets = {
-                    new Secret(Environment.GetEnvironmentVariable("CLIENT_CREDENTIALS_CLIENT_SECRET").Sha256()),
-                },
-
-                AllowedScopes = { Environment.GetEnvironmentVariable("API_RESOURCE") },
+                    throw new ArgumentNullException("You must set either CLIENTS_CONFIGURATION_INLINE or CLIENTS_CONFIGURATION_PATH env variable");
+                }
+                configStr = System.IO.File.ReadAllText(configFilePath);
             }
-        };
+            var configClients = Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<Client>>(configStr, new SecretConverter());
+            return configClients;
+        }
 
         public static IEnumerable<IdentityResource> GetIdentityResources() => new List<IdentityResource>
         {
@@ -50,9 +38,20 @@ namespace OpenIdConnectServer
             new IdentityResources.Email(),
         };
 
-        public static List<TestUser> GetUsers() => new List<TestUser>
+        public static List<TestUser> GetUsers()
         {
-            JsonConvert.DeserializeObject<TestUser>(Environment.GetEnvironmentVariable("TEST_USER"))
-        };
+            string configStr = Environment.GetEnvironmentVariable("USERS_CONFIGURATION_INLINE");
+            if (string.IsNullOrWhiteSpace(configStr))
+            {
+                var configFilePath = Environment.GetEnvironmentVariable("USERS_CONFIGURATION_PATH");
+                if (string.IsNullOrWhiteSpace(configFilePath))
+                {
+                    return new List<TestUser>();
+                }
+                configStr = System.IO.File.ReadAllText(configFilePath);
+            }
+            var configUsers = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TestUser>>(configStr);
+            return configUsers;
+        }
     }
 }
