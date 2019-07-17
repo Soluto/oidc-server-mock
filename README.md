@@ -1,6 +1,6 @@
 # OpenId Connect Server Mock
 
-This project is the mock server that provides OpenId Connect functionality including Implicit Flow.
+This project allows you to run configurable mock server with OpenId Connect functionality.
 
 This is the sample of using the server in `docker-compose` configuration:
 
@@ -14,6 +14,10 @@ This is the sample of using the server in `docker-compose` configuration:
         - "4011:80"
       environment:
         ASPNETCORE_ENVIRONMENT: Development
+        API_RESOURCES_INLINE: |
+          [
+            "some-app"
+          ]
         USERS_CONFIGURATION_INLINE: |
           [
             {
@@ -67,5 +71,5 @@ When `clients-config.json` is as following:
 
 Clients configuration should be provided. Test user configuration is optional (used for implicit flow only).
 
-There are two ways to provide configuration both to clients and users. You can either provide it inline as environment variable (`USERS_CONFIGURATION_INLINE` / `CLIENTS_CONFIGURATION_INLINE`) or mount volume and provide the path to configuration json as environment variable (`USERS_CONFIGURATION_PATH` / `CLIENTS_CONFIGURATION_PATH`).
+There are two ways to provide configuration for supported scopes, clients and users. You can either provide it inline as environment variable (`USERS_CONFIGURATION_INLINE` / `CLIENTS_CONFIGURATION_INLINE` / `API_RESOURCES_INLINE`) or mount volume and provide the path to configuration json as environment variable (`USERS_CONFIGURATION_PATH` / `CLIENTS_CONFIGURATION_PATH` / `API_RESOURCES_PATH`).
 

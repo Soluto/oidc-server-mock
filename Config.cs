@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 using System.Security.Claims;
 using IdentityServer4;
@@ -11,9 +13,21 @@ namespace OpenIdConnectServer
 {
     public static class Config
     {
-        public static IEnumerable<ApiResource> GetApiResources() => new List<ApiResource>{
-            new ApiResource(Environment.GetEnvironmentVariable("API_RESOURCE")),
-        };
+        public static IEnumerable<ApiResource> GetApiResources()
+        {
+            string apiResourcesStr = Environment.GetEnvironmentVariable("API_RESOURCES_INLINE");
+            if (string.IsNullOrWhiteSpace(apiResourcesStr))
+            {
+                var apiResourcesFilePath = Environment.GetEnvironmentVariable("API_RESOURCES_PATH");
+                if (string.IsNullOrWhiteSpace(apiResourcesFilePath))
+                {
+                    return new List<ApiResource>();
+                }
+                apiResourcesStr = File.ReadAllText(apiResourcesFilePath);
+            }
+            var apiResourceNames = JsonConvert.DeserializeObject<string[]>(apiResourcesStr);
+            return apiResourceNames.Select(r => new ApiResource(r));
+        }
 
         public static IEnumerable<Client> GetClients()
         {
@@ -25,9 +39,9 @@ namespace OpenIdConnectServer
                 {
                     throw new ArgumentNullException("You must set either CLIENTS_CONFIGURATION_INLINE or CLIENTS_CONFIGURATION_PATH env variable");
                 }
-                configStr = System.IO.File.ReadAllText(configFilePath);
+                configStr = File.ReadAllText(configFilePath);
             }
-            var configClients = Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<Client>>(configStr, new SecretConverter());
+            var configClients = JsonConvert.DeserializeObject<IEnumerable<Client>>(configStr, new SecretConverter());
             return configClients;
         }
 
@@ -48,9 +62,9 @@ namespace OpenIdConnectServer
                 {
                     return new List<TestUser>();
                 }
-                configStr = System.IO.File.ReadAllText(configFilePath);
+                configStr = File.ReadAllText(configFilePath);
             }
-            var configUsers = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TestUser>>(configStr);
+            var configUsers = JsonConvert.DeserializeObject<List<TestUser>>(configStr);
             return configUsers;
         }
     }
