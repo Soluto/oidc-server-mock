@@ -8,7 +8,7 @@ namespace OpenIdConnectServer.Utils
     {
         public override void WriteJson(JsonWriter writer, Secret value, JsonSerializer serializer)
         {
-            writer.WriteValue(value.ToString());
+            throw new NotImplementedException();
         }
 
         public override Secret ReadJson(JsonReader reader, Type objectType, Secret existingValue, bool hasExistingValue, JsonSerializer serializer)

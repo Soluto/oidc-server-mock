@@ -23,17 +23,6 @@ WORKDIR /OpenIdConnectServerMock
 
 ENV ASPNETCORE_ENVIRONMENT=Development
 
-# OpenId connect client
-ENV OIDC_CLIENT_ID=openid-mock-client
-ENV REDIRECT_URIS=http://localhost:3000/auth/oidc
-
-# oauth2/client_credentials client
-ENV CLIENT_CREDENTIALS_CLIENT_ID=client-credentials-mock-client
-ENV CLIENT_CREDENTIALS_CLIENT_SECRET="client-credentials-mock-client-secret"
-ENV API_RESOURCE="some-app"
-
-ENV TEST_USER="{\"SubjectId\":\"1\",\"Username\":\"User1\",\"Password\":\"pwd\"}"
-
 EXPOSE 80
 
 HEALTHCHECK --interval=60s --timeout=2s --retries=8 \
