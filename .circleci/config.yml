@@ -96,6 +96,7 @@ jobs:
           name: Load docker images from fs
           working_directory: /tmp/oidc-server-mock
           command: |
+            docker load < oidc-server-mock.tar
             docker load < e2e.tar
 
       - run:
