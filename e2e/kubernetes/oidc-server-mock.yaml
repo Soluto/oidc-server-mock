@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oidc-server-mock
+spec:
+  selector:
+    matchLabels:
+      app: oidc-server-mock
+  template:
+    metadata:
+      labels:
+        app: oidc-server-mock
+    spec:
+      containers:
+      - name: oidc-server-mock
+        image: soluto/oidc-server-mock
+        imagePullPolicy: Never
+        env:
+          - name: API_RESOURCES_INLINE
+            value: |
+              [
+                "user-service-scope"
+              ]
+          - name: CLIENTS_CONFIGURATION_INLINE
+            value: |
+              [
+                {
+                    "ClientId": "e2e-client-id",
+                    "ClientSecrets": [
+                      "e2e-client-secret"
+                    ],
+                    "Description": "e2e configuration",
+                    "AllowedGrantTypes": [
+                        "client_credentials"
+                    ],
+                    "AllowedScopes": [
+                        "user-service-scope"
+                    ]
+                }
+              ]
+        livenessProbe:
+          httpGet:
+            path: /.well-known/openid-configuration
+            port: 80
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: oidc-server-mock
+spec:
+  selector:
+    app: oidc-server-mock
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+---
