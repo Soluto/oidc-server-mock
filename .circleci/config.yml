@@ -103,13 +103,13 @@ jobs:
           working_directory: e2e
           command: scripts/run_tests.sh
 
-    push_oidc_server_mock:
-      machine:
-        image: ubuntu-1604:201903-01
+  push_oidc_server_mock:
+    machine:
+      image: ubuntu-1604:201903-01
 
-      steps:
-        - push_image:
-            imageName: oidc-server-mock
+    steps:
+      - push_image:
+          imageName: oidc-server-mock
 
 workflows:
   version: 2
