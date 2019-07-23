@@ -91,27 +91,22 @@ parse_options() {
     case $i in
         --kind-version=*)
         KIND_VERSION="${i#*=}"
-        shift
         ;;
 
         --kubectl-version=*)
         KUBECTL_VERSION="${i#*=}"
-        shift
         ;;
 
         --cluster-name=*)
         CLUSTER_NAME="${i#*=}"
-        shift
         ;;
 
         --startup-timeout=*)
         STARTUP_TIMEOUT="${i#*=}"
-        shift
         ;;
 
         --test-time=*)
         TEST_TIMEOUT="${i#*=}"
-        shift
         ;;
 
         *)
@@ -148,9 +143,9 @@ parse_options() {
 }
 
 main() {
-    #trap delete_cluster EXIT
+    trap delete_cluster EXIT
     trap 'report_error_and_exit $LINENO $?' ERR
-    parse_options
+    parse_options "$@"
 
     if [[ ! -z "$CI" ]]
     then
