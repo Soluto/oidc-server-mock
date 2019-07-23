@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: e2e
+  labels:
+    name: e2e
+    app: e2e
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: e2e
+        image: soluto/e2e
+        imagePullPolicy: Never
+        env:
+          - name: OIDC_TOKEN_URL
+            value: http://oidc-server-mock/connect/token
+          - name: CLIENT_CREDENTIALS_CLIENT_ID
+            value: e2e-client-id
+          - name: CLIENT_CREDENTIALS_CLIENT_SECRET
+            value: e2e-client-secret
+          - name: API_RESOURCE
+            value: user-service-scope
+  backoffLimit: 0

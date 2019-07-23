@@ -1,0 +1,133 @@
+version: 2.1
+
+commands:
+  build_image:
+    description: Builds image
+    parameters:
+      imageName:
+        type: string
+      workingDirectory:
+        type: string
+
+    steps:
+      - checkout
+      - run:
+          name: Build image
+          working_directory: << parameters.workingDirectory >>
+          command: docker build -t soluto/<< parameters.imageName >> --build-arg target=PRODUCTION .
+
+      - run:
+          name: Save image to fs
+          working_directory: /tmp
+          command: |
+            mkdir -p oidc-server-mock
+            docker save -o oidc-server-mock/<< parameters.imageName >>.tar soluto/<< parameters.imageName >>
+
+      - persist_to_workspace:
+          root: /tmp/oidc-server-mock
+          paths:
+            - << parameters.imageName >>.tar
+
+  push_image:
+    description: Push image to Docker Hub
+    parameters:
+      imageName:
+        type: string
+
+    steps:
+      - checkout
+
+      - attach_workspace:
+          at: /tmp/oidc-server-mock
+
+      - run:
+          name: Load Docker image
+          command: docker load < /tmp/oidc-server-mock<< parameters.imageName >>.tar
+
+
+      - run:
+          name: Set tag to env
+          command: echo 'export IMAGE_TAG=`echo "$CIRCLE_TAG" | cut -d'v' -f 2`' >> $BASH_ENV
+
+      - deploy:
+          name: Tag and push versioned Docker image
+          command: |
+            docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+            docker tag soluto/<< parameters.imageName >> soluto/<< parameters.imageName >>:${IMAGE_TAG}
+            docker push soluto/<< parameters.imageName >>:${IMAGE_TAG}
+
+      - deploy:
+          name: Tag and push latest Docker image
+          command: |
+            docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+            docker tag soluto/<< parameters.imageName >>:${IMAGE_TAG} soluto/<< parameters.imageName >>:lastest
+            docker push soluto/<< parameters.imageName >>:latest
+
+jobs:
+  build_oidc_server_mock:
+    machine:
+      image: ubuntu-1604:201903-01
+
+    steps:
+      - build_image:
+          imageName: oidc-server-mock
+          workingDirectory: ./src
+
+  build_e2e:
+    machine:
+      image: ubuntu-1604:201903-01
+
+    steps:
+      - build_image:
+          imageName: e2e
+          workingDirectory: ./e2e
+
+  run_tests:
+    machine:
+      image: ubuntu-1604:201903-01
+
+    steps:
+      - checkout
+
+      - attach_workspace:
+          at: /tmp/oidc-server-mock
+
+      - run:
+          name: Load docker images from fs
+          working_directory: /tmp/oidc-server-mock
+          command: |
+            docker load < oidc-server-mock.tar
+            docker load < e2e.tar
+
+      - run:
+          name: Run E2E tests
+          working_directory: e2e
+          command: scripts/run_tests.sh
+
+  push_oidc_server_mock:
+    machine:
+      image: ubuntu-1604:201903-01
+
+    steps:
+      - push_image:
+          imageName: oidc-server-mock
+
+workflows:
+  version: 2
+
+  build_test_push:
+    jobs:
+      - build_oidc_server_mock
+      - build_e2e
+      - run_tests:
+          requires:
+            - build_oidc_server_mock
+            - build_e2e
+      - push_oidc_server_mock:
+          requires:
+            - run_tests
+          filters:
+            branches:
+              only: master
+            tags:
+              only: /^v([0-9]+\.){2}[0-9]+(-\S+)?$/

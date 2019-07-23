@@ -1,0 +1,23 @@
+{
+  "name": "e2e",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "mocha --require ts-node/register ./**/*.spec.ts --exit"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "axios": "0.19.0",
+    "chai": "4.2.0",
+    "querystring": "0.2.0",
+    "wait-on": "3.3.0"
+  },
+  "devDependencies": {
+    "@types/chai": "4.1.7",
+    "@types/mocha": "5.2.7",
+    "@types/node": "12.6.8",
+    "mocha": "6.2.0",
+    "ts-node": "8.3.0",
+    "tslint": "5.18.0",
+    "typescript": "3.5.3"
+  }
+}
