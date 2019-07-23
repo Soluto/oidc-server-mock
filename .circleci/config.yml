@@ -42,7 +42,7 @@ commands:
 
       - run:
           name: Load Docker image
-          command: docker load < /tmp/oidc-server-mock<< parameters.imageName >>.tar
+          command: docker load < /tmp/oidc-server-mock/<< parameters.imageName >>.tar
 
 
       - run:
