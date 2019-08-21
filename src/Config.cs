@@ -2,7 +2,6 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
-using System.Security.Claims;
 using IdentityServer4;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
@@ -45,12 +44,16 @@ namespace OpenIdConnectServer
             return configClients;
         }
 
-        public static IEnumerable<IdentityResource> GetIdentityResources() => new List<IdentityResource>
+        public static IEnumerable<IdentityResource> GetIdentityResources()
         {
-            new IdentityResources.OpenId(),
-            new IdentityResources.Profile(),
-            new IdentityResources.Email(),
-        };
+            var standardResources = new List<IdentityResource>
+            {
+                new IdentityResources.OpenId(),
+                new IdentityResources.Profile(),
+                new IdentityResources.Email()
+            };
+            return standardResources.Union(GetCustomIdentityResources());
+        }
 
         public static List<TestUser> GetUsers()
         {
@@ -64,8 +67,31 @@ namespace OpenIdConnectServer
                 }
                 configStr = File.ReadAllText(configFilePath);
             }
-            var configUsers = JsonConvert.DeserializeObject<List<TestUser>>(configStr);
+            var configUsers = JsonConvert.DeserializeObject<List<TestUser>>(configStr, new ClaimJsonConverter());
             return configUsers;
+        }
+
+        private static IEnumerable<IdentityResource> GetCustomIdentityResources()
+        {
+            string identityResourcesStr = Environment.GetEnvironmentVariable("IDENTITY_RESOURCES_INLINE");
+            if (string.IsNullOrWhiteSpace(identityResourcesStr))
+            {
+                var identityResourcesFilePath = Environment.GetEnvironmentVariable("IDENTITY_RESOURCES_PATH");
+                if (string.IsNullOrWhiteSpace(identityResourcesFilePath))
+                {
+                    return new List<IdentityResource>();
+                }
+                identityResourcesStr = File.ReadAllText(identityResourcesFilePath);
+            }
+
+            var identityResourceConifgs = JsonConvert.DeserializeObject<IdentityResourceConfig[]>(identityResourcesStr);
+            return identityResourceConifgs.Select(c => new IdentityResource(c.Name, c.ClaimTypes));
+        }
+
+        private class IdentityResourceConfig
+        {
+            public string Name { get; set; }
+            public IEnumerable<string> ClaimTypes { get; set; }
         }
     }
 }
