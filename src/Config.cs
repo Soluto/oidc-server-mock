@@ -40,7 +40,7 @@ namespace OpenIdConnectServer
                 }
                 configStr = File.ReadAllText(configFilePath);
             }
-            var configClients = JsonConvert.DeserializeObject<IEnumerable<Client>>(configStr, new SecretConverter());
+            var configClients = JsonConvert.DeserializeObject<IEnumerable<Client>>(configStr, new SecretConverter(), new ClaimJsonConverter());
             return configClients;
         }
 
