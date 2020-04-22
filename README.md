@@ -66,7 +66,20 @@ When `clients-config.json` is as following:
         ],
         "AllowedScopes": [
             "some-app"
+        ],
+        "ClientClaimsPrefix": "",
+        "Claims": [
+            {
+                "Type": "string_claim",
+                "Value": "string_claim_value"
+            },
+            {
+                "Type": "json_claim",
+                "Value": "['value1', 'value2']",
+                "ValueType": "json"
+            }
         ]
+
     }
 ]
 ```
