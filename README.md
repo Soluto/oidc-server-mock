@@ -16,9 +16,17 @@ This is the sample of using the server in `docker-compose` configuration:
         - "4011:80"
       environment:
         ASPNETCORE_ENVIRONMENT: Development
+        API_SCOPES_INLINE: |
+          [
+            "some-app-scope-1",
+            "some-app-scope-2"
+          ]
         API_RESOURCES_INLINE: |
           [
-            "some-app"
+            {
+              "Name": "some-app",
+              "Scopes": ["some-app-scope-1", "some-app-scope-2"]
+            }
           ]
         USERS_CONFIGURATION_INLINE: |
           [

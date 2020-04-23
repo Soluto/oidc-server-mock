@@ -22,28 +22,25 @@ namespace OpenIdConnectServer
                     .AddDeveloperSigningCredential()
                     .AddInMemoryIdentityResources(Config.GetIdentityResources())
                     .AddInMemoryApiResources(Config.GetApiResources())
+                    .AddInMemoryApiScopes(Config.GetApiScopes())
                     .AddInMemoryClients(Config.GetClients())
                     .AddTestUsers(Config.GetUsers());
 
-            services.AddMvc();
+            services.AddRouting();
             services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
+            app.UseDeveloperExceptionPage();
             app.UseCors(builder => builder.AllowAnyOrigin()
                                           .AllowAnyMethod()
                                           .AllowAnyHeader());
 
             app.UseIdentityServer();
             app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();
+            app.UseRouting();
         }
     }
 }

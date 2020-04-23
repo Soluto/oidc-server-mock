@@ -16,10 +16,18 @@ spec:
         image: soluto/oidc-server-mock
         imagePullPolicy: Never
         env:
-          - name: API_RESOURCES_INLINE
+          - name: API_SCOPES_INLINE
             value: |
               [
                 "user-service-scope"
+              ]
+          - name: API_RESOURCES_INLINE
+            value: |
+              [
+                {
+                  "Name": "user-service",
+                  "Scopes": ["user-service-scope"]
+                }
               ]
           - name: CLIENTS_CONFIGURATION_INLINE
             value: |
