@@ -1,11 +1,11 @@
-﻿@model LoginViewModel
+@model LoginViewModel
 
 <div class="login-page">
     <div class="page-header">
         <h1>Login</h1>
     </div>
 
-    @Html.Partial("_ValidationSummary")
+    <partial name="_ValidationSummary" />
 
     <div class="row">
 
@@ -63,8 +63,9 @@
                             {
                                 <li>
                                     <a class="btn btn-default"
-                                       asp-action="ExternalLogin"
-                                       asp-route-provider="@provider.AuthenticationScheme"
+                                       asp-controller="External"
+                                       asp-action="Challenge"
+                                       asp-route-scheme="@provider.AuthenticationScheme"
                                        asp-route-returnUrl="@Model.ReturnUrl">
                                         @provider.DisplayName
                                     </a>

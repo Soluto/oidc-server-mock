@@ -1,6 +1,7 @@
 import axios from "axios";
 import { expect } from "chai";
 import * as querystring from "querystring";
+import * as jwt from "jsonwebtoken";
 
 describe("Test", () => {
     it("should work", async () => {
@@ -18,7 +19,9 @@ describe("Test", () => {
         expect(response).to.exist;
         // tslint:disable-next-line:no-unused-expression
         expect(response.data.access_token).to.exist;
-        // tslint:disable-next-line:no-unused-expression
-        expect(response.data.access_token).not.to.be.empty;
+        const token = jwt.decode(response.data.access_token);
+        expect(token['scope']).to.deep.equal([ 'user-service-scope' ])
+        expect(token['string_claim']).to.equal('string_claim_value');
+        expect(token['json_claim']).to.deep.equal(['value1', 'value2']);
     });
 });

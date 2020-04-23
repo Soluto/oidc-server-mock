@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,9 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="IdentityServer4" Version="2.5.0" />
-    <PackageReference Include="Microsoft.AspNetCore.All" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="IdentityServer4" Version="4.0.0-preview.3.23" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
 </Project>

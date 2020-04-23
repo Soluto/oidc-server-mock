@@ -16,10 +16,18 @@ spec:
         image: soluto/oidc-server-mock
         imagePullPolicy: Never
         env:
-          - name: API_RESOURCES_INLINE
+          - name: API_SCOPES_INLINE
             value: |
               [
                 "user-service-scope"
+              ]
+          - name: API_RESOURCES_INLINE
+            value: |
+              [
+                {
+                  "Name": "user-service",
+                  "Scopes": ["user-service-scope"]
+                }
               ]
           - name: CLIENTS_CONFIGURATION_INLINE
             value: |
@@ -35,6 +43,18 @@ spec:
                     ],
                     "AllowedScopes": [
                         "user-service-scope"
+                    ],
+                    "ClientClaimsPrefix": "",
+                    "Claims": [
+                      {
+                        "Type": "string_claim",
+                        "Value": "string_claim_value"
+                      },
+                      {
+                        "Type": "json_claim",
+                        "Value": "['value1', 'value2']",
+                        "ValueType": "json"
+                      }
                     ]
                 }
               ]
@@ -42,6 +62,10 @@ spec:
           httpGet:
             path: /.well-known/openid-configuration
             port: 80
+        resources:
+            limits:
+                cpu: 1
+                memory: 1000M
 ---
 kind: Service
 apiVersion: v1

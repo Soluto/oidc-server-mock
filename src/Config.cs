@@ -12,6 +12,22 @@ namespace OpenIdConnectServer
 {
     public static class Config
     {
+        public static IEnumerable<ApiScope> GetApiScopes()
+        {
+            string apiScopesStr = Environment.GetEnvironmentVariable("API_SCOPES_INLINE");
+            if (string.IsNullOrWhiteSpace(apiScopesStr))
+            {
+                var apiScopesFilePath = Environment.GetEnvironmentVariable("API_SCOPES_PATH");
+                if (string.IsNullOrWhiteSpace(apiScopesFilePath))
+                {
+                    return new List<ApiScope>();
+                }
+                apiScopesStr = File.ReadAllText(apiScopesFilePath);
+            }
+            var apiScopeNames = JsonConvert.DeserializeObject<string[]>(apiScopesStr);
+            return apiScopeNames.Select(r => new ApiScope(r));
+        }
+
         public static IEnumerable<ApiResource> GetApiResources()
         {
             string apiResourcesStr = Environment.GetEnvironmentVariable("API_RESOURCES_INLINE");
@@ -24,8 +40,8 @@ namespace OpenIdConnectServer
                 }
                 apiResourcesStr = File.ReadAllText(apiResourcesFilePath);
             }
-            var apiResourceNames = JsonConvert.DeserializeObject<string[]>(apiResourcesStr);
-            return apiResourceNames.Select(r => new ApiResource(r));
+            var apiResourceNames = JsonConvert.DeserializeObject<IEnumerable<ApiResource>>(apiResourcesStr, new ApiResourceJsonConverter());
+            return apiResourceNames;
         }
 
         public static IEnumerable<Client> GetClients()

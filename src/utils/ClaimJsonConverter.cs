@@ -17,9 +17,9 @@ namespace OpenIdConnectServer.Utils
         {
             var jObject = JObject.Load(reader);
             var type = jObject["Type"].Value<string>();
-            var val = jObject["Value"].Value<string>();
-
-            return new Claim(type, val);
+            var value = jObject["Value"].Value<string>();
+            var valueType = jObject.ContainsKey("ValueType") ? jObject["ValueType"].Value<string>() : ClaimValueTypes.String;
+            return new Claim(type, value, valueType);
         }
 
         public override bool CanRead => true;
