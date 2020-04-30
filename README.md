@@ -16,6 +16,13 @@ This is the sample of using the server in `docker-compose` configuration:
         - "4011:80"
       environment:
         ASPNETCORE_ENVIRONMENT: Development
+        SERVER_OPTIONS_INLINE: |
+          {
+            "AccessTokenJwtType": "JWT",
+            "Discovery": {
+              "ShowKeySet": true
+            }
+          }
         API_SCOPES_INLINE: |
           [
             "some-app-scope-1",
@@ -94,5 +101,21 @@ When `clients-config.json` is as following:
 
 Clients configuration should be provided. Test user configuration is optional (used for implicit flow only).
 
-There are two ways to provide configuration for supported scopes, clients and users. You can either provide it inline as environment variable (`USERS_CONFIGURATION_INLINE` / `CLIENTS_CONFIGURATION_INLINE` / `API_RESOURCES_INLINE`) or mount volume and provide the path to configuration json as environment variable (`USERS_CONFIGURATION_PATH` / `CLIENTS_CONFIGURATION_PATH` / `API_RESOURCES_PATH`).
+There are two ways to provide configuration for supported scopes, clients and users. You can either provide it inline as environment variable:
+
+  * `SERVER_OPTIONS_INLINE`
+  * `API_SCOPES_INLINE`
+  * `USERS_CONFIGURATION_INLINE`
+  * `CLIENTS_CONFIGURATION_INLINE`
+  * `API_RESOURCES_INLINE`
+  * `IDENTITY_RESOURCES_INLINE`
+
+   or mount volume and provide the path to configuration json as environment variable:
+
+  * `SERVER_OPTIONS_PATH`
+  * `API_SCOPES_PATH`
+  * `USERS_CONFIGURATION_PATH`
+  * `CLIENTS_CONFIGURATION_PATH`
+  * `API_RESOURCES_PATH`
+  * `IDENTITY_RESOURCES_PATH`
 
