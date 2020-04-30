@@ -16,6 +16,14 @@ spec:
         image: soluto/oidc-server-mock
         imagePullPolicy: Never
         env:
+          - name: SERVER_OPTIONS_INLINE
+            value: |
+              {
+                "AccessTokenJwtType": "JWT",
+                "Discovery": {
+                  "ShowKeySet": true
+                }
+              }
           - name: API_SCOPES_INLINE
             value: |
               [
