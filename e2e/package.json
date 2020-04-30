@@ -8,14 +8,14 @@
   "dependencies": {
     "axios": "0.19.2",
     "chai": "4.2.0",
-    "jsonwebtoken": "^8.5.1",
+    "jws": "^4.0.0",
     "querystring": "0.2.0",
     "wait-on": "4.0.2"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
     "@types/chai": "4.2.11",
-    "@types/jsonwebtoken": "^8.3.9",
+    "@types/jws": "^3.2.2",
     "@types/mocha": "7.0.2",
     "@types/node": "^12.12.37",
     "@types/wait-on": "^4.0.0",

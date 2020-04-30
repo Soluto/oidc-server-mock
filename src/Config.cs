@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
-using IdentityServer4;
+using IdentityServer4.Configuration;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
 using Newtonsoft.Json;
@@ -10,8 +10,23 @@ using OpenIdConnectServer.Utils;
 
 namespace OpenIdConnectServer
 {
-    public static class Config
+  public static class Config
     {
+        public static IdentityServerOptions GetServerOptions()
+        {
+            string serverOptionsStr = Environment.GetEnvironmentVariable("SERVER_OPTIONS_INLINE");
+            if (string.IsNullOrWhiteSpace(serverOptionsStr))
+            {
+                var serverOptionsFilePath = Environment.GetEnvironmentVariable("SERVER_OPTIONS_PATH");
+                if (string.IsNullOrWhiteSpace(serverOptionsFilePath))
+                {
+                    return new IdentityServerOptions();
+                }
+                serverOptionsStr = File.ReadAllText(serverOptionsFilePath);
+            }
+            var serverOptions = JsonConvert.DeserializeObject<IdentityServerOptions>(serverOptionsStr);
+            return serverOptions;
+        }
         public static IEnumerable<ApiScope> GetApiScopes()
         {
             string apiScopesStr = Environment.GetEnvironmentVariable("API_SCOPES_INLINE");
