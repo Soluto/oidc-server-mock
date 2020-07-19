@@ -118,12 +118,12 @@ parse_options() {
 
     if [[ -z "$KIND_VERSION" ]]
     then
-        KIND_VERSION="0.3.0"
+        KIND_VERSION="0.8.1"
     fi
 
     if [[ -z "$KUBECTL_VERSION" ]]
     then
-        KUBECTL_VERSION="1.14.3"
+        KUBECTL_VERSION="1.18.0"
     fi
 
     if [[ -z "$CLUSTER_NAME" ]]
