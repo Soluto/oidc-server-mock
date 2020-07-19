@@ -2,26 +2,38 @@
   "name": "e2e",
   "version": "1.0.0",
   "scripts": {
-    "test": "mocha --require ts-node/register ./**/*.spec.ts --exit"
+    "test": "mocha --require ts-node/register ./**/*.spec.ts --exit",
+    "lint": "eslint . --ext .ts",
+    "format": "prettier --write **/*.ts"
   },
   "license": "MIT",
   "dependencies": {
     "axios": "0.19.2",
     "chai": "4.2.0",
-    "jws": "^4.0.0",
+    "jws": "4.0.0",
     "querystring": "0.2.0",
-    "wait-on": "4.0.2"
+    "wait-on": "5.1.0"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
     "@types/chai": "4.2.11",
-    "@types/jws": "^3.2.2",
-    "@types/mocha": "7.0.2",
-    "@types/node": "^12.12.37",
-    "@types/wait-on": "^4.0.0",
-    "mocha": "7.1.1",
-    "ts-node": "8.9.0",
-    "tslint": "6.1.1",
-    "typescript": "3.8.3"
+    "@types/jws": "3.2.2",
+    "@types/mocha": "8.0.0",
+    "@types/node": "14.0.23",
+    "@types/wait-on": "4.0.0",
+    "@typescript-eslint/eslint-plugin": "3.6.1",
+    "@typescript-eslint/parser": "3.6.1",
+    "eslint": "7.5.0",
+    "eslint-config-prettier": "6.11.0",
+    "eslint-plugin-import": "2.22.0",
+    "eslint-plugin-jest": "23.18.0",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-prettier": "3.1.4",
+    "eslint-plugin-promise": "4.2.1",
+    "eslint-plugin-unicorn": "21.0.0",
+    "mocha": "8.0.1",
+    "prettier": "2.0.5",
+    "ts-node": "8.10.2",
+    "typescript": "3.9.7"
   }
 }

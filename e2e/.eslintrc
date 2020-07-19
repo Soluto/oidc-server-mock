@@ -1,0 +1,44 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2019,
+    "project": ["./tsconfig.json"]
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "unicorn",
+    "promise",
+    "prettier",
+    "jest"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:node/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+    "plugin:unicorn/recommended",
+    "plugin:prettier/recommended",
+    "plugin:promise/recommended",
+    "plugin:jest/style"
+  ],
+  "rules": {
+    "import/order": "error",
+    "node/no-unsupported-features/es-syntax": "off",
+    "node/no-unpublished-import": "off",
+    "unicorn/prevent-abbreviations": ["error", {
+      "checkFilenames": false
+    }]
+  },
+  "settings": {
+    "node": {
+      "allowModules": [
+        "chai",
+        "wait-on"
+      ],
+      "tryExtensions": [".ts", ".json", ".node"]
+    }
+  }
+}
