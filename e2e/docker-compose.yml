@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  oidc-server-mock:
+    container_name: oidc-server-mock
+    build: ../src
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      SERVER_OPTIONS_PATH: /config/server-options.json
+      API_SCOPES_PATH: /config/api-scopes.json
+      API_RESOURCES_PATH: /config/api-resources.json
+      USERS_CONFIGURATION_PATH: /config/user-configuration.json
+      CLIENTS_CONFIGURATION_PATH: /config/clients-configuration.json
+    volumes:
+      - ./config:/config:ro
+    ports:
+      - 8080:80

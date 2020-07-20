@@ -2,23 +2,23 @@
   "name": "e2e",
   "version": "1.0.0",
   "scripts": {
-    "test": "mocha --require ts-node/register ./**/*.spec.ts --exit",
+    "test": "jest --runInBand --config jest.config.json",
     "lint": "eslint . --ext .ts",
     "format": "prettier --write **/*.ts"
   },
   "license": "MIT",
   "dependencies": {
     "axios": "0.19.2",
-    "chai": "4.2.0",
+    "docker-compose": "0.23.5",
+    "dotenv": "8.2.0",
     "jws": "4.0.0",
     "querystring": "0.2.0",
     "wait-on": "5.1.0"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
-    "@types/chai": "4.2.11",
+    "@types/jest": "26.0.5",
     "@types/jws": "3.2.2",
-    "@types/mocha": "8.0.0",
     "@types/node": "14.0.23",
     "@types/wait-on": "4.0.0",
     "@typescript-eslint/eslint-plugin": "3.6.1",
@@ -31,9 +31,10 @@
     "eslint-plugin-prettier": "3.1.4",
     "eslint-plugin-promise": "4.2.1",
     "eslint-plugin-unicorn": "21.0.0",
+    "jest": "26.1.0",
     "mocha": "8.0.1",
     "prettier": "2.0.5",
-    "ts-node": "8.10.2",
+    "ts-jest": "26.1.3",
     "typescript": "3.9.7"
   }
 }

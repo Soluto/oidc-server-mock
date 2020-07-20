@@ -1,0 +1,24 @@
+name: Run Tests
+
+on: [push]
+
+jobs:
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: install latest buildx
+        run: |
+          mkdir -p ~/.docker/cli-plugins &&
+          wget -O ~/.docker/cli-plugins/docker-buildx https://github.com/docker/buildx/releases/download/v0.4.1/buildx-v0.4.1.linux-amd64 &&
+          chmod a+x  ~/.docker/cli-plugins/docker-buildx
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: '14'
+      - name: Run yarn
+        run: yarn
+        working-directory: ./e2e
+      - name: Run Tests
+        run: yarn test
+        working-directory: ./e2e

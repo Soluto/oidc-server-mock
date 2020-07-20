@@ -1,0 +1,9 @@
+# TypeScript project
+node_modules
+
+# .Net project
+bin
+obj
+
+# Docker
+.docker

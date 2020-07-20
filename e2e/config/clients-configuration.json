@@ -1,0 +1,46 @@
+[{
+  "ClientId": "implicit-mock-client",
+  "Description": "Client for implicit flow",
+  "AllowedGrantTypes": [
+      "implicit"
+  ],
+  "AllowAccessTokensViaBrowser": true,
+  "RedirectUris": [
+      "http://localhost:3000/auth/oidc",
+      "http://localhost:4004/auth/oidc"
+  ],
+  "AllowedScopes": [
+      "openid",
+      "profile",
+      "email"
+  ],
+  "IdentityTokenLifetime": 3600,
+  "AccessTokenLifetime": 3600
+},
+{
+  "ClientId": "client-credentials-mock-client",
+  "ClientSecrets": [
+    "client-credentials-mock-client-secret"
+  ],
+  "Description": "Client for client credentials flow",
+  "AllowedGrantTypes": [
+      "client_credentials"
+  ],
+  "AllowedScopes": [
+      "some-app-scope-1"
+  ],
+  "ClientClaimsPrefix": "",
+  "Claims": [
+      {
+          "Type": "string_claim",
+          "Value": "string_claim_value"
+      },
+      {
+          "Type": "json_claim",
+          "Value": "['value1', 'value2']",
+          "ValueType": "json"
+      }
+  ]
+
+}
+]
