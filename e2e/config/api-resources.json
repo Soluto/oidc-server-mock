@@ -1,0 +1,6 @@
+[
+  {
+    "Name": "some-app",
+    "Scopes": ["some-app-scope-1", "some-app-scope-2"]
+  }
+]

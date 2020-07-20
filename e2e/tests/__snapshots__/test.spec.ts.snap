@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test should work 1`] = `
+{
+  "alg": "RS256",
+  "typ": "JWT",
+  "iss": "http://localhost:8080",
+  "aud": "some-app",
+  "client_id": "client-credentials-mock-client",
+  "string_claim": "string_claim_value",
+  "scope": [
+    "some-app-scope-1"
+  ],
+  "json_claim": [
+    "value1",
+    "value2"
+  ]
+}
+`;
