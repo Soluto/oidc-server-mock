@@ -1,6 +1,6 @@
 # OpenId Connect Server Mock
 
-[![CircleCI](https://circleci.com/gh/Soluto/oidc-server-mock.svg?style=svg)](https://circleci.com/gh/Soluto/oidc-server-mock)
+![Run Tests badge](https://github.com/Soluto/oidc-server-mock/workflows/Run%20Tests/badge.svg)
 
 This project allows you to run configurable mock server with OpenId Connect functionality.
 
