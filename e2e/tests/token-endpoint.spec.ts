@@ -4,14 +4,14 @@ import axios from 'axios';
 import { decode } from 'jws';
 import jwtSerializer from '../utils/jwt-serializer';
 
-describe('Test', () => {
+describe('Token Endpoint', () => {
   beforeAll(() => {
     dotenv.config();
 
     expect.addSnapshotSerializer(jwtSerializer);
   });
 
-  it('should work', async () => {
+  test('Client Credentials', async () => {
     const { CLIENT_CREDENTIALS_CLIENT_ID, CLIENT_CREDENTIALS_CLIENT_SECRET, API_RESOURCE } = process.env;
     const parameters = {
       client_id: CLIENT_CREDENTIALS_CLIENT_ID,
