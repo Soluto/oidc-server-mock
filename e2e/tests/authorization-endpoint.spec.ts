@@ -3,26 +3,34 @@ import * as dotenv from 'dotenv';
 import { chromium, Page, Browser } from 'playwright-chromium';
 import { decode as decodeJWT } from 'jws';
 
+import users from '../config/user-configuration.json';
+import clients from '../config/clients-configuration.json';
+import type { User, Client } from '../types';
+
 describe('Authorization Endpoint', () => {
   let browser: Browser;
   let page: Page;
+  let implicitFlowClient: Client;
   beforeAll(async () => {
     dotenv.config();
 
     browser = await chromium.launch();
     page = await browser.newPage();
+
+    implicitFlowClient = clients.find(c => c.ClientId === 'implicit-flow-client-id');
+    expect(implicitFlowClient).toBeDefined();
   });
 
   afterAll(async () => {
     await browser.close();
   });
 
-  test('Implicit Flow', async () => {
+  test.each(users)('Implicit Flow', async (user: User) => {
     const parameters = {
-      client_id: 'implicit-mock-client',
+      client_id: implicitFlowClient.ClientId,
       scope: 'openid',
       response_type: 'id_token token',
-      redirect_uri: 'https://www.google.com',
+      redirect_uri: implicitFlowClient.RedirectUris?.[0],
       state: 'abc',
       nonce: 'xyz',
     };
@@ -31,12 +39,12 @@ describe('Authorization Endpoint', () => {
     expect(response.ok()).toBeTruthy();
 
     await page.waitForSelector('#Username');
-    await page.type('#Username', 'User1');
-    await page.type('#Password', 'pwd');
+    await page.type('#Username', user.Username);
+    await page.type('#Password', user.Password);
     await page.keyboard.press('Enter');
     await page.waitForNavigation();
     const redirectedUrl = new URL(page.url());
-    expect(redirectedUrl.origin).toEqual('https://www.google.com');
+    expect(redirectedUrl.origin).toEqual(implicitFlowClient.RedirectUris?.[0]);
     const hash = redirectedUrl.hash.slice(1);
     const query = querystring.parse(hash);
 

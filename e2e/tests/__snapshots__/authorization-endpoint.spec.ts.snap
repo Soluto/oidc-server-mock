@@ -5,7 +5,7 @@ exports[`Authorization Endpoint Implicit Flow 1`] = `
   "alg": "RS256",
   "typ": "JWT",
   "iss": "http://localhost:8080",
-  "aud": "implicit-mock-client",
+  "aud": "implicit-flow-client-id",
   "nonce": "xyz",
   "s_hash": "ungWv48Bz-pBQUDeXa4iIw",
   "sub": "1",
@@ -21,7 +21,7 @@ exports[`Authorization Endpoint Implicit Flow 2`] = `
   "alg": "RS256",
   "typ": "JWT",
   "iss": "http://localhost:8080",
-  "client_id": "implicit-mock-client",
+  "client_id": "implicit-flow-client-id",
   "sub": "1",
   "idp": "local",
   "scope": [
