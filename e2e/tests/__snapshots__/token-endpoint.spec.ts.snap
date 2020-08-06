@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test should work 1`] = `
+exports[`Token Endpoint Client Credentials 1`] = `
 {
   "alg": "RS256",
   "typ": "JWT",
