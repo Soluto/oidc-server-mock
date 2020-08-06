@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
+    "rootDir": ".",
     "target": "es2017",
     "module": "commonjs",
     "moduleResolution": "node",

@@ -1,5 +1,5 @@
-import * as dotenv from 'dotenv'
 import * as querystring from 'querystring';
+import * as dotenv from 'dotenv';
 import { chromium, Page, Browser } from 'playwright-chromium';
 import { decode as decodeJWT } from 'jws';
 
@@ -30,7 +30,7 @@ describe('Authorization Endpoint', () => {
     const response = await page.goto(url);
     expect(response.ok()).toBeTruthy();
 
-    const usernameInput = await page.waitForSelector('#Username');
+    await page.waitForSelector('#Username');
     await page.type('#Username', 'User1');
     await page.type('#Password', 'pwd');
     await page.keyboard.press('Enter');
