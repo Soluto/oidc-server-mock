@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Authorization Endpoint Implicit Flow 1`] = `
+{
+  "alg": "RS256",
+  "typ": "JWT",
+  "iss": "http://localhost:8080",
+  "aud": "implicit-mock-client",
+  "nonce": "xyz",
+  "s_hash": "ungWv48Bz-pBQUDeXa4iIw",
+  "sub": "1",
+  "idp": "local",
+  "amr": [
+    "pwd"
+  ]
+}
+`;
+
+exports[`Authorization Endpoint Implicit Flow 2`] = `
+{
+  "alg": "RS256",
+  "typ": "JWT",
+  "iss": "http://localhost:8080",
+  "client_id": "implicit-mock-client",
+  "sub": "1",
+  "idp": "local",
+  "scope": [
+    "openid"
+  ],
+  "amr": [
+    "pwd"
+  ]
+}
+`;

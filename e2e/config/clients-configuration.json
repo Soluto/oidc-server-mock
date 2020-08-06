@@ -6,8 +6,7 @@
   ],
   "AllowAccessTokensViaBrowser": true,
   "RedirectUris": [
-      "http://localhost:3000/auth/oidc",
-      "http://localhost:4004/auth/oidc"
+      "https://www.google.com"
   ],
   "AllowedScopes": [
       "openid",
