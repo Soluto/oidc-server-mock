@@ -3,18 +3,24 @@ import * as dotenv from 'dotenv';
 import axios from 'axios';
 import { decode } from 'jws';
 
+import clients from '../config/clients-configuration.json';
+import type { Client } from '../types';
+
 describe('Token Endpoint', () => {
+  let client: Client;
+
   beforeAll(() => {
     dotenv.config();
+    client = clients.find(c => c.ClientId === 'client-credentials-mock-client-id');
+    expect(client).toBeDefined();
   });
 
   test('Client Credentials', async () => {
-    const { CLIENT_CREDENTIALS_CLIENT_ID, CLIENT_CREDENTIALS_CLIENT_SECRET, API_RESOURCE } = process.env;
     const parameters = {
-      client_id: CLIENT_CREDENTIALS_CLIENT_ID,
-      client_secret: CLIENT_CREDENTIALS_CLIENT_SECRET,
+      client_id: client.ClientId,
+      client_secret: client.ClientSecrets?.[0],
       grant_type: 'client_credentials',
-      scope: API_RESOURCE,
+      scope: client.AllowedScopes[0],
     };
 
     const response = await axios.post(process.env.OIDC_TOKEN_URL, querystring.stringify(parameters));

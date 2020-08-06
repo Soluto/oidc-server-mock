@@ -6,7 +6,7 @@ exports[`Token Endpoint Client Credentials 1`] = `
   "typ": "JWT",
   "iss": "http://localhost:8080",
   "aud": "some-app",
-  "client_id": "client-credentials-mock-client",
+  "client_id": "client-credentials-mock-client-id",
   "string_claim": "string_claim_value",
   "scope": [
     "some-app-scope-1"
