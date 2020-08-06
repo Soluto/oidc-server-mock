@@ -16,9 +16,9 @@ jobs:
       - uses: actions/setup-node@v2-beta
         with:
           node-version: '14'
-      - name: Run yarn
-        run: yarn
+      - name: Run npm install
+        run: npm ci
         working-directory: ./e2e
       - name: Run Tests
-        run: yarn test
+        run: npm run test
         working-directory: ./e2e
