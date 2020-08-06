@@ -1,6 +1,6 @@
-const DefaultJestRunner = require('jest-runner');
+const PlaywrightRunner = require('jest-playwright-preset/lib/PlaywrightRunner').default;
 const dockerCompose = require('docker-compose');
-const waitFor = require('./utils/wait-for');
+const waitFor = require('./wait-for');
 
 const options = {
   cwd: __dirname,
@@ -12,7 +12,7 @@ const options = {
   log: true,
 };
 
-class SerialJestRunner extends DefaultJestRunner {
+class FrontendJestRunner extends PlaywrightRunner {
   constructor(config, context) {
     super(config, context);
     this.isSerial = true;
@@ -41,4 +41,4 @@ class SerialJestRunner extends DefaultJestRunner {
   }
 }
 
-module.exports = SerialJestRunner;
+module.exports = FrontendJestRunner;

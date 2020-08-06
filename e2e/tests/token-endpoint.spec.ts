@@ -2,13 +2,10 @@ import * as querystring from 'querystring';
 import * as dotenv from 'dotenv'
 import axios from 'axios';
 import { decode } from 'jws';
-import jwtSerializer from '../utils/jwt-serializer';
 
 describe('Token Endpoint', () => {
   beforeAll(() => {
     dotenv.config();
-
-    expect.addSnapshotSerializer(jwtSerializer);
   });
 
   test('Client Credentials', async () => {

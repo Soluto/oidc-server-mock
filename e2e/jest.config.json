@@ -1,8 +1,27 @@
 {
-  "preset": "ts-jest",
-  "rootDir": ".",
-  "testTimeout": 60000,
-  "testMatch": ["<rootDir>/tests/**/*.spec.ts"],
-  "testPathIgnorePatterns": ["<rootDir>/node_modules/", "<rootDir>/dist/"],
-  "runner": "<rootDir>/test-runner.js"
+  "projects": [
+    {
+      "displayName": "Backend Tests",
+      "preset": "ts-jest",
+      "rootDir": ".",
+      "snapshotSerializers": ["<rootDir>/utils/jwt-serializer.js"],
+      "testTimeout": 60000,
+      "testMatch": ["<rootDir>/tests/**/*.spec.ts"],
+      "testPathIgnorePatterns": ["<rootDir>/node_modules/", "<rootDir>/dist/", "<rootDir>/tests/authorization-endpoint.spec.ts"],
+      "runner": "<rootDir>/utils/backend-test-runner.js"
+    },
+    {
+      "displayName": "Frontend Tests",
+      "preset": "jest-playwright-preset",
+      "rootDir": ".",
+      "snapshotSerializers": ["<rootDir>/utils/jwt-serializer.js"],
+      "testTimeout": 60000,
+      "testMatch": ["<rootDir>/tests/**/authorization-endpoint.spec.ts"],
+      "testPathIgnorePatterns": ["<rootDir>/node_modules/", "<rootDir>/dist/"],
+      "transform": {
+        "^.+\\.ts$": "ts-jest"
+      },
+      "runner": "<rootDir>/utils/frontend-test-runner.js"
+    }
+  ]
 }
