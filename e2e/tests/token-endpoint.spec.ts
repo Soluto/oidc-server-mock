@@ -1,5 +1,5 @@
 import * as querystring from 'querystring';
-import * as dotenv from 'dotenv'
+import * as dotenv from 'dotenv';
 import axios from 'axios';
 import { decode } from 'jws';
 

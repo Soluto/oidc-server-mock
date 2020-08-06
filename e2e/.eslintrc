@@ -35,7 +35,6 @@
   "settings": {
     "node": {
       "allowModules": [
-        "chai",
         "wait-on"
       ],
       "tryExtensions": [".ts", ".json", ".node"]
