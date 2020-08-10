@@ -103,19 +103,52 @@ Clients configuration should be provided. Test user configuration is optional (u
 
 There are two ways to provide configuration for supported scopes, clients and users. You can either provide it inline as environment variable:
 
-  * `SERVER_OPTIONS_INLINE`
-  * `API_SCOPES_INLINE`
-  * `USERS_CONFIGURATION_INLINE`
-  * `CLIENTS_CONFIGURATION_INLINE`
-  * `API_RESOURCES_INLINE`
-  * `IDENTITY_RESOURCES_INLINE`
+* `SERVER_OPTIONS_INLINE`
+* `API_SCOPES_INLINE`
+* `USERS_CONFIGURATION_INLINE`
+* `CLIENTS_CONFIGURATION_INLINE`
+* `API_RESOURCES_INLINE`
+* `IDENTITY_RESOURCES_INLINE`
 
    or mount volume and provide the path to configuration json as environment variable:
 
-  * `SERVER_OPTIONS_PATH`
-  * `API_SCOPES_PATH`
-  * `USERS_CONFIGURATION_PATH`
-  * `CLIENTS_CONFIGURATION_PATH`
-  * `API_RESOURCES_PATH`
-  * `IDENTITY_RESOURCES_PATH`
+* `SERVER_OPTIONS_PATH`
+* `API_SCOPES_PATH`
+* `USERS_CONFIGURATION_PATH`
+* `CLIENTS_CONFIGURATION_PATH`
+* `API_RESOURCES_PATH`
+* `IDENTITY_RESOURCES_PATH`
 
+## Contributing
+
+### Requirements
+
+1. [Docker](https://www.docker.com/) (version 18.09 or higher)
+
+2. [NodeJS](https://nodejs.org/en/) (version 10.0.0 or higher)
+
+### Getting started
+
+1. Clone the repo:
+
+      ```sh
+      git clone git@github.com:Soluto/oidc-server-mock.git
+      ```
+
+2. Install `npm` packages:
+
+    ```sh
+    npm install
+    ```
+
+3. Run tests:
+
+    ```sh
+    npm run test
+    ```
+
+## Used by
+
+1. [Tweek](https://github.com/Soluto/tweek) blackbox [tests](https://github.com/Soluto/tweek-blackbox).
+
+2. [Stitch](https://github.com/Soluto/Stitch) e2e tests.
