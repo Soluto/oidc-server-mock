@@ -55,8 +55,8 @@ namespace OpenIdConnectServer
                 }
                 apiResourcesStr = File.ReadAllText(apiResourcesFilePath);
             }
-            var apiResourceNames = JsonConvert.DeserializeObject<IEnumerable<ApiResource>>(apiResourcesStr, new ApiResourceJsonConverter());
-            return apiResourceNames;
+            var apiResources = JsonConvert.DeserializeObject<IEnumerable<ApiResource>>(apiResourcesStr, new SecretConverter(), new ClaimJsonConverter());
+            return apiResources;
         }
 
         public static IEnumerable<Client> GetClients()
@@ -115,8 +115,8 @@ namespace OpenIdConnectServer
                 identityResourcesStr = File.ReadAllText(identityResourcesFilePath);
             }
 
-            var identityResourceConifgs = JsonConvert.DeserializeObject<IdentityResourceConfig[]>(identityResourcesStr);
-            return identityResourceConifgs.Select(c => new IdentityResource(c.Name, c.ClaimTypes));
+            var identityResourceConfig = JsonConvert.DeserializeObject<IdentityResourceConfig[]>(identityResourcesStr);
+            return identityResourceConfig.Select(c => new IdentityResource(c.Name, c.ClaimTypes));
         }
 
         private class IdentityResourceConfig
