@@ -4,17 +4,21 @@
       "displayName": "Backend Tests",
       "preset": "ts-jest",
       "rootDir": ".",
-      "snapshotSerializers": ["<rootDir>/utils/jwt-serializer.js"],
+      "snapshotSerializers": ["<rootDir>/utils/jwt-serializer.js", "<rootDir>/utils/jwt-payload-serializer.js"],
       "testTimeout": 60000,
       "testMatch": ["<rootDir>/tests/**/*.spec.ts"],
-      "testPathIgnorePatterns": ["<rootDir>/node_modules/", "<rootDir>/dist/", "<rootDir>/tests/authorization-endpoint.spec.ts"],
+      "testPathIgnorePatterns": [
+        "<rootDir>/node_modules/",
+        "<rootDir>/dist/",
+        "<rootDir>/tests/authorization-endpoint.spec.ts"
+      ],
       "runner": "<rootDir>/utils/backend-test-runner.js"
     },
     {
       "displayName": "Frontend Tests",
       "preset": "jest-playwright-preset",
       "rootDir": ".",
-      "snapshotSerializers": ["<rootDir>/utils/jwt-serializer.js"],
+      "snapshotSerializers": ["<rootDir>/utils/jwt-serializer.js", "<rootDir>/utils/jwt-payload-serializer.js"],
       "testTimeout": 60000,
       "testMatch": ["<rootDir>/tests/**/authorization-endpoint.spec.ts"],
       "testPathIgnorePatterns": ["<rootDir>/node_modules/", "<rootDir>/dist/"],

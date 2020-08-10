@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Introspection Endpoint Unknown token 1`] = `
+Object {
+  "active": false,
+}
+`;
+
+exports[`Introspection Endpoint Valid token 1`] = `
+{
+  "iss": "http://localhost:8080",
+  "aud": "some-app",
+  "client_id": "introspect-client-id",
+  "active": true,
+  "scope": "some-app-scope-1"
+}
+`;
