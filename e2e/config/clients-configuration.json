@@ -27,5 +27,12 @@
         "ValueType": "json"
       }
     ]
+  },
+  {
+    "ClientId": "introspect-client-id",
+    "ClientSecrets": ["introspect-client-secret"],
+    "Description": "Client for introspect endpoint test",
+    "AllowedGrantTypes": ["client_credentials"],
+    "AllowedScopes": ["some-app-scope-1"]
   }
 ]
