@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserInfo Endpoint  Invoke UserInfo endpoint 1`] = `
+Object {
+  "sub": "simple_user",
+}
+`;
+
+exports[`UserInfo Endpoint  Invoke UserInfo endpoint 2`] = `
+Object {
+  "name": "John Smith",
+  "sub": "user_with_standard_claims",
+}
+`;

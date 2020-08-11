@@ -15,10 +15,17 @@ describe('Authorization Endpoint', () => {
     dotenv.config();
 
     browser = await chromium.launch();
-    page = await browser.newPage();
 
     implicitFlowClient = clients.find(c => c.ClientId === 'implicit-flow-client-id');
     expect(implicitFlowClient).toBeDefined();
+  });
+
+  beforeEach(async () => {
+    page = await browser.newPage();
+  });
+
+  afterEach(async () => {
+    await page.close();
   });
 
   afterAll(async () => {

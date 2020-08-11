@@ -7,11 +7,7 @@
       "snapshotSerializers": ["<rootDir>/utils/jwt-serializer.js", "<rootDir>/utils/jwt-payload-serializer.js"],
       "testTimeout": 60000,
       "testMatch": ["<rootDir>/tests/**/*.spec.ts"],
-      "testPathIgnorePatterns": [
-        "<rootDir>/node_modules/",
-        "<rootDir>/dist/",
-        "<rootDir>/tests/authorization-endpoint.spec.ts"
-      ],
+      "testPathIgnorePatterns": ["<rootDir>/node_modules/", "<rootDir>/dist/", "<rootDir>/tests/*.e2e-spec.ts"],
       "runner": "<rootDir>/utils/backend-test-runner.js"
     },
     {
@@ -20,7 +16,7 @@
       "rootDir": ".",
       "snapshotSerializers": ["<rootDir>/utils/jwt-serializer.js", "<rootDir>/utils/jwt-payload-serializer.js"],
       "testTimeout": 60000,
-      "testMatch": ["<rootDir>/tests/**/authorization-endpoint.spec.ts"],
+      "testMatch": ["<rootDir>/tests/**/*.e2e-spec.ts"],
       "testPathIgnorePatterns": ["<rootDir>/node_modules/", "<rootDir>/dist/"],
       "transform": {
         "^.+\\.ts$": "ts-jest"

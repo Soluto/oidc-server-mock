@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Authorization Endpoint Implicit Flow 1`] = `
+{
+  "alg": "RS256",
+  "typ": "JWT",
+  "iss": "http://localhost:8080",
+  "aud": "implicit-flow-client-id",
+  "nonce": "xyz",
+  "s_hash": "ungWv48Bz-pBQUDeXa4iIw",
+  "sub": "simple_user",
+  "idp": "local",
+  "amr": [
+    "pwd"
+  ]
+}
+`;
+
+exports[`Authorization Endpoint Implicit Flow 2`] = `
+{
+  "alg": "RS256",
+  "typ": "JWT",
+  "iss": "http://localhost:8080",
+  "client_id": "implicit-flow-client-id",
+  "sub": "simple_user",
+  "idp": "local",
+  "scope": [
+    "openid"
+  ],
+  "amr": [
+    "pwd"
+  ]
+}
+`;
+
+exports[`Authorization Endpoint Implicit Flow 3`] = `
+{
+  "alg": "RS256",
+  "typ": "JWT",
+  "iss": "http://localhost:8080",
+  "aud": "implicit-flow-client-id",
+  "nonce": "xyz",
+  "s_hash": "ungWv48Bz-pBQUDeXa4iIw",
+  "sub": "user_with_standard_claims",
+  "idp": "local",
+  "amr": [
+    "pwd"
+  ]
+}
+`;
+
+exports[`Authorization Endpoint Implicit Flow 4`] = `
+{
+  "alg": "RS256",
+  "typ": "JWT",
+  "iss": "http://localhost:8080",
+  "client_id": "implicit-flow-client-id",
+  "sub": "user_with_standard_claims",
+  "idp": "local",
+  "scope": [
+    "openid"
+  ],
+  "amr": [
+    "pwd"
+  ]
+}
+`;

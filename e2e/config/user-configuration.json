@@ -1,7 +1,26 @@
 [
   {
-    "SubjectId":"1",
-    "Username":"User1",
-    "Password":"pwd"
+    "SubjectId": "simple_user",
+    "Username": "simple_user",
+    "Password": "pwd"
+  },
+  {
+    "SubjectId": "user_with_standard_claims",
+    "Username": "user_with_standard_claims",
+    "Password": "pwd",
+    "Claims": [
+      {
+        "Type": "name",
+        "Value": "John Smith"
+      },
+      {
+        "Type": "email",
+        "Value": "john.smith@gmail.com"
+      },
+      {
+        "Type": "email_verified",
+        "Value": "true"
+      }
+    ]
   }
 ]
