@@ -135,7 +135,7 @@ There are two ways to provide configuration for supported scopes, clients and us
       git clone git@github.com:Soluto/oidc-server-mock.git
       ```
 
-2. Install `npm` packages:
+2. Install `npm` packages (run from `/e2e` folder):
 
     ```sh
     npm install
