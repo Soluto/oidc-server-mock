@@ -2,7 +2,13 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 as source
 ARG target="Release"
 
+RUN apt-get update && apt-get install unzip
+
 WORKDIR /src
+
+COPY ./getmain.sh ./getmain.sh
+RUN ./getmain.sh
+
 COPY ./OpenIdConnectServerMock.csproj ./OpenIdConnectServerMock.csproj
 RUN dotnet restore
 

@@ -141,6 +141,8 @@ There are two ways to provide configuration for supported scopes, clients and us
     npm install
     ```
 
+    > Note: During the build of Docker image UI source code is fetched from [github](https://github.com/IdentityServer/IdentityServer4.Quickstart.UI/tree/main). If you experience some issues on project compile step of Docker build or on runtime try to change the branch or commit in the [script](./src/getmain.sh).
+
 3. Run tests:
 
     ```sh
