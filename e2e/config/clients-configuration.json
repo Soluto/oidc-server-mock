@@ -5,7 +5,7 @@
     "AllowedGrantTypes": ["implicit"],
     "AllowAccessTokensViaBrowser": true,
     "RedirectUris": ["https://www.google.com"],
-    "AllowedScopes": ["openid", "profile", "email"],
+    "AllowedScopes": ["openid", "profile", "email", "some-custom-identity"],
     "IdentityTokenLifetime": 3600,
     "AccessTokenLifetime": 3600
   },

@@ -25,7 +25,8 @@ exports[`Authorization Endpoint Implicit Flow 2`] = `
   "sub": "simple_user",
   "idp": "local",
   "scope": [
-    "openid"
+    "openid",
+    "some-custom-identity"
   ],
   "amr": [
     "pwd"
@@ -33,7 +34,9 @@ exports[`Authorization Endpoint Implicit Flow 2`] = `
 }
 `;
 
-exports[`Authorization Endpoint Implicit Flow 3`] = `
+exports[`Authorization Endpoint Implicit Flow 3`] = `"openid some-custom-identity"`;
+
+exports[`Authorization Endpoint Implicit Flow 4`] = `
 {
   "alg": "RS256",
   "typ": "JWT",
@@ -49,7 +52,7 @@ exports[`Authorization Endpoint Implicit Flow 3`] = `
 }
 `;
 
-exports[`Authorization Endpoint Implicit Flow 4`] = `
+exports[`Authorization Endpoint Implicit Flow 5`] = `
 {
   "alg": "RS256",
   "typ": "JWT",
@@ -58,10 +61,49 @@ exports[`Authorization Endpoint Implicit Flow 4`] = `
   "sub": "user_with_standard_claims",
   "idp": "local",
   "scope": [
-    "openid"
+    "openid",
+    "some-custom-identity"
   ],
   "amr": [
     "pwd"
   ]
 }
 `;
+
+exports[`Authorization Endpoint Implicit Flow 6`] = `"openid some-custom-identity"`;
+
+exports[`Authorization Endpoint Implicit Flow 7`] = `
+{
+  "alg": "RS256",
+  "typ": "JWT",
+  "iss": "http://localhost:8080",
+  "aud": "implicit-flow-client-id",
+  "nonce": "xyz",
+  "s_hash": "ungWv48Bz-pBQUDeXa4iIw",
+  "sub": "user_with_custom_identity_claims",
+  "idp": "local",
+  "amr": [
+    "pwd"
+  ]
+}
+`;
+
+exports[`Authorization Endpoint Implicit Flow 8`] = `
+{
+  "alg": "RS256",
+  "typ": "JWT",
+  "iss": "http://localhost:8080",
+  "client_id": "implicit-flow-client-id",
+  "sub": "user_with_custom_identity_claims",
+  "idp": "local",
+  "scope": [
+    "openid",
+    "some-custom-identity"
+  ],
+  "amr": [
+    "pwd"
+  ]
+}
+`;
+
+exports[`Authorization Endpoint Implicit Flow 9`] = `"openid some-custom-identity"`;

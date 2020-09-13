@@ -37,7 +37,7 @@ describe('UserInfo Endpoint', () => {
     test(`Retrieve user access token ${user.SubjectId}`, async () => {
       const parameters = {
         client_id: implicitFlowClient.ClientId,
-        scope: 'openid profile',
+        scope: 'openid profile some-custom-identity',
         response_type: 'id_token token',
         redirect_uri: implicitFlowClient.RedirectUris?.[0],
         state: 'abc',

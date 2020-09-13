@@ -11,6 +11,7 @@ services:
       API_RESOURCES_PATH: /config/api-resources.json
       USERS_CONFIGURATION_PATH: /config/user-configuration.json
       CLIENTS_CONFIGURATION_PATH: /config/clients-configuration.json
+      IDENTITY_RESOURCES_PATH: /config/identity-resources.json
     volumes:
       - ./config:/config:ro
     ports:
