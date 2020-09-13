@@ -8,15 +8,15 @@ Object {
 
 exports[`UserInfo Endpoint  Invoke UserInfo endpoint 2`] = `
 Object {
-  "name": "John Smith",
-  "sub": "user_with_standard_claims",
+  "name": "Jack Sparrow",
+  "some-custom-identity-user-claim": "Jack's Custom User Claim",
+  "sub": "user_with_custom_identity_claims",
 }
 `;
 
 exports[`UserInfo Endpoint  Invoke UserInfo endpoint 3`] = `
 Object {
-  "name": "Jack Sparrow",
-  "some-custom-identity-user-claim": "Jack's Custom User Claim",
-  "sub": "user_with_custom_identity_claims",
+  "name": "John Smith",
+  "sub": "user_with_standard_claims",
 }
 `;
