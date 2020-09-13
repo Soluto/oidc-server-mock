@@ -8,6 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
+      - name: Install missing dependencies
+        run: sudo apt-get install ffmpeg
+
       - name: install latest buildx
         run: |
           mkdir -p ~/.docker/cli-plugins &&
@@ -16,9 +20,11 @@ jobs:
       - uses: actions/setup-node@v2-beta
         with:
           node-version: '14'
+
       - name: Run npm install
         run: npm ci
         working-directory: ./e2e
+
       - name: Run Tests
         run: npm run test
         working-directory: ./e2e

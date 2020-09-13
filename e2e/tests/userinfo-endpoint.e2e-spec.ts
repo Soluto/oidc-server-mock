@@ -7,6 +7,8 @@ import users from '../config/user-configuration.json';
 import clients from '../config/clients-configuration.json';
 import type { User, Client } from '../types';
 
+const testCases: User[] = users.sort((u1, u2) => (u1.Username < u2.Username ? -1 : 1));
+
 describe('UserInfo Endpoint', () => {
   let browser: Browser;
   let page: Page;
@@ -31,7 +33,7 @@ describe('UserInfo Endpoint', () => {
     await browser.close();
   });
 
-  describe.each(users)('', (user: User) => {
+  describe.each(testCases)('', (user: User) => {
     let accessToken: string;
 
     test(`Retrieve user access token ${user.SubjectId}`, async () => {

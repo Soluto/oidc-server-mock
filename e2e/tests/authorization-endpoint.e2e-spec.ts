@@ -7,12 +7,16 @@ import users from '../config/user-configuration.json';
 import clients from '../config/clients-configuration.json';
 import type { User, Client } from '../types';
 
+const testCases: User[] = users.sort((u1, u2) => (u1.Username < u2.Username ? -1 : 1));
+
 describe('Authorization Endpoint', () => {
   let browser: Browser;
   let page: Page;
   let implicitFlowClient: Client;
   beforeAll(async () => {
     dotenv.config();
+
+    process.env.DEBUG = 'pw:api';
 
     browser = await chromium.launch();
 
@@ -32,7 +36,7 @@ describe('Authorization Endpoint', () => {
     await browser.close();
   });
 
-  test.each(users)('Implicit Flow', async (user: User) => {
+  test.each(testCases)('Implicit Flow', async (user: User) => {
     const parameters = {
       client_id: implicitFlowClient.ClientId,
       scope: 'openid some-custom-identity',
