@@ -12,3 +12,11 @@ Object {
   "sub": "user_with_standard_claims",
 }
 `;
+
+exports[`UserInfo Endpoint  Invoke UserInfo endpoint 3`] = `
+Object {
+  "name": "Jack Sparrow",
+  "some-custom-identity-user-claim": "Jack's Custom User Claim",
+  "sub": "user_with_custom_identity_claims",
+}
+`;

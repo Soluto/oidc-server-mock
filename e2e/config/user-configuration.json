@@ -22,5 +22,24 @@
         "Value": "true"
       }
     ]
+  },
+  {
+    "SubjectId": "user_with_custom_identity_claims",
+    "Username": "user_with_custom_identity_claims",
+    "Password": "pwd",
+    "Claims": [
+      {
+        "Type": "name",
+        "Value": "Jack Sparrow"
+      },
+      {
+        "Type": "email",
+        "Value": "jack.sparrow@gmail.com"
+      },
+      {
+        "Type": "some-custom-identity-user-claim",
+        "Value": "Jack's Custom User Claim"
+      }
+    ]
   }
 ]

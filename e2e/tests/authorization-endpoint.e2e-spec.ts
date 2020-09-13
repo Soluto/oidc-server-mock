@@ -35,7 +35,7 @@ describe('Authorization Endpoint', () => {
   test.each(users)('Implicit Flow', async (user: User) => {
     const parameters = {
       client_id: implicitFlowClient.ClientId,
-      scope: 'openid',
+      scope: 'openid some-custom-identity',
       response_type: 'id_token token',
       redirect_uri: implicitFlowClient.RedirectUris?.[0],
       state: 'abc',
@@ -66,6 +66,6 @@ describe('Authorization Endpoint', () => {
     expect(decodedAccessToken).toMatchSnapshot();
 
     const scope = query['scope'];
-    expect(scope).toEqual('openid');
+    expect(scope).toMatchSnapshot();
   });
 });
