@@ -22,6 +22,11 @@ namespace OpenIdConnectServer
                 options.Cookie.IsEssential = true;
             });
 
+            services.AddSession(options =>
+            {
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+            });
+
             services.AddControllersWithViews();
 
             services.AddIdentityServer(options =>
