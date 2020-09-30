@@ -17,7 +17,7 @@ describe('Introspection Endpoint', () => {
     dotenv.config();
     apiResource = apiResources.find(aR => aR.Name === 'some-app');
     expect(apiResource).toBeDefined();
-    const auth = btoa(`${apiResource.Name}:${apiResource.ApiSecrets?.[0]}`);
+    const auth = Buffer.from(`${apiResource.Name}:${apiResource.ApiSecrets?.[0]}`).toString('base64');
     requestConfig = {
       headers: {
         Authorization: `Basic ${auth}`,
