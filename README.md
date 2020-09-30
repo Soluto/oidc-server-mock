@@ -119,6 +119,24 @@ There are two ways to provide configuration for supported scopes, clients and us
 * `API_RESOURCES_PATH`
 * `IDENTITY_RESOURCES_PATH`
 
+## HTTPS
+
+To use `https` protocol with the server just add the following environment variables to the `docker run`/`docker-compose up` command, expose ports and mount volume containing the pfx file:
+
+```yaml
+environment:
+  ASPNETCORE_URLS: https://+:443;http://+:80
+  ASPNETCORE_Kestrel__Certificates__Default__Password: <password for pfx file>
+  ASPNETCORE_Kestrel__Certificates__Default__Path: /path/to/pfx/file
+volumes:
+  - ./local/path/to/pfx/file:/path/to/pfx/file:ro
+ports:
+  - 8080:80
+  - 8443:443
+```
+
+---
+
 ## Contributing
 
 ### Requirements

@@ -6,6 +6,9 @@ services:
     build: ../src
     environment:
       ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+      ASPNETCORE_Kestrel__Certificates__Default__Password: oidc-server-mock-pwd
+      ASPNETCORE_Kestrel__Certificates__Default__Path: /https/aspnetapp.pfx
       SERVER_OPTIONS_PATH: /config/server-options.json
       API_SCOPES_PATH: /config/api-scopes.json
       API_RESOURCES_PATH: /config/api-resources.json
@@ -14,5 +17,7 @@ services:
       IDENTITY_RESOURCES_PATH: /config/identity-resources.json
     volumes:
       - ./config:/config:ro
+      - ./https:/https:ro
     ports:
       - 8080:80
+      - 8443:443
