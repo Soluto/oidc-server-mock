@@ -41,7 +41,7 @@ describe('UserInfo Endpoint', () => {
         client_id: implicitFlowClient.ClientId,
         scope: 'openid profile some-custom-identity',
         response_type: 'id_token token',
-        redirect_uri: implicitFlowClient.RedirectUris?.[0],
+        redirect_uri: implicitFlowClient.RedirectUris?.[0].replace('*', 'www'),
         state: 'abc',
         nonce: 'xyz',
       };
@@ -55,7 +55,7 @@ describe('UserInfo Endpoint', () => {
       await page.keyboard.press('Enter');
       await page.waitForNavigation();
       const redirectedUrl = new URL(page.url());
-      expect(redirectedUrl.origin).toEqual(implicitFlowClient.RedirectUris?.[0]);
+      expect(redirectedUrl.origin).toEqual(parameters.redirect_uri);
       const hash = redirectedUrl.hash.slice(1);
       const query = querystring.parse(hash);
 
