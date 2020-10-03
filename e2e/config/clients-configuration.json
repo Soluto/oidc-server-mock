@@ -4,7 +4,7 @@
     "Description": "Client for implicit flow",
     "AllowedGrantTypes": ["implicit"],
     "AllowAccessTokensViaBrowser": true,
-    "RedirectUris": ["https://www.google.com"],
+    "RedirectUris": ["https://*.google.com"],
     "AllowedScopes": ["openid", "profile", "email", "some-custom-identity"],
     "IdentityTokenLifetime": 3600,
     "AccessTokenLifetime": 3600
