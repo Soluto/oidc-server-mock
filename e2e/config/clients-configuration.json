@@ -45,7 +45,8 @@
     "RequirePkce": false,
     "AllowedScopes": ["openid", "email"],
     "IdentityTokenLifetime": 3600,
-    "AccessTokenLifetime": 3600
+    "AccessTokenLifetime": 3600,
+    "RequireClientSecret": false
   },
   {
     "ClientId": "authorization-code-with-pkce-client-id",
@@ -56,6 +57,7 @@
     "RedirectUris": ["https://*.google.com"],
     "AllowedScopes": ["openid", "email"],
     "IdentityTokenLifetime": 3600,
-    "AccessTokenLifetime": 3600
+    "AccessTokenLifetime": 3600,
+    "RequireClientSecret": false
   }
 ]

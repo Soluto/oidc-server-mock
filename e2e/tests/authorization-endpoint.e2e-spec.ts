@@ -113,7 +113,6 @@ describe('Authorization Endpoint', () => {
 
     const tokenEndpointParameters = {
       client_id: authorizationCodeFlowClient.ClientId,
-      client_secret: authorizationCodeFlowClient.ClientSecrets?.[0],
       code,
       grant_type: 'authorization_code',
       redirect_uri: authorizationCodeFlowClient.RedirectUris?.[0].replace('*', 'www'),
@@ -163,7 +162,6 @@ describe('Authorization Endpoint', () => {
 
     const tokenEndpointParameters = {
       client_id: authorizationCodeFlowPkceClient.ClientId,
-      client_secret: authorizationCodeFlowPkceClient.ClientSecrets?.[0],
       code,
       grant_type: 'authorization_code',
       redirect_uri: authorizationCodeFlowPkceClient.RedirectUris?.[0].replace('*', 'www'),
