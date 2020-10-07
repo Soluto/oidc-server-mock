@@ -1,6 +1,14 @@
 name: Run Tests
 
-on: [push, pull_request_target]
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - README.md
+  pull_request_target:
+    paths-ignore:
+      - README.md
 
 jobs:
   tests:
