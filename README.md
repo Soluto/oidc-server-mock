@@ -25,8 +25,12 @@ This is the sample of using the server in `docker-compose` configuration:
           }
         API_SCOPES_INLINE: |
           [
-            "some-app-scope-1",
-            "some-app-scope-2"
+            {
+              "Name": "some-app-scope-1"
+            },
+            {
+              "Name": "some-app-scope-2"
+            }
           ]
         API_RESOURCES_INLINE: |
           [
