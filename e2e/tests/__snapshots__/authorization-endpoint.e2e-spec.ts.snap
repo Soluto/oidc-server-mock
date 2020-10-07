@@ -1,5 +1,56 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Authorization Endpoint Authorization Code Flow (with PKCE): simple_user access token 1`] = `
+{
+  "alg": "RS256",
+  "typ": "JWT",
+  "iss": "http://localhost:8080",
+  "client_id": "authorization-code-with-pkce-client-id",
+  "sub": "simple_user",
+  "idp": "local",
+  "scope": [
+    "openid"
+  ],
+  "amr": [
+    "pwd"
+  ]
+}
+`;
+
+exports[`Authorization Endpoint Authorization Code Flow (with PKCE): user_with_custom_identity_claims access token 1`] = `
+{
+  "alg": "RS256",
+  "typ": "JWT",
+  "iss": "http://localhost:8080",
+  "client_id": "authorization-code-with-pkce-client-id",
+  "sub": "user_with_custom_identity_claims",
+  "idp": "local",
+  "scope": [
+    "openid"
+  ],
+  "amr": [
+    "pwd"
+  ]
+}
+`;
+
+exports[`Authorization Endpoint Authorization Code Flow (with PKCE): user_with_standard_claims access token 1`] = `
+{
+  "alg": "RS256",
+  "typ": "JWT",
+  "iss": "http://localhost:8080",
+  "client_id": "authorization-code-with-pkce-client-id",
+  "sub": "user_with_standard_claims",
+  "idp": "local",
+  "scope": [
+    "openid"
+  ],
+  "amr": [
+    "pwd"
+  ]
+}
+`;
+
 exports[`Authorization Endpoint Authorization Code Flow: simple_user access token 1`] = `
 {
   "alg": "RS256",
