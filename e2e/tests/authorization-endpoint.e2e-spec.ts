@@ -1,6 +1,7 @@
 import * as querystring from 'querystring';
 import * as dotenv from 'dotenv';
 import { chromium, Page, Browser } from 'playwright-chromium';
+import axios from 'axios';
 import { decode as decodeJWT } from 'jws';
 
 import users from '../config/user-configuration.json';
@@ -13,6 +14,7 @@ describe('Authorization Endpoint', () => {
   let browser: Browser;
   let page: Page;
   let implicitFlowClient: Client;
+  let authorizationFlowClient: Client;
   beforeAll(async () => {
     dotenv.config();
 
@@ -22,6 +24,9 @@ describe('Authorization Endpoint', () => {
 
     implicitFlowClient = clients.find(c => c.ClientId === 'implicit-flow-client-id');
     expect(implicitFlowClient).toBeDefined();
+
+    authorizationFlowClient = clients.find(c => c.ClientId === 'authorization-code-client-id');
+    expect(authorizationFlowClient).toBeDefined();
   });
 
   beforeEach(async () => {
@@ -67,9 +72,53 @@ describe('Authorization Endpoint', () => {
     const accessToken = query['access_token'];
     expect(typeof accessToken).toEqual('string');
     const decodedAccessToken = decodeJWT(accessToken as string);
-    expect(decodedAccessToken).toMatchSnapshot();
+    expect(decodedAccessToken).toMatchSnapshot(`${user.Username} access token`);
 
     const scope = query['scope'];
-    expect(scope).toMatchSnapshot();
+    expect(scope).toMatchSnapshot(`${user.Username} scope`);
+  });
+
+  test.each(testCases)('Authorization Code Flow', async (user: User) => {
+    const authorizationEndpointParameters = {
+      client_id: authorizationFlowClient.ClientId,
+      scope: 'openid',
+      response_type: 'code',
+      redirect_uri: authorizationFlowClient.RedirectUris?.[0].replace('*', 'www'),
+      state: 'abc',
+      nonce: 'xyz',
+    };
+    const url = `${process.env.OIDC_AUTHORIZE_URL}?${querystring.stringify(authorizationEndpointParameters)}`;
+    const authorizationEndpointResponse = await page.goto(url);
+    expect(authorizationEndpointResponse.ok()).toBeTruthy();
+
+    await page.waitForSelector('#Username');
+    await page.type('#Username', user.Username);
+    await page.type('#Password', user.Password);
+    await page.keyboard.press('Enter');
+    await page.waitForNavigation();
+    const redirectedUrl = new URL(page.url());
+    expect(redirectedUrl.origin).toEqual(authorizationEndpointParameters.redirect_uri);
+    expect(redirectedUrl.searchParams.has('code')).toBeTruthy();
+    const code = redirectedUrl.searchParams.get('code');
+
+    const tokenEndpointParameters = {
+      client_id: authorizationFlowClient.ClientId,
+      client_secret: authorizationFlowClient.ClientSecrets?.[0],
+      code,
+      grant_type: 'authorization_code',
+      redirect_uri: authorizationFlowClient.RedirectUris?.[0].replace('*', 'www'),
+      scope: authorizationFlowClient.AllowedScopes[0],
+    };
+
+    const tokenEndpointResponse = await axios.post(
+      process.env.OIDC_TOKEN_URL,
+      querystring.stringify(tokenEndpointParameters)
+    );
+
+    expect(tokenEndpointResponse).toBeDefined();
+    expect(tokenEndpointResponse.data.access_token).toBeDefined();
+    const token = decodeJWT(tokenEndpointResponse.data.access_token);
+
+    expect(token).toMatchSnapshot(`${user.Username} access token`);
   });
 });
