@@ -7,11 +7,27 @@ using IdentityServer4.Models;
 using IdentityServer4.Test;
 using Newtonsoft.Json;
 using OpenIdConnectServer.Utils;
+using OpenIdConnectServer.Helpers;
 
 namespace OpenIdConnectServer
 {
   public static class Config
     {
+        public static AspNetServicesOptions GetAspNetServicesOptions() {
+            string aspNetServicesOptionsStr = Environment.GetEnvironmentVariable("ASPNET_SERVICES_OPTIONS_INLINE");
+            if (string.IsNullOrWhiteSpace(aspNetServicesOptionsStr))
+            {
+                var aspNetServicesOptionsPath = Environment.GetEnvironmentVariable("ASPNET_SERVICES_OPTIONS_PATH");
+                if (string.IsNullOrWhiteSpace(aspNetServicesOptionsPath))
+                {
+                    return new AspNetServicesOptions();
+                }
+                aspNetServicesOptionsStr = File.ReadAllText(aspNetServicesOptionsPath);
+            }
+            var aspNetServicesOptions = JsonConvert.DeserializeObject<AspNetServicesOptions>(aspNetServicesOptionsStr);
+            return aspNetServicesOptions;
+        }
+
         public static IdentityServerOptions GetServerOptions()
         {
             string serverOptionsStr = Environment.GetEnvironmentVariable("SERVER_OPTIONS_INLINE");
@@ -27,6 +43,7 @@ namespace OpenIdConnectServer
             var serverOptions = JsonConvert.DeserializeObject<IdentityServerOptions>(serverOptionsStr);
             return serverOptions;
         }
+
         public static IEnumerable<ApiScope> GetApiScopes()
         {
             string apiScopesStr = Environment.GetEnvironmentVariable("API_SCOPES_INLINE");

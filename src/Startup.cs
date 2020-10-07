@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using OpenIdConnectServer.Helpers;
@@ -26,6 +25,9 @@ namespace OpenIdConnectServer
                     .AddInMemoryClients(Config.GetClients())
                     .AddTestUsers(Config.GetUsers())
                     .AddRedirectUriValidator<UriValidator>();
+
+            var aspNetServicesOptions = Config.GetAspNetServicesOptions();
+            AspNetServicesHelper.ApplyAspNetServicesOptions(services, aspNetServicesOptions);
 
             services.AddRouting();
             services.AddCors();
