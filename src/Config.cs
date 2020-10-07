@@ -56,8 +56,8 @@ namespace OpenIdConnectServer
                 }
                 apiScopesStr = File.ReadAllText(apiScopesFilePath);
             }
-            var apiScopeNames = JsonConvert.DeserializeObject<string[]>(apiScopesStr);
-            return apiScopeNames.Select(r => new ApiScope(r));
+            var apiScopes = JsonConvert.DeserializeObject<IEnumerable<ApiScope>>(apiScopesStr);
+            return apiScopes;
         }
 
         public static IEnumerable<ApiResource> GetApiResources()
