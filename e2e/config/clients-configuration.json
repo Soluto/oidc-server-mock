@@ -34,5 +34,28 @@
     "Description": "Client for introspect endpoint test",
     "AllowedGrantTypes": ["client_credentials"],
     "AllowedScopes": ["some-app-scope-1"]
+  },
+  {
+    "ClientId": "authorization-code-client-id",
+    "ClientSecrets": ["authorization-code-client-secret"],
+    "Description": "Client for authorization code flow",
+    "AllowedGrantTypes": ["authorization_code"],
+    "AllowAccessTokensViaBrowser": true,
+    "RedirectUris": ["https://*.google.com"],
+    "RequirePkce": false,
+    "AllowedScopes": ["openid", "email"],
+    "IdentityTokenLifetime": 3600,
+    "AccessTokenLifetime": 3600
+  },
+  {
+    "ClientId": "authorization-code-with-pkce-client-id",
+    "ClientSecrets": ["authorization-code-with-pkce-client-secret"],
+    "Description": "Client for authorization code flow",
+    "AllowedGrantTypes": ["authorization_code"],
+    "AllowAccessTokensViaBrowser": true,
+    "RedirectUris": ["https://*.google.com"],
+    "AllowedScopes": ["openid", "email"],
+    "IdentityTokenLifetime": 3600,
+    "AccessTokenLifetime": 3600
   }
 ]
