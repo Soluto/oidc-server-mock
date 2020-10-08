@@ -1,6 +1,7 @@
 [
   {
-    "Name": "some-app-scope-1"
+    "Name": "some-app-scope-1",
+    "UserClaims": ["some-app-scope-1-custom-user-claim"]
   },
   {
     "Name": "some-app-scope-2"

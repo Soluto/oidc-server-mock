@@ -72,7 +72,7 @@ namespace OpenIdConnectServer
                 }
                 apiResourcesStr = File.ReadAllText(apiResourcesFilePath);
             }
-            var apiResources = JsonConvert.DeserializeObject<IEnumerable<ApiResource>>(apiResourcesStr, new SecretConverter(), new ClaimJsonConverter());
+            var apiResources = JsonConvert.DeserializeObject<IEnumerable<ApiResource>>(apiResourcesStr, new SecretConverter());
             return apiResources;
         }
 
