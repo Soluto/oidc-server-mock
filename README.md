@@ -44,7 +44,29 @@ This is the sample of using the server in `docker-compose` configuration:
             {
               "SubjectId":"1",
               "Username":"User1",
-              "Password":"pwd"
+              "Password":"pwd",
+              "Claims": [
+                {
+                  "Type": "name",
+                  "Value": "Sam Tailor"
+                },
+                {
+                  "Type": "email",
+                  "Value": "sam.tailor@gmail.com"
+                },
+                {
+                  "Type": "some-api-resource-claim",
+                  "Value": "Sam's Api Resource Custom Claim"
+                },
+                {
+                  "Type": "some-api-scope-claim",
+                  "Value": "Sam's Api Scope Custom Claim"
+                },
+                {
+                  "Type": "some-identity-resource-claim",
+                  "Value": "Sam's Identity Resource Custom Claim"
+                }
+              ]
             }
           ]
         CLIENTS_CONFIGURATION_PATH: /tmp/config/clients-config.json

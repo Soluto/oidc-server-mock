@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Token Endpoint Client Credentials 1`] = `
+exports[`Token Endpoint Client Credentials: client-credentials-flow-client-id 1`] = `
 {
   "alg": "RS256",
   "typ": "JWT",
   "iss": "http://localhost:8080",
   "aud": "some-app",
-  "client_id": "client-credentials-mock-client-id",
+  "client_id": "client-credentials-flow-client-id",
   "string_claim": "string_claim_value",
   "scope": [
     "some-app-scope-1"
@@ -14,6 +14,91 @@ exports[`Token Endpoint Client Credentials 1`] = `
   "json_claim": [
     "value1",
     "value2"
+  ]
+}
+`;
+
+exports[`Token Endpoint Password: simple_user 1`] = `
+{
+  "alg": "RS256",
+  "typ": "JWT",
+  "iss": "http://localhost:8080",
+  "client_id": "password-flow-client-id",
+  "sub": "simple_user",
+  "idp": "local",
+  "scope": [
+    "openid"
+  ],
+  "amr": [
+    "pwd"
+  ]
+}
+`;
+
+exports[`Token Endpoint Password: user_with_all_claim_types 1`] = `
+{
+  "alg": "RS256",
+  "typ": "JWT",
+  "iss": "http://localhost:8080",
+  "client_id": "password-flow-client-id",
+  "sub": "user_with_all_claim_types",
+  "idp": "local",
+  "scope": [
+    "openid"
+  ],
+  "amr": [
+    "pwd"
+  ]
+}
+`;
+
+exports[`Token Endpoint Password: user_with_custom_api_resource_claims 1`] = `
+{
+  "alg": "RS256",
+  "typ": "JWT",
+  "iss": "http://localhost:8080",
+  "client_id": "password-flow-client-id",
+  "sub": "user_with_custom_api_resource_claims",
+  "idp": "local",
+  "scope": [
+    "openid"
+  ],
+  "amr": [
+    "pwd"
+  ]
+}
+`;
+
+exports[`Token Endpoint Password: user_with_custom_identity_claims 1`] = `
+{
+  "alg": "RS256",
+  "typ": "JWT",
+  "iss": "http://localhost:8080",
+  "client_id": "password-flow-client-id",
+  "sub": "user_with_custom_identity_claims",
+  "idp": "local",
+  "scope": [
+    "openid"
+  ],
+  "amr": [
+    "pwd"
+  ]
+}
+`;
+
+exports[`Token Endpoint Password: user_with_standard_claims 1`] = `
+{
+  "alg": "RS256",
+  "typ": "JWT",
+  "iss": "http://localhost:8080",
+  "client_id": "password-flow-client-id",
+  "sub": "user_with_standard_claims",
+  "idp": "local",
+  "scope": [
+    "openid"
+  ],
+  "amr": [
+    "pwd"
   ]
 }
 `;

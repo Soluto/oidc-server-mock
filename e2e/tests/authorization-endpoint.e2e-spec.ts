@@ -54,7 +54,7 @@ describe('Authorization Endpoint', () => {
   test.each(testCases)('Implicit Flow', async (user: User) => {
     const parameters = {
       client_id: implicitFlowClient.ClientId,
-      scope: 'openid some-custom-identity',
+      scope: 'openid some-custom-identity some-app-scope-1',
       response_type: 'id_token token',
       redirect_uri: implicitFlowClient.RedirectUris?.[0].replace('*', 'www'),
       state: 'abc',
@@ -77,7 +77,7 @@ describe('Authorization Endpoint', () => {
     const idToken = query['id_token'];
     expect(typeof idToken).toEqual('string');
     const decodedIdToken = decodeJWT(idToken as string);
-    expect(decodedIdToken).toMatchSnapshot();
+    expect(decodedIdToken).toMatchSnapshot(`${user.Username} id token`);
 
     const accessToken = query['access_token'];
     expect(typeof accessToken).toEqual('string');

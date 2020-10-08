@@ -24,7 +24,8 @@ namespace OpenIdConnectServer
                     .AddInMemoryApiScopes(Config.GetApiScopes())
                     .AddInMemoryClients(Config.GetClients())
                     .AddTestUsers(Config.GetUsers())
-                    .AddRedirectUriValidator<UriValidator>();
+                    .AddRedirectUriValidator<UriValidator>()
+                    .AddProfileService<ConfigurableProfileService>();
 
             var aspNetServicesOptions = Config.GetAspNetServicesOptions();
             AspNetServicesHelper.ApplyAspNetServicesOptions(services, aspNetServicesOptions);

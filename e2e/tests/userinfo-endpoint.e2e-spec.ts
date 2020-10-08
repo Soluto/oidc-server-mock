@@ -2,6 +2,7 @@ import * as querystring from 'querystring';
 import * as dotenv from 'dotenv';
 import { chromium, Page, Browser } from 'playwright-chromium';
 import axios from 'axios';
+import { decode as decodeJWT } from 'jws';
 
 import users from '../config/user-configuration.json';
 import clients from '../config/clients-configuration.json';
@@ -39,7 +40,7 @@ describe('UserInfo Endpoint', () => {
     test(`Retrieve user access token ${user.SubjectId}`, async () => {
       const parameters = {
         client_id: implicitFlowClient.ClientId,
-        scope: 'openid profile some-custom-identity',
+        scope: 'openid profile email some-custom-identity some-app-scope-1',
         response_type: 'id_token token',
         redirect_uri: implicitFlowClient.RedirectUris?.[0].replace('*', 'www'),
         state: 'abc',
@@ -62,9 +63,11 @@ describe('UserInfo Endpoint', () => {
       const token = query['access_token'];
       expect(typeof token).toEqual('string');
       accessToken = token as string;
+      const decodedAccessToken = decodeJWT(accessToken);
+      expect(decodedAccessToken).toMatchSnapshot();
     });
 
-    test('Invoke UserInfo endpoint', async () => {
+    test(`Invoke UserInfo endpoint ${user.SubjectId}`, async () => {
       const response = await axios.get(process.env.OIDC_USERINFO_URL, {
         headers: { authorization: `Bearer ${accessToken}` },
       });
