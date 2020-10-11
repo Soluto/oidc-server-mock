@@ -3,13 +3,18 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using AspNetCorsOptions = Microsoft.AspNetCore.Cors.Infrastructure.CorsOptions;
 
 namespace OpenIdConnectServer.Helpers
 {
-    public class AspNetServicesOptions
+  public class AspNetServicesOptions
     {
+        public AspNetCorsOptions Cors { get; set; }
+
         public IDictionary<string, AuthenticationOptions> Authentication { get; set; }
         public SessionOptions Session { get; set; }
+
+        public ForwardedHeadersOptions ForwardedHeadersOptions { get; set; }
     }
 
     public class AuthenticationOptions
@@ -19,40 +24,62 @@ namespace OpenIdConnectServer.Helpers
 
     public static class AspNetServicesHelper
     {
-        public static void ApplyAspNetServicesOptions(IServiceCollection services, AspNetServicesOptions config)
+        public static void ConfigureAspNetServices(IServiceCollection services, AspNetServicesOptions config)
         {
             if (config.Authentication != null)
             {
-                ApplyAuthenticationOptions(services, config.Authentication);
+                ConfigureAuthenticationOptions(services, config.Authentication);
             }
 
             if (config.Session != null)
             {
-                ApplySessionOptions(services, config.Session);
+                ConfigureSessionOptions(services, config.Session);
             }
         }
 
-        public static void ApplyAuthenticationOptions(IServiceCollection services, IDictionary<string, AuthenticationOptions> config)
+        public static void UseAspNetServices(IApplicationBuilder app, AspNetServicesOptions config)
+        {
+            if (config.Cors != null)
+            {
+                app.UseCors();
+            }
+
+            if (config.ForwardedHeadersOptions != null)
+            {
+                app.UseForwardedHeaders(config.ForwardedHeadersOptions);
+            }
+        }
+
+        public static void ConfigureAuthenticationOptions(IServiceCollection services, IDictionary<string, AuthenticationOptions> config)
         {
             foreach (var schemaConfig in config)
             {
                 var builder = services.AddAuthentication(schemaConfig.Key);
-                ApplyAuthenticationOptionsForScheme(builder, schemaConfig.Value);
+                ConfigureAuthenticationOptionsForScheme(builder, schemaConfig.Value);
             }
         }
 
-        public static void ApplyAuthenticationOptionsForScheme(AuthenticationBuilder builder, AuthenticationOptions schemaConfig)
+        private static void ConfigureAuthenticationOptionsForScheme(AuthenticationBuilder builder, AuthenticationOptions schemaConfig)
         {
             builder.AddCookie(options => {
                 MergeHelper.Merge(schemaConfig.CookieAuthenticationOptions, options);
             });
         }
 
-        public static void ApplySessionOptions(IServiceCollection services, SessionOptions config)
+        private static void ConfigureSessionOptions(IServiceCollection services, SessionOptions config)
         {
             services.AddSession(options => {
                 MergeHelper.Merge(config, options);
             });
+        }
+
+        private static void ConfigureCors(IServiceCollection services, AspNetCorsOptions corsConfig)
+        {
+            services.AddCors(options =>
+                {
+                    MergeHelper.Merge(corsConfig, options);
+                }
+            );
         }
     }
 }

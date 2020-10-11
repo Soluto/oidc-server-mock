@@ -7,7 +7,7 @@ using OpenIdConnectServer.Validation;
 
 namespace OpenIdConnectServer
 {
-  public class Startup
+    public class Startup
     {
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
@@ -27,22 +27,22 @@ namespace OpenIdConnectServer
                     .AddInMemoryClients(Config.GetClients())
                     .AddTestUsers(Config.GetUsers())
                     .AddRedirectUriValidator<RedirectUriValidator>()
-                    .AddProfileService<ProfileService>();
+                    .AddProfileService<ProfileService>()
+                    .AddCorsPolicyService<CorsPolicyService>();
 
             var aspNetServicesOptions = Config.GetAspNetServicesOptions();
-            AspNetServicesHelper.ApplyAspNetServicesOptions(services, aspNetServicesOptions);
+            AspNetServicesHelper.ConfigureAspNetServices(services, aspNetServicesOptions);
 
             services.AddRouting();
-            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseDeveloperExceptionPage();
-            app.UseCors(builder => builder.AllowAnyOrigin()
-                                          .AllowAnyMethod()
-                                          .AllowAnyHeader());
+
+            var aspNetServicesOptions = Config.GetAspNetServicesOptions();
+            AspNetServicesHelper.UseAspNetServices(app, aspNetServicesOptions);
 
             app.UseIdentityServer();
             app.UseStaticFiles();
