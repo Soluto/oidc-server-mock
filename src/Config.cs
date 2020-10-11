@@ -6,7 +6,7 @@ using IdentityServer4.Configuration;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
 using Newtonsoft.Json;
-using OpenIdConnectServer.Utils;
+using OpenIdConnectServer.JsonConverters;
 using OpenIdConnectServer.Helpers;
 
 namespace OpenIdConnectServer
@@ -72,7 +72,7 @@ namespace OpenIdConnectServer
                 }
                 apiResourcesStr = File.ReadAllText(apiResourcesFilePath);
             }
-            var apiResources = JsonConvert.DeserializeObject<IEnumerable<ApiResource>>(apiResourcesStr, new SecretConverter());
+            var apiResources = JsonConvert.DeserializeObject<IEnumerable<ApiResource>>(apiResourcesStr, new SecretJsonConverter());
             return apiResources;
         }
 
@@ -88,7 +88,7 @@ namespace OpenIdConnectServer
                 }
                 configStr = File.ReadAllText(configFilePath);
             }
-            var configClients = JsonConvert.DeserializeObject<IEnumerable<Client>>(configStr, new SecretConverter(), new ClaimJsonConverter());
+            var configClients = JsonConvert.DeserializeObject<IEnumerable<Client>>(configStr, new SecretJsonConverter(), new ClaimJsonConverter());
             return configClients;
         }
 
