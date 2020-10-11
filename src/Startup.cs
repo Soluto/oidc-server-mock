@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using OpenIdConnectServer.Helpers;
+using OpenIdConnectServer.Services;
+using OpenIdConnectServer.Validation;
 
 namespace OpenIdConnectServer
 {
@@ -24,8 +26,8 @@ namespace OpenIdConnectServer
                     .AddInMemoryApiScopes(Config.GetApiScopes())
                     .AddInMemoryClients(Config.GetClients())
                     .AddTestUsers(Config.GetUsers())
-                    .AddRedirectUriValidator<UriValidator>()
-                    .AddProfileService<ConfigurableProfileService>();
+                    .AddRedirectUriValidator<RedirectUriValidator>()
+                    .AddProfileService<ProfileService>();
 
             var aspNetServicesOptions = Config.GetAspNetServicesOptions();
             AspNetServicesHelper.ApplyAspNetServicesOptions(services, aspNetServicesOptions);

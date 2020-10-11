@@ -2,9 +2,9 @@ using System;
 using Newtonsoft.Json;
 using IdentityServer4.Models;
 
-namespace OpenIdConnectServer.Utils
+namespace OpenIdConnectServer.JsonConverters
 {
-    public class SecretConverter : JsonConverter<Secret>
+    public class SecretJsonConverter : JsonConverter<Secret>
     {
         public override void WriteJson(JsonWriter writer, Secret value, JsonSerializer serializer)
         {

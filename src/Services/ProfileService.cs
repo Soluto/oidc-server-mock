@@ -6,13 +6,13 @@ using IdentityServer4.Models;
 using IdentityServer4.Services;
 using IdentityServer4.Test;
 
-namespace OpenIdConnectServer
+namespace OpenIdConnectServer.Services
 {
-  internal class ConfigurableProfileService : IProfileService
+  internal class ProfileService : IProfileService
   {
     private readonly IEnumerable<TestUser> _users;
 
-    public ConfigurableProfileService()
+    public ProfileService()
     {
         _users = Config.GetUsers();
     }
