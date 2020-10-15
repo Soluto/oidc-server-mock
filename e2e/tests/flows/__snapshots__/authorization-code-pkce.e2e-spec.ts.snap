@@ -1,0 +1,588 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Authorization Code Flow (with PKCE) - simple_user - Grants 1`] = `
+"<!DOCTYPE html><html lang=\\"en\\"><head>
+    <meta charset=\\"utf-8\\">
+    <meta http-equiv=\\"X-UA-Compatible\\" content=\\"IE=edge\\">
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1.0, shrink-to-fit=no\\">
+
+    <title>IdentityServer4</title>
+    
+    <link rel=\\"icon\\" type=\\"image/x-icon\\" href=\\"/favicon.ico\\">
+    <link rel=\\"shortcut icon\\" type=\\"image/x-icon\\" href=\\"/favicon.ico\\">
+    
+    <link rel=\\"stylesheet\\" href=\\"/lib/bootstrap/dist/css/bootstrap.min.css\\">
+    <link rel=\\"stylesheet\\" href=\\"/css/site.css\\">
+</head>
+<body>
+    
+
+<div class=\\"nav-page\\">
+    <nav class=\\"navbar navbar-expand-lg navbar-dark bg-dark\\">
+
+        <a href=\\"/\\" class=\\"navbar-brand\\">
+            <img src=\\"/icon.png\\" class=\\"icon-banner\\">
+            IdentityServer4
+        </a>
+
+            <ul class=\\"navbar-nav mr-auto\\">
+                <li class=\\"nav-item dropdown\\">
+                    <a href=\\"#\\" class=\\"nav-link dropdown-toggle\\" data-toggle=\\"dropdown\\">simple_user <b class=\\"caret\\"></b></a>
+                    
+                    <div class=\\"dropdown-menu\\">
+                        <a class=\\"dropdown-item\\" href=\\"/Account/Logout\\">Logout</a>
+                    </div>
+              </li>
+            </ul>
+    
+    </nav>
+</div>
+
+   
+    <div class=\\"container body-container\\">
+        
+<div class=\\"grants-page\\">
+    <div class=\\"lead\\">
+        <h1>Client Application Permissions</h1>
+        <p>Below is the list of applications you have given permission to and the resources they have access to.</p>
+    </div>
+
+            <div class=\\"card\\">
+                <div class=\\"card-header\\">
+                    <div class=\\"row\\">
+                        <div class=\\"col-sm-8 card-title\\">
+                            <strong>authorization-code-client-id</strong>
+                        </div>
+
+                        <div class=\\"col-sm-2\\">
+                            <form action=\\"/Grants/Revoke\\" method=\\"post\\">
+                                <input type=\\"hidden\\" name=\\"clientId\\" value=\\"authorization-code-client-id\\">
+                                <button class=\\"btn btn-danger\\">Revoke Access</button>
+                            <input name=\\"__RequestVerificationToken\\" type=\\"hidden\\" value=\\"CfDJ8Eky9VyqqPNLoUcaLSvjcIoc0xm1dT1Bfnp7zlblCpVssTYLObhzCYf1FpxGdJ5aRGzqcEBmiW6PZLDdNzmymdnnYAwrZ40QGnQKhS16kfb3CsRVIsG78jOADqi0BRyciRCVOOJ5fybgHKxzM9ebfvc-rVN-QvAGoKxp8xUfpD-jzwj8zdkmZmnTsdySmmHaog\\"></form>
+                        </div>
+                    </div>
+                </div>
+                
+                <ul class=\\"list-group list-group-flush\\">
+                    <li class=\\"list-group-item\\">
+                        <label>Created:</label> 2020-10-15
+                    </li>
+                        <li class=\\"list-group-item\\">
+                            <label>Expires:</label> 2020-10-15
+                        </li>
+                        <li class=\\"list-group-item\\">
+                            <label>Identity Grants</label>
+                            <ul>
+                                    <li>Your user identifier</li>
+                                    <li>User profile</li>
+                                    <li>Your email address</li>
+                                    <li>some-custom-identity</li>
+                            </ul>
+                        </li>
+                        <li class=\\"list-group-item\\">
+                            <label>API Grants</label>
+                            <ul>
+                                    <li>some-app-scope-1</li>
+                            </ul>
+                        </li>
+                </ul>
+            </div>
+</div>
+    </div>
+
+    <script src=\\"/lib/jquery/dist/jquery.slim.min.js\\"></script>
+    <script src=\\"/lib/bootstrap/dist/js/bootstrap.bundle.min.js\\"></script>
+
+    
+
+
+</body></html>"
+`;
+
+exports[`Authorization Code Flow (with PKCE) - simple_user - Introspection Endpoint 1`] = `
+{
+  "iss": "http://localhost:8080",
+  "aud": "some-app",
+  "client_id": "authorization-code-with-pkce-client-id",
+  "sub": "simple_user",
+  "idp": "local",
+  "amr": "pwd",
+  "active": true,
+  "scope": "some-app-scope-1"
+}
+`;
+
+exports[`Authorization Code Flow (with PKCE) - simple_user - Token Endpoint 1`] = `
+{
+  "alg": "RS256",
+  "typ": "JWT",
+  "iss": "http://localhost:8080",
+  "aud": "some-app",
+  "client_id": "authorization-code-with-pkce-client-id",
+  "sub": "simple_user",
+  "idp": "local",
+  "scope": [
+    "openid",
+    "profile",
+    "email",
+    "some-custom-identity",
+    "some-app-scope-1"
+  ],
+  "amr": [
+    "pwd"
+  ]
+}
+`;
+
+exports[`Authorization Code Flow (with PKCE) - simple_user - UserInfo Endpoint 1`] = `
+Object {
+  "sub": "simple_user",
+}
+`;
+
+exports[`Authorization Code Flow (with PKCE) - user_with_all_claim_types - Grants 1`] = `
+"<!DOCTYPE html><html lang=\\"en\\"><head>
+    <meta charset=\\"utf-8\\">
+    <meta http-equiv=\\"X-UA-Compatible\\" content=\\"IE=edge\\">
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1.0, shrink-to-fit=no\\">
+
+    <title>IdentityServer4</title>
+    
+    <link rel=\\"icon\\" type=\\"image/x-icon\\" href=\\"/favicon.ico\\">
+    <link rel=\\"shortcut icon\\" type=\\"image/x-icon\\" href=\\"/favicon.ico\\">
+    
+    <link rel=\\"stylesheet\\" href=\\"/lib/bootstrap/dist/css/bootstrap.min.css\\">
+    <link rel=\\"stylesheet\\" href=\\"/css/site.css\\">
+</head>
+<body>
+    
+
+<div class=\\"nav-page\\">
+    <nav class=\\"navbar navbar-expand-lg navbar-dark bg-dark\\">
+
+        <a href=\\"/\\" class=\\"navbar-brand\\">
+            <img src=\\"/icon.png\\" class=\\"icon-banner\\">
+            IdentityServer4
+        </a>
+
+            <ul class=\\"navbar-nav mr-auto\\">
+                <li class=\\"nav-item dropdown\\">
+                    <a href=\\"#\\" class=\\"nav-link dropdown-toggle\\" data-toggle=\\"dropdown\\">user_with_all_claim_types <b class=\\"caret\\"></b></a>
+                    
+                    <div class=\\"dropdown-menu\\">
+                        <a class=\\"dropdown-item\\" href=\\"/Account/Logout\\">Logout</a>
+                    </div>
+              </li>
+            </ul>
+    
+    </nav>
+</div>
+
+   
+    <div class=\\"container body-container\\">
+        
+<div class=\\"grants-page\\">
+    <div class=\\"lead\\">
+        <h1>Client Application Permissions</h1>
+        <p>Below is the list of applications you have given permission to and the resources they have access to.</p>
+    </div>
+
+        <div class=\\"row\\">
+            <div class=\\"col-sm-8\\">
+                <div class=\\"alert alert-info\\">
+                    You have not given access to any applications
+                </div>
+            </div>
+        </div>
+</div>
+    </div>
+
+    <script src=\\"/lib/jquery/dist/jquery.slim.min.js\\"></script>
+    <script src=\\"/lib/bootstrap/dist/js/bootstrap.bundle.min.js\\"></script>
+
+    
+
+
+</body></html>"
+`;
+
+exports[`Authorization Code Flow (with PKCE) - user_with_all_claim_types - Introspection Endpoint 1`] = `
+{
+  "iss": "http://localhost:8080",
+  "aud": "some-app",
+  "client_id": "authorization-code-with-pkce-client-id",
+  "sub": "user_with_all_claim_types",
+  "idp": "local",
+  "some-app-user-custom-claim": "Oliver's Custom User Claim",
+  "some-app-scope-1-custom-user-claim": "Oliver's Scope Custom User Claim",
+  "amr": "pwd",
+  "active": true,
+  "scope": "some-app-scope-1"
+}
+`;
+
+exports[`Authorization Code Flow (with PKCE) - user_with_all_claim_types - Token Endpoint 1`] = `
+{
+  "alg": "RS256",
+  "typ": "JWT",
+  "iss": "http://localhost:8080",
+  "aud": "some-app",
+  "client_id": "authorization-code-with-pkce-client-id",
+  "sub": "user_with_all_claim_types",
+  "idp": "local",
+  "some-app-user-custom-claim": "Oliver's Custom User Claim",
+  "some-app-scope-1-custom-user-claim": "Oliver's Scope Custom User Claim",
+  "scope": [
+    "openid",
+    "profile",
+    "email",
+    "some-custom-identity",
+    "some-app-scope-1"
+  ],
+  "amr": [
+    "pwd"
+  ]
+}
+`;
+
+exports[`Authorization Code Flow (with PKCE) - user_with_all_claim_types - UserInfo Endpoint 1`] = `
+Object {
+  "email": "oliver.hunter@gmail.com",
+  "name": "Oliver Hunter",
+  "some-custom-identity-user-claim": "Oliver's Custom User Claim",
+  "sub": "user_with_all_claim_types",
+}
+`;
+
+exports[`Authorization Code Flow (with PKCE) - user_with_custom_api_resource_claims - Grants 1`] = `
+"<!DOCTYPE html><html lang=\\"en\\"><head>
+    <meta charset=\\"utf-8\\">
+    <meta http-equiv=\\"X-UA-Compatible\\" content=\\"IE=edge\\">
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1.0, shrink-to-fit=no\\">
+
+    <title>IdentityServer4</title>
+    
+    <link rel=\\"icon\\" type=\\"image/x-icon\\" href=\\"/favicon.ico\\">
+    <link rel=\\"shortcut icon\\" type=\\"image/x-icon\\" href=\\"/favicon.ico\\">
+    
+    <link rel=\\"stylesheet\\" href=\\"/lib/bootstrap/dist/css/bootstrap.min.css\\">
+    <link rel=\\"stylesheet\\" href=\\"/css/site.css\\">
+</head>
+<body>
+    
+
+<div class=\\"nav-page\\">
+    <nav class=\\"navbar navbar-expand-lg navbar-dark bg-dark\\">
+
+        <a href=\\"/\\" class=\\"navbar-brand\\">
+            <img src=\\"/icon.png\\" class=\\"icon-banner\\">
+            IdentityServer4
+        </a>
+
+            <ul class=\\"navbar-nav mr-auto\\">
+                <li class=\\"nav-item dropdown\\">
+                    <a href=\\"#\\" class=\\"nav-link dropdown-toggle\\" data-toggle=\\"dropdown\\">user_with_custom_api_resource_claims <b class=\\"caret\\"></b></a>
+                    
+                    <div class=\\"dropdown-menu\\">
+                        <a class=\\"dropdown-item\\" href=\\"/Account/Logout\\">Logout</a>
+                    </div>
+              </li>
+            </ul>
+    
+    </nav>
+</div>
+
+   
+    <div class=\\"container body-container\\">
+        
+<div class=\\"grants-page\\">
+    <div class=\\"lead\\">
+        <h1>Client Application Permissions</h1>
+        <p>Below is the list of applications you have given permission to and the resources they have access to.</p>
+    </div>
+
+        <div class=\\"row\\">
+            <div class=\\"col-sm-8\\">
+                <div class=\\"alert alert-info\\">
+                    You have not given access to any applications
+                </div>
+            </div>
+        </div>
+</div>
+    </div>
+
+    <script src=\\"/lib/jquery/dist/jquery.slim.min.js\\"></script>
+    <script src=\\"/lib/bootstrap/dist/js/bootstrap.bundle.min.js\\"></script>
+
+    
+
+
+</body></html>"
+`;
+
+exports[`Authorization Code Flow (with PKCE) - user_with_custom_api_resource_claims - Introspection Endpoint 1`] = `
+{
+  "iss": "http://localhost:8080",
+  "aud": "some-app",
+  "client_id": "authorization-code-with-pkce-client-id",
+  "sub": "user_with_custom_api_resource_claims",
+  "idp": "local",
+  "some-app-user-custom-claim": "Sam's Custom User Claim",
+  "some-app-scope-1-custom-user-claim": "Sam's Scope Custom User Claim",
+  "amr": "pwd",
+  "active": true,
+  "scope": "some-app-scope-1"
+}
+`;
+
+exports[`Authorization Code Flow (with PKCE) - user_with_custom_api_resource_claims - Token Endpoint 1`] = `
+{
+  "alg": "RS256",
+  "typ": "JWT",
+  "iss": "http://localhost:8080",
+  "aud": "some-app",
+  "client_id": "authorization-code-with-pkce-client-id",
+  "sub": "user_with_custom_api_resource_claims",
+  "idp": "local",
+  "some-app-user-custom-claim": "Sam's Custom User Claim",
+  "some-app-scope-1-custom-user-claim": "Sam's Scope Custom User Claim",
+  "scope": [
+    "openid",
+    "profile",
+    "email",
+    "some-custom-identity",
+    "some-app-scope-1"
+  ],
+  "amr": [
+    "pwd"
+  ]
+}
+`;
+
+exports[`Authorization Code Flow (with PKCE) - user_with_custom_api_resource_claims - UserInfo Endpoint 1`] = `
+Object {
+  "email": "sam.tailor@gmail.com",
+  "name": "Sam Tailor",
+  "sub": "user_with_custom_api_resource_claims",
+}
+`;
+
+exports[`Authorization Code Flow (with PKCE) - user_with_custom_identity_claims - Grants 1`] = `
+"<!DOCTYPE html><html lang=\\"en\\"><head>
+    <meta charset=\\"utf-8\\">
+    <meta http-equiv=\\"X-UA-Compatible\\" content=\\"IE=edge\\">
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1.0, shrink-to-fit=no\\">
+
+    <title>IdentityServer4</title>
+    
+    <link rel=\\"icon\\" type=\\"image/x-icon\\" href=\\"/favicon.ico\\">
+    <link rel=\\"shortcut icon\\" type=\\"image/x-icon\\" href=\\"/favicon.ico\\">
+    
+    <link rel=\\"stylesheet\\" href=\\"/lib/bootstrap/dist/css/bootstrap.min.css\\">
+    <link rel=\\"stylesheet\\" href=\\"/css/site.css\\">
+</head>
+<body>
+    
+
+<div class=\\"nav-page\\">
+    <nav class=\\"navbar navbar-expand-lg navbar-dark bg-dark\\">
+
+        <a href=\\"/\\" class=\\"navbar-brand\\">
+            <img src=\\"/icon.png\\" class=\\"icon-banner\\">
+            IdentityServer4
+        </a>
+
+            <ul class=\\"navbar-nav mr-auto\\">
+                <li class=\\"nav-item dropdown\\">
+                    <a href=\\"#\\" class=\\"nav-link dropdown-toggle\\" data-toggle=\\"dropdown\\">user_with_custom_identity_claims <b class=\\"caret\\"></b></a>
+                    
+                    <div class=\\"dropdown-menu\\">
+                        <a class=\\"dropdown-item\\" href=\\"/Account/Logout\\">Logout</a>
+                    </div>
+              </li>
+            </ul>
+    
+    </nav>
+</div>
+
+   
+    <div class=\\"container body-container\\">
+        
+<div class=\\"grants-page\\">
+    <div class=\\"lead\\">
+        <h1>Client Application Permissions</h1>
+        <p>Below is the list of applications you have given permission to and the resources they have access to.</p>
+    </div>
+
+        <div class=\\"row\\">
+            <div class=\\"col-sm-8\\">
+                <div class=\\"alert alert-info\\">
+                    You have not given access to any applications
+                </div>
+            </div>
+        </div>
+</div>
+    </div>
+
+    <script src=\\"/lib/jquery/dist/jquery.slim.min.js\\"></script>
+    <script src=\\"/lib/bootstrap/dist/js/bootstrap.bundle.min.js\\"></script>
+
+    
+
+
+</body></html>"
+`;
+
+exports[`Authorization Code Flow (with PKCE) - user_with_custom_identity_claims - Introspection Endpoint 1`] = `
+{
+  "iss": "http://localhost:8080",
+  "aud": "some-app",
+  "client_id": "authorization-code-with-pkce-client-id",
+  "sub": "user_with_custom_identity_claims",
+  "idp": "local",
+  "amr": "pwd",
+  "active": true,
+  "scope": "some-app-scope-1"
+}
+`;
+
+exports[`Authorization Code Flow (with PKCE) - user_with_custom_identity_claims - Token Endpoint 1`] = `
+{
+  "alg": "RS256",
+  "typ": "JWT",
+  "iss": "http://localhost:8080",
+  "aud": "some-app",
+  "client_id": "authorization-code-with-pkce-client-id",
+  "sub": "user_with_custom_identity_claims",
+  "idp": "local",
+  "scope": [
+    "openid",
+    "profile",
+    "email",
+    "some-custom-identity",
+    "some-app-scope-1"
+  ],
+  "amr": [
+    "pwd"
+  ]
+}
+`;
+
+exports[`Authorization Code Flow (with PKCE) - user_with_custom_identity_claims - UserInfo Endpoint 1`] = `
+Object {
+  "email": "jack.sparrow@gmail.com",
+  "name": "Jack Sparrow",
+  "some-custom-identity-user-claim": "Jack's Custom User Claim",
+  "sub": "user_with_custom_identity_claims",
+}
+`;
+
+exports[`Authorization Code Flow (with PKCE) - user_with_standard_claims - Grants 1`] = `
+"<!DOCTYPE html><html lang=\\"en\\"><head>
+    <meta charset=\\"utf-8\\">
+    <meta http-equiv=\\"X-UA-Compatible\\" content=\\"IE=edge\\">
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1.0, shrink-to-fit=no\\">
+
+    <title>IdentityServer4</title>
+    
+    <link rel=\\"icon\\" type=\\"image/x-icon\\" href=\\"/favicon.ico\\">
+    <link rel=\\"shortcut icon\\" type=\\"image/x-icon\\" href=\\"/favicon.ico\\">
+    
+    <link rel=\\"stylesheet\\" href=\\"/lib/bootstrap/dist/css/bootstrap.min.css\\">
+    <link rel=\\"stylesheet\\" href=\\"/css/site.css\\">
+</head>
+<body>
+    
+
+<div class=\\"nav-page\\">
+    <nav class=\\"navbar navbar-expand-lg navbar-dark bg-dark\\">
+
+        <a href=\\"/\\" class=\\"navbar-brand\\">
+            <img src=\\"/icon.png\\" class=\\"icon-banner\\">
+            IdentityServer4
+        </a>
+
+            <ul class=\\"navbar-nav mr-auto\\">
+                <li class=\\"nav-item dropdown\\">
+                    <a href=\\"#\\" class=\\"nav-link dropdown-toggle\\" data-toggle=\\"dropdown\\">user_with_standard_claims <b class=\\"caret\\"></b></a>
+                    
+                    <div class=\\"dropdown-menu\\">
+                        <a class=\\"dropdown-item\\" href=\\"/Account/Logout\\">Logout</a>
+                    </div>
+              </li>
+            </ul>
+    
+    </nav>
+</div>
+
+   
+    <div class=\\"container body-container\\">
+        
+<div class=\\"grants-page\\">
+    <div class=\\"lead\\">
+        <h1>Client Application Permissions</h1>
+        <p>Below is the list of applications you have given permission to and the resources they have access to.</p>
+    </div>
+
+        <div class=\\"row\\">
+            <div class=\\"col-sm-8\\">
+                <div class=\\"alert alert-info\\">
+                    You have not given access to any applications
+                </div>
+            </div>
+        </div>
+</div>
+    </div>
+
+    <script src=\\"/lib/jquery/dist/jquery.slim.min.js\\"></script>
+    <script src=\\"/lib/bootstrap/dist/js/bootstrap.bundle.min.js\\"></script>
+
+    
+
+
+</body></html>"
+`;
+
+exports[`Authorization Code Flow (with PKCE) - user_with_standard_claims - Introspection Endpoint 1`] = `
+{
+  "iss": "http://localhost:8080",
+  "aud": "some-app",
+  "client_id": "authorization-code-with-pkce-client-id",
+  "sub": "user_with_standard_claims",
+  "idp": "local",
+  "amr": "pwd",
+  "active": true,
+  "scope": "some-app-scope-1"
+}
+`;
+
+exports[`Authorization Code Flow (with PKCE) - user_with_standard_claims - Token Endpoint 1`] = `
+{
+  "alg": "RS256",
+  "typ": "JWT",
+  "iss": "http://localhost:8080",
+  "aud": "some-app",
+  "client_id": "authorization-code-with-pkce-client-id",
+  "sub": "user_with_standard_claims",
+  "idp": "local",
+  "scope": [
+    "openid",
+    "profile",
+    "email",
+    "some-custom-identity",
+    "some-app-scope-1"
+  ],
+  "amr": [
+    "pwd"
+  ]
+}
+`;
+
+exports[`Authorization Code Flow (with PKCE) - user_with_standard_claims - UserInfo Endpoint 1`] = `
+Object {
+  "email": "john.smith@gmail.com",
+  "email_verified": "true",
+  "name": "John Smith",
+  "sub": "user_with_standard_claims",
+}
+`;
