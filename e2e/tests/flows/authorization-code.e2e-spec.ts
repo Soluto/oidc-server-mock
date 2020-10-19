@@ -4,7 +4,7 @@ import { chromium, Page, Browser } from 'playwright-chromium';
 import type { User, Client } from '../../types';
 import users from '../../config/user-configuration.json';
 import clients from '../../config/clients-configuration.json';
-import { authorizationEndpoint, grants, introspectEndpoint, tokenEndpoint, userInfoEndpoint } from '../../helpers';
+import { authorizationEndpoint, introspectEndpoint, tokenEndpoint, userInfoEndpoint } from '../../helpers';
 
 const testCases: User[] = users
   .map(u => ({
@@ -76,10 +76,6 @@ describe('Authorization Code Flow', () => {
 
     test('Introspection Endpoint', async () => {
       await introspectEndpoint(token, 'some-app');
-    });
-
-    test('Grants', async () => {
-      await grants(page, user);
     });
   });
 });
