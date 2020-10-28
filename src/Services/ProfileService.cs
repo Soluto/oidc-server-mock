@@ -19,8 +19,8 @@ namespace OpenIdConnectServer.Services
 
     public Task GetProfileDataAsync(ProfileDataRequestContext context)
     {
-        var userName = context.Subject.GetSubjectId();
-        var user = this._users.FirstOrDefault(u => u.Username == userName);
+        var subjectId = context.Subject.GetSubjectId();
+        var user = this._users.FirstOrDefault(u => u.SubjectId == subjectId);
         if (user != null)
         {
             var claims = context.FilterClaims(user.Claims);
@@ -31,8 +31,8 @@ namespace OpenIdConnectServer.Services
 
     public Task IsActiveAsync(IsActiveContext context)
     {
-        var userName = context.Subject.GetSubjectId();
-        var user = this._users.FirstOrDefault(u => u.Username == userName);
+        var subjectId = context.Subject.GetSubjectId();
+        var user = this._users.FirstOrDefault(u => u.SubjectId == subjectId);
         context.IsActive = user?.IsActive ?? false;
         return Task.CompletedTask;
     }
