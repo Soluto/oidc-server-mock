@@ -163,6 +163,24 @@ ports:
 
 ---
 
+## Cookie SameSite mode
+
+Since Aug 2020 Chrome has a new [secure-by-default model](https://blog.chromium.org/2019/10/developers-get-ready-for-new.html) for cookies, enabled by a new cookie classification system. Other browsers will join in near future.
+
+There are two ways to use `oidc-server-mock` with this change.
+
+1. Run the container with HTTP enables (see above).
+2. Change cookies `SameSite` mode from default `None` to `Lax`. To do so just add the following to `SERVER_OPTIONS_INLINE/PATH` env var:
+
+```json
+{
+  "Authentication": {
+    "CookieSameSiteMode": "Lax",
+    "CheckSessionCookieSameSiteMode": "Lax"
+  }
+}
+```
+
 ## Contributing
 
 ### Requirements
