@@ -12,6 +12,14 @@ const options = {
   log: true,
 };
 
+const upAdditionalOptions = {
+  commandOptions: ['--force-recreate', '--remove-orphans', '--renew-anon-volumes'],
+};
+
+const downAdditionalOptions = {
+  commandOptions: ['--volumes', '--remove-orphans'],
+};
+
 class BackendJestRunner extends DefaultJestRunner {
   constructor(config, context) {
     super(config, context);
@@ -20,14 +28,14 @@ class BackendJestRunner extends DefaultJestRunner {
 
   async setup() {
     await dockerCompose.buildAll(options);
-    await dockerCompose.upAll(options);
+    await dockerCompose.upAll({ ...options, ...upAdditionalOptions });
 
     await waitFor.start(30000);
   }
 
   async teardown() {
     // await dockerCompose.logs(['oidc-server-mock'], options);
-    await dockerCompose.down(options);
+    await dockerCompose.down({ ...options, ...downAdditionalOptions });
     await waitFor.stop(30000);
   }
 
