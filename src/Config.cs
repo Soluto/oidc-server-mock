@@ -44,6 +44,21 @@ namespace OpenIdConnectServer
             return serverOptions;
         }
 
+        public static void ConfigureAccountOptions()
+        {
+            string accountOptionsStr = Environment.GetEnvironmentVariable("ACCOUNT_OPTIONS_INLINE");
+            if (string.IsNullOrWhiteSpace(accountOptionsStr))
+            {
+                var accountOptionsFilePath = Environment.GetEnvironmentVariable("ACCOUNT_OPTIONS_PATH");
+                if (string.IsNullOrWhiteSpace(accountOptionsFilePath))
+                {
+                    return;
+                }
+                accountOptionsStr = File.ReadAllText(accountOptionsFilePath);
+            }
+            AccountOptionsHelper.ConfigureAccountOptions(accountOptionsStr);
+        }
+
         public static IEnumerable<string> GetServerCorsAllowedOrigins()
         {
             string allowedOriginsStr = Environment.GetEnvironmentVariable("SERVER_CORS_ALLOWED_ORIGINS_INLINE");

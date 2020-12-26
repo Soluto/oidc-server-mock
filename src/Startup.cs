@@ -33,6 +33,8 @@ namespace OpenIdConnectServer
             var aspNetServicesOptions = Config.GetAspNetServicesOptions();
             AspNetServicesHelper.ConfigureAspNetServices(services, aspNetServicesOptions);
 
+            Config.ConfigureAccountOptions();
+
             services.AddRouting();
         }
 
