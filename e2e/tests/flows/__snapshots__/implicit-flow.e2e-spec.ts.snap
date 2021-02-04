@@ -1,5 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Implicit Flow - simple_user - Authorization Endpoint (id_token only) 1`] = `
+{
+  "alg": "RS256",
+  "typ": "JWT",
+  "iss": "http://localhost:8080",
+  "aud": "implicit-flow-client-id",
+  "nonce": "xyz",
+  "s_hash": "ungWv48Bz-pBQUDeXa4iIw",
+  "sub": "simple_user",
+  "idp": "local",
+  "amr": [
+    "pwd"
+  ]
+}
+`;
+
 exports[`Implicit Flow - simple_user - Authorization Endpoint 1`] = `
 {
   "alg": "RS256",
@@ -38,6 +54,25 @@ exports[`Implicit Flow - simple_user - Introspection Endpoint 1`] = `
 exports[`Implicit Flow - simple_user - UserInfo Endpoint 1`] = `
 Object {
   "sub": "simple_user",
+}
+`;
+
+exports[`Implicit Flow - user_with_all_claim_types - Authorization Endpoint (id_token only) 1`] = `
+{
+  "alg": "RS256",
+  "typ": "JWT",
+  "iss": "http://localhost:8080",
+  "aud": "implicit-flow-client-id",
+  "nonce": "xyz",
+  "s_hash": "ungWv48Bz-pBQUDeXa4iIw",
+  "sub": "user_with_all_claim_types",
+  "idp": "local",
+  "name": "Oliver Hunter",
+  "email": "oliver.hunter@gmail.com",
+  "some-custom-identity-user-claim": "Oliver's Custom User Claim",
+  "amr": [
+    "pwd"
+  ]
 }
 `;
 
@@ -89,6 +124,24 @@ Object {
 }
 `;
 
+exports[`Implicit Flow - user_with_custom_api_resource_claims - Authorization Endpoint (id_token only) 1`] = `
+{
+  "alg": "RS256",
+  "typ": "JWT",
+  "iss": "http://localhost:8080",
+  "aud": "implicit-flow-client-id",
+  "nonce": "xyz",
+  "s_hash": "ungWv48Bz-pBQUDeXa4iIw",
+  "sub": "user_with_custom_api_resource_claims",
+  "idp": "local",
+  "name": "Sam Tailor",
+  "email": "sam.tailor@gmail.com",
+  "amr": [
+    "pwd"
+  ]
+}
+`;
+
 exports[`Implicit Flow - user_with_custom_api_resource_claims - Authorization Endpoint 1`] = `
 {
   "alg": "RS256",
@@ -136,6 +189,25 @@ Object {
 }
 `;
 
+exports[`Implicit Flow - user_with_custom_identity_claims - Authorization Endpoint (id_token only) 1`] = `
+{
+  "alg": "RS256",
+  "typ": "JWT",
+  "iss": "http://localhost:8080",
+  "aud": "implicit-flow-client-id",
+  "nonce": "xyz",
+  "s_hash": "ungWv48Bz-pBQUDeXa4iIw",
+  "sub": "user_with_custom_identity_claims",
+  "idp": "local",
+  "name": "Jack Sparrow",
+  "email": "jack.sparrow@gmail.com",
+  "some-custom-identity-user-claim": "Jack's Custom User Claim",
+  "amr": [
+    "pwd"
+  ]
+}
+`;
+
 exports[`Implicit Flow - user_with_custom_identity_claims - Authorization Endpoint 1`] = `
 {
   "alg": "RS256",
@@ -177,6 +249,25 @@ Object {
   "name": "Jack Sparrow",
   "some-custom-identity-user-claim": "Jack's Custom User Claim",
   "sub": "user_with_custom_identity_claims",
+}
+`;
+
+exports[`Implicit Flow - user_with_standard_claims - Authorization Endpoint (id_token only) 1`] = `
+{
+  "alg": "RS256",
+  "typ": "JWT",
+  "iss": "http://localhost:8080",
+  "aud": "implicit-flow-client-id",
+  "nonce": "xyz",
+  "s_hash": "ungWv48Bz-pBQUDeXa4iIw",
+  "sub": "user_with_standard_claims",
+  "idp": "local",
+  "name": "John Smith",
+  "email": "john.smith@gmail.com",
+  "email_verified": "true",
+  "amr": [
+    "pwd"
+  ]
 }
 `;
 

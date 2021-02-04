@@ -72,5 +72,25 @@ describe('Implicit Flow', () => {
     test('Introspection Endpoint', async () => {
       await introspectEndpoint(token, 'some-app');
     });
+
+    test('Authorization Endpoint (id_token only)', async () => {
+      const parameters = {
+        client_id: client.ClientId,
+        scope: 'openid profile email some-custom-identity',
+        response_type: 'id_token',
+        redirect_uri: client.RedirectUris?.[0].replace('*', 'www'),
+        state: 'abc',
+        nonce: 'xyz',
+      };
+      const redirectedUrl = await authorizationEndpoint(page, parameters, user, parameters.redirect_uri);
+      const hash = redirectedUrl.hash.slice(1);
+      const query = querystring.parse(hash);
+
+      const tokenParameter = query['id_token'];
+      expect(typeof tokenParameter).toEqual('string');
+      token = tokenParameter as string;
+      const decodedAccessToken = decodeJWT(token);
+      expect(decodedAccessToken).toMatchSnapshot();
+    });
   });
 });
