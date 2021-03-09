@@ -1,12 +1,12 @@
 name: PR
 
 on:
+  pull_request:
+    paths-ignore:
+      - README.md
   push:
     branches:
       - master
-    paths-ignore:
-      - README.md
-  pull_request_target:
     paths-ignore:
       - README.md
 
