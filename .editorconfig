@@ -2,7 +2,12 @@ root = true
 
 [*]
 indent_style = space
-indent_size = 2
 charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
+
+[*.{ts,js,json,yaml,yml}]
+indent_size = 2
+
+[*.cs]
+indent_size = 4
