@@ -151,6 +151,27 @@ There are two ways to provide configuration for supported scopes, clients and us
 * `API_RESOURCES_PATH`
 * `IDENTITY_RESOURCES_PATH`
 
+## Custom endpoints
+
+### User management
+
+Users can be added (in future also removed and altered) via `user management` endpoint.
+
+* Create new user: `POST` request to `/api/v1/user` path.
+  The request body should be the `User` object. Just as in `USERS_CONFIGURATION`.
+  The response is subjectId as sent in request.
+
+* Get user: `GET` request to  `/api/v1/user/{subjectId}` path.
+  The response is `User` object
+
+* Update user `PUT` request to `/api/v1/user` path. (**Not implemented yet**)
+  The request body should be the `User` object. Just as in `USERS_CONFIGURATION`.
+  The response is subjectId as sent in request.
+  > If user doesn't exits it will be created.
+
+* Delete user: `DELETE` request to  `/api/v1/user/{subjectId}` path.  (**Not implemented yet**)
+  The response is `User` object
+
 ## HTTPS
 
 To use `https` protocol with the server just add the following environment variables to the `docker run`/`docker-compose up` command, expose ports and mount volume containing the pfx file:
