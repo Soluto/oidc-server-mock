@@ -2,7 +2,11 @@ import * as querystring from 'querystring';
 import axios, { AxiosRequestConfig } from 'axios';
 import apiResources from '../config/api-resources.json';
 
-export default async (token: string, apiResourceId: string): Promise<void> => {
+export default async (
+  token: string,
+  apiResourceId: string,
+  snapshotPropertyMatchers: Record<string, unknown> = {}
+): Promise<void> => {
   const apiResource = apiResources.find(aR => aR.Name === apiResourceId);
   expect(apiResource).toBeDefined();
   const auth = Buffer.from(`${apiResource.Name}:${apiResource.ApiSecrets?.[0]}`).toString('base64');
@@ -19,5 +23,5 @@ export default async (token: string, apiResourceId: string): Promise<void> => {
   const response = await axios.post(process.env.OIDC_INTROSPECTION_URL, requestBody, requestConfig);
 
   expect(response).toBeDefined();
-  expect(response.data).toMatchSnapshot();
+  expect(response.data).toMatchSnapshot(snapshotPropertyMatchers);
 };

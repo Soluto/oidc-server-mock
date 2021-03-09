@@ -31,7 +31,7 @@ describe('Password Flow', () => {
         username: user.Username,
         password: user.Password,
         grant_type: 'password',
-        scope: client.AllowedScopes,
+        scope: client.AllowedScopes.join(' '),
       };
 
       token = await tokenEndpoint(parameters);

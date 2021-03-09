@@ -48,7 +48,7 @@ describe('Implicit Flow', () => {
     test('Authorization Endpoint', async () => {
       const parameters = {
         client_id: client.ClientId,
-        scope: 'openid profile email some-custom-identity some-app-scope-1',
+        scope: client.AllowedScopes.join(' '),
         response_type: 'id_token token',
         redirect_uri: client.RedirectUris?.[0].replace('*', 'www'),
         state: 'abc',

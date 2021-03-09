@@ -5,24 +5,29 @@ using IdentityServer4.Extensions;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
 using IdentityServer4.Test;
+using Microsoft.Extensions.Logging;
 
 namespace OpenIdConnectServer.Services
 {
   internal class ProfileService : IProfileService
   {
-    private readonly IEnumerable<TestUser> _users;
+    private readonly TestUserStore _userStore;
+    private readonly ILogger Logger;
 
-    public ProfileService()
+    public ProfileService(TestUserStore userStore, ILogger<ProfileService> logger)
     {
-        _users = Config.GetUsers();
+        _userStore = userStore;
+        Logger = logger;
     }
 
     public Task GetProfileDataAsync(ProfileDataRequestContext context)
     {
         var subjectId = context.Subject.GetSubjectId();
-        var user = this._users.FirstOrDefault(u => u.SubjectId == subjectId);
+        Logger.LogDebug("Getting profile data for subjectId: {subjectId}", subjectId);
+        var user = this._userStore.FindBySubjectId(subjectId);
         if (user != null)
         {
+            Logger.LogDebug("The user was found in store");
             var claims = context.FilterClaims(user.Claims);
             context.AddRequestedClaims(claims);
         }
@@ -32,8 +37,10 @@ namespace OpenIdConnectServer.Services
     public Task IsActiveAsync(IsActiveContext context)
     {
         var subjectId = context.Subject.GetSubjectId();
-        var user = this._users.FirstOrDefault(u => u.SubjectId == subjectId);
+        Logger.LogDebug("Checking if the user is active for subjectId: {subject}", subjectId);
+        var user = this._userStore.FindBySubjectId(subjectId);
         context.IsActive = user?.IsActive ?? false;
+        Logger.LogDebug("The user is active: {isActive}", context.IsActive);
         return Task.CompletedTask;
     }
   }

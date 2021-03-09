@@ -1,7 +1,6 @@
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace OpenIdConnectServer
+namespace OpenIdConnectServer.Controllers
 {
     public class HealthController : Controller
     {

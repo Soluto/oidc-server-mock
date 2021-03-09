@@ -58,7 +58,7 @@ describe('Authorization Code Flow (with PKCE)', () => {
 
       const parameters = {
         client_id: client.ClientId,
-        scope: 'openid profile email some-custom-identity some-app-scope-1',
+        scope: client.AllowedScopes.join(' '),
         response_type: 'code',
         redirect_uri: client.RedirectUris?.[0].replace('*', 'www'),
         code_challenge: codeChallenge,
@@ -78,7 +78,7 @@ describe('Authorization Code Flow (with PKCE)', () => {
         grant_type: 'authorization_code',
         redirect_uri: client.RedirectUris?.[0].replace('*', 'www'),
         code_verifier: codeVerifier,
-        scope: 'openid profile email some-custom-identity some-app-scope-1',
+        scope: client.AllowedScopes.join(' '),
       };
 
       token = await tokenEndpoint(parameters);

@@ -19,7 +19,7 @@ describe('Client Credentials Flow', () => {
       client_id: client.ClientId,
       client_secret: client.ClientSecrets?.[0],
       grant_type: 'client_credentials',
-      scope: client.AllowedScopes,
+      scope: client.AllowedScopes.join(' '),
     };
 
     token = await tokenEndpoint(parameters);
