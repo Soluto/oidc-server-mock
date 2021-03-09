@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`User management Introspection Endpoint 1`] = `
+{
+  "iss": "http://localhost:8080",
+  "aud": "some-app",
+  "client_id": "password-flow-client-id",
+  "sub": {},
+  "idp": "local",
+  "some-app-user-custom-claim": {},
+  "some-app-scope-1-custom-user-claim": {},
+  "amr": "pwd",
+  "active": true,
+  "scope": "some-app-scope-1"
+}
+`;
+
+exports[`User management Token Endpoint 1`] = `
+{
+  "alg": "RS256",
+  "typ": "JWT",
+  "iss": "http://localhost:8080",
+  "aud": "some-app",
+  "client_id": "password-flow-client-id",
+  "sub": {},
+  "idp": "local",
+  "some-app-user-custom-claim": {},
+  "some-app-scope-1-custom-user-claim": {},
+  "scope": [
+    "email",
+    "openid",
+    "profile",
+    "some-app-scope-1",
+    "some-custom-identity"
+  ],
+  "amr": [
+    "pwd"
+  ]
+}
+`;
+
+exports[`User management UserInfo Endpoint 1`] = `
+Object {
+  "email": Any<String>,
+  "name": Any<String>,
+  "some-custom-identity-user-claim": Any<String>,
+  "sub": Any<String>,
+}
+`;

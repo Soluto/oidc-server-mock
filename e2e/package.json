@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "axios": "0.21.1",
+    "chance": "^1.1.7",
     "docker-compose": "0.23.6",
     "dotenv": "8.2.0",
     "jws": "4.0.0",
@@ -19,6 +20,7 @@
     "wait-on": "5.2.1"
   },
   "devDependencies": {
+    "@types/chance": "^1.1.1",
     "@types/jest": "26.0.20",
     "@types/jws": "3.2.3",
     "@types/node": "14.14.25",
