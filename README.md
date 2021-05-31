@@ -196,8 +196,8 @@ Since Aug 2020 Chrome has a new [secure-by-default model](https://blog.chromium.
 
 There are two ways to use `oidc-server-mock` with this change.
 
-1. Run the container with HTTP enables (see above).
-2. Change cookies `SameSite` mode from default `None` to `Lax`. To do so just add the following to `SERVER_OPTIONS_INLINE/PATH` env var:
+1. Run the container with HTTPS enabled (see above).
+2. Change cookies `SameSite` mode from default `None` to `Lax`. To do so just add the following to `ASPNET_SERVICES_OPTIONS_INLINE/PATH` env var:
 
 ```json
 {
