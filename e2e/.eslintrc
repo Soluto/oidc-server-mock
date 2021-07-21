@@ -28,13 +28,25 @@
     "import/order": "error",
     "node/no-unsupported-features/es-syntax": "off",
     "node/no-unpublished-import": "off",
+    "unicorn/numeric-separators-style": "off",
     "unicorn/prevent-abbreviations": ["error", {
       "checkFilenames": false
     }]
   },
+  "overrides": [
+    {
+      "files": ["*.js"],
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off",
+        "unicorn/prefer-module": "off"
+      }
+    }
+  ],
   "settings": {
     "node": {
       "allowModules": [
+        "jest-playwright-preset",
+        "jest-runner",
         "wait-on"
       ],
       "tryExtensions": [".ts", ".json", ".node"]

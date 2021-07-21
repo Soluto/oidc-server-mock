@@ -1,10 +1,10 @@
 module.exports = {
-  test(arg) {
-    return arg.header && arg.payload && arg.signature;
+  test(argument) {
+    return argument.header && argument.payload && argument.signature;
   },
-  print(val) {
-    const { alg, typ } = val.header;
-    const { exp, iat, jti, nbf, auth_time, sid, at_hash, ...payload } = val.payload;
+  print(value) {
+    const { alg, typ } = value.header;
+    const { exp, iat, jti, nbf, auth_time, sid, at_hash, ...payload } = value.payload;
     return JSON.stringify({ alg, typ, ...payload }, undefined, 2);
   },
 };

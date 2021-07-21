@@ -1,9 +1,9 @@
 module.exports = {
-  test(arg) {
-    return arg.iat && arg.exp && arg.nbf;
+  test(argument) {
+    return argument.iat && argument.exp && argument.nbf;
   },
-  print(val) {
-    const { exp, iat, jti, nbf, auth_time, sid, at_hash, ...payload } = val;
+  print(value) {
+    const { exp, iat, jti, nbf, auth_time, sid, at_hash, ...payload } = value;
     return JSON.stringify(payload, undefined, 2);
   },
 };

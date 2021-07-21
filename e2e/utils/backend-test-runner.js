@@ -1,6 +1,6 @@
 const DefaultJestRunner = require('jest-runner');
 const dockerCompose = require('docker-compose');
-const waitFor = require('./wait-for');
+const waitFor = require('./wait-for.js');
 
 const options = {
   cwd: __dirname,

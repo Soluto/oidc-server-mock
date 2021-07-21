@@ -1,6 +1,6 @@
 const PlaywrightRunner = require('jest-playwright-preset/lib/PlaywrightRunner').default;
 const dockerCompose = require('docker-compose');
-const waitFor = require('./wait-for');
+const waitFor = require('./wait-for.js');
 
 const options = {
   cwd: __dirname,
