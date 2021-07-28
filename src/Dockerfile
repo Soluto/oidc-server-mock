@@ -1,5 +1,5 @@
 # Stage 1: Build
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 as source
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1.17 as source
 ARG target="Release"
 
 RUN apt-get update && apt-get install unzip
