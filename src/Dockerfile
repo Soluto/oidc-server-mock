@@ -1,5 +1,5 @@
 # Stage 1: Build
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1.17 as source
+FROM mcr.microsoft.com/dotnet/sdk:3.1.411 as source
 ARG target="Release"
 
 RUN apt-get update && apt-get install unzip
@@ -19,7 +19,7 @@ RUN dotnet publish -c $target -o obj/docker/publish
 RUN cp -r /src/obj/docker/publish /OpenIdConnectServerMock
 
 # Stage 2: Release
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 as release
+FROM mcr.microsoft.com/dotnet/aspnet:3.1.17 as release
 ARG target="Release"
 
 RUN if [ $target = "Debug" ]; then apt-get update && apt-get install unzip && rm -rf /var/lib/apt/lists/* && curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /vsdbg; fi
