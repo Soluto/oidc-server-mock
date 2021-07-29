@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv';
 
-import clients from '../../config/clients-configuration.json';
+import clients from '../../config/clients.json';
 import { introspectEndpoint, tokenEndpoint } from '../../helpers';
 import type { Client } from '../../types';
 

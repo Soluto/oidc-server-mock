@@ -1,10 +1,15 @@
+import * as fs from 'fs';
+import path from 'path';
+
 import * as dotenv from 'dotenv';
 import { Browser, BrowserContext, chromium, Page } from 'playwright-chromium';
+import * as yaml from 'yaml';
 
-import clients from '../../config/clients-configuration.json';
-import users from '../../config/user-configuration.json';
+import clients from '../../config/clients.json';
 import { authorizationEndpoint, introspectEndpoint, tokenEndpoint, userInfoEndpoint } from '../../helpers';
 import type { Client, User } from '../../types';
+
+const users = yaml.parse(fs.readFileSync(path.join(process.cwd(), './config/users.yaml'), { encoding: 'utf8' }));
 
 const testCases: User[] = users
   .map(u => ({

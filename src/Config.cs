@@ -5,13 +5,13 @@ using System.Collections.Generic;
 using IdentityServer4.Configuration;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
-using Newtonsoft.Json;
-using OpenIdConnectServer.JsonConverters;
 using OpenIdConnectServer.Helpers;
+using YamlDotNet.Serialization;
+using OpenIdConnectServer.YamlConverters;
 
 namespace OpenIdConnectServer
 {
-  public static class Config
+    public static class Config
     {
         public static AspNetServicesOptions GetAspNetServicesOptions() {
             string aspNetServicesOptionsStr = Environment.GetEnvironmentVariable("ASPNET_SERVICES_OPTIONS_INLINE");
@@ -24,7 +24,7 @@ namespace OpenIdConnectServer
                 }
                 aspNetServicesOptionsStr = File.ReadAllText(aspNetServicesOptionsPath);
             }
-            var aspNetServicesOptions = JsonConvert.DeserializeObject<AspNetServicesOptions>(aspNetServicesOptionsStr);
+            var aspNetServicesOptions = DeserializeObject<AspNetServicesOptions>(aspNetServicesOptionsStr);
             return aspNetServicesOptions;
         }
 
@@ -40,7 +40,7 @@ namespace OpenIdConnectServer
                 }
                 serverOptionsStr = File.ReadAllText(serverOptionsFilePath);
             }
-            var serverOptions = JsonConvert.DeserializeObject<IdentityServerOptions>(serverOptionsStr);
+            var serverOptions = DeserializeObject<IdentityServerOptions>(serverOptionsStr);
             return serverOptions;
         }
 
@@ -71,7 +71,7 @@ namespace OpenIdConnectServer
                 }
                 allowedOriginsStr = File.ReadAllText(allowedOriginsFilePath);
             }
-            var allowedOrigins = JsonConvert.DeserializeObject<IEnumerable<string>>(allowedOriginsStr);
+            var allowedOrigins = DeserializeObject<IEnumerable<string>>(allowedOriginsStr);
             return allowedOrigins;
         }
 
@@ -87,7 +87,7 @@ namespace OpenIdConnectServer
                 }
                 apiScopesStr = File.ReadAllText(apiScopesFilePath);
             }
-            var apiScopes = JsonConvert.DeserializeObject<IEnumerable<ApiScope>>(apiScopesStr);
+            var apiScopes = DeserializeObject<IEnumerable<ApiScope>>(apiScopesStr);
             return apiScopes;
         }
 
@@ -103,7 +103,7 @@ namespace OpenIdConnectServer
                 }
                 apiResourcesStr = File.ReadAllText(apiResourcesFilePath);
             }
-            var apiResources = JsonConvert.DeserializeObject<IEnumerable<ApiResource>>(apiResourcesStr, new SecretJsonConverter());
+            var apiResources = DeserializeObject<IEnumerable<ApiResource>>(apiResourcesStr);
             return apiResources;
         }
 
@@ -119,7 +119,7 @@ namespace OpenIdConnectServer
                 }
                 configStr = File.ReadAllText(configFilePath);
             }
-            var configClients = JsonConvert.DeserializeObject<IEnumerable<Client>>(configStr, new SecretJsonConverter(), new ClaimJsonConverter());
+            var configClients = DeserializeObject<IEnumerable<Client>>(configStr);
             return configClients;
         }
 
@@ -146,7 +146,7 @@ namespace OpenIdConnectServer
                 }
                 configStr = File.ReadAllText(configFilePath);
             }
-            var configUsers = JsonConvert.DeserializeObject<List<TestUser>>(configStr, new ClaimJsonConverter());
+            var configUsers = DeserializeObject<List<TestUser>>(configStr);
             return configUsers;
         }
 
@@ -163,8 +163,17 @@ namespace OpenIdConnectServer
                 identityResourcesStr = File.ReadAllText(identityResourcesFilePath);
             }
 
-            var identityResourceConfig = JsonConvert.DeserializeObject<IdentityResourceConfig[]>(identityResourcesStr);
+            var identityResourceConfig = DeserializeObject<IdentityResourceConfig[]>(identityResourcesStr);
             return identityResourceConfig.Select(c => new IdentityResource(c.Name, c.ClaimTypes));
+        }
+
+        private static T DeserializeObject<T>(string value)
+        {
+            var deserializer = new DeserializerBuilder()
+                .WithTypeConverter(new ClaimYamlConverter())
+                .WithTypeConverter(new SecretYamlConverter())
+                .Build();
+            return deserializer.Deserialize<T>(value);
         }
 
         private class IdentityResourceConfig
