@@ -31,7 +31,8 @@
     "unicorn/numeric-separators-style": "off",
     "unicorn/prevent-abbreviations": ["error", {
       "checkFilenames": false
-    }]
+    }],
+    "unicorn/prefer-node-protocol": "off"
   },
   "overrides": [
     {
