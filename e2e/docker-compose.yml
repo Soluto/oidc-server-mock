@@ -16,6 +16,10 @@ services:
       USERS_CONFIGURATION_PATH: /config/user-configuration.json
       CLIENTS_CONFIGURATION_PATH: /config/clients-configuration.json
       IDENTITY_RESOURCES_PATH: /config/identity-resources.json
+      ASPNET_SERVICES_OPTIONS_INLINE: |
+        {
+          "BasePath": "/some-base-path"
+        }
     volumes:
       - ./config:/config:ro
       - ./https:/https:ro

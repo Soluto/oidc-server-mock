@@ -15,6 +15,8 @@ namespace OpenIdConnectServer.Helpers
         public SessionOptions Session { get; set; }
 
         public ForwardedHeadersOptions ForwardedHeadersOptions { get; set; }
+
+        public string BasePath { get; set; }
     }
 
     public class AuthenticationOptions

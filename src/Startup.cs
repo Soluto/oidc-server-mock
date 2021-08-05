@@ -6,10 +6,12 @@ using OpenIdConnectServer.Services;
 using OpenIdConnectServer.Validation;
 using OpenIdConnectServer.JsonConverters;
 using Newtonsoft.Json.Serialization;
+using OpenIdConnectServer.Middlewares;
+using IdentityServer4.Hosting;
 
 namespace OpenIdConnectServer
 {
-  public class Startup
+    public class Startup
     {
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
@@ -52,6 +54,16 @@ namespace OpenIdConnectServer
             AspNetServicesHelper.UseAspNetServices(app, aspNetServicesOptions);
 
             app.UseIdentityServer();
+
+            var basePath = Config.GetAspNetServicesOptions().BasePath;
+            if (!string.IsNullOrEmpty(basePath))
+            {
+                app.UseWhen(ctx => ctx.Request.Path.StartsWithSegments(basePath), appBuilder => {
+                    appBuilder.UseMiddleware<BasePathMiddleware>();
+                    appBuilder.UseMiddleware<IdentityServerMiddleware>();
+                });
+            }
+
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthorization();
