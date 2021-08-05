@@ -155,6 +155,13 @@ There are two ways to provide configuration for supported scopes, clients and us
 * `API_RESOURCES_PATH`
 * `IDENTITY_RESOURCES_PATH`
 
+
+## Base path
+
+The server can be configured to run with base path. So all the server endpoints will be also available with some prefix segment.
+For example `http://localhost:8080/my-base-path/.well-known/openid-configuration` and `http://localhost:8080/my-base-path/connect/token`.
+Just set `BasePath` property in `ASPNET_SERVICES_OPTIONS_INLINE/PATH` env var.
+
 ## Custom endpoints
 
 ### User management
