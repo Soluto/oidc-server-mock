@@ -54,7 +54,9 @@ jobs:
     # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
     # If this step fails, then you should remove it and run the build manually (see below)
     - name: Autobuild
+      if: ${{ matrix.language == 'javascript' }}
       uses: github/codeql-action/autobuild@v1
+
 
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 https://git.io/JvXDl
@@ -63,9 +65,14 @@ jobs:
     #    and modify them (or add more) to build your code if your project
     #    uses a compiled language
 
-    #- run: |
-    #   make bootstrap
-    #   make release
+    - name: CS Build
+      if: ${{ matrix.language == 'csharp' }}
+      run: |
+        ./getmain.sh
+        dotnet clean OpenIdConnectServerMock.csproj
+        dotnet restore OpenIdConnectServerMock.csproj
+        dotnet build --no-incremental /p:UseSharedCompilation=false OpenIdConnectServerMock.csproj
+      working-directory: ./src
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
