@@ -4,6 +4,13 @@
 
 This project allows you to run configurable mock server with OpenId Connect functionality.
 
+The image is stored in `github` registry. Use the following to pull the image:
+
+```bash
+docker pull ghcr.io/soluto/oidc-server-mock:latest
+```
+
+
 This is the sample of using the server in `docker-compose` configuration:
 
 ```yaml
@@ -11,7 +18,7 @@ This is the sample of using the server in `docker-compose` configuration:
   services:
     oidc-server-mock:
       container_name: oidc-server-mock
-      image: soluto/oidc-server-mock
+      image: ghcr.io/soluto/oidc-server-mock:latest
       ports:
         - "4011:80"
       environment:
