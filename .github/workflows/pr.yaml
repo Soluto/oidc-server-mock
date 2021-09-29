@@ -9,6 +9,7 @@ on:
       - master
     paths-ignore:
       - README.md
+  workflow_dispatch:
 
 jobs:
   tests:
@@ -17,14 +18,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install missing dependencies
-        run: sudo apt-get install ffmpeg
-
-      - name: install latest buildx
-        run: |
-          mkdir -p ~/.docker/cli-plugins &&
-          wget -O ~/.docker/cli-plugins/docker-buildx https://github.com/docker/buildx/releases/download/v0.4.2/buildx-v0.4.2.linux-amd64 &&
-          chmod a+x  ~/.docker/cli-plugins/docker-buildx
       - uses: actions/setup-node@v2-beta
         with:
           node-version: '14'
