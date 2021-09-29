@@ -31,7 +31,7 @@ ENV ASPNETCORE_ENVIRONMENT=Development
 
 EXPOSE 80
 
-HEALTHCHECK --interval=60s --timeout=2s --retries=8 \
+HEALTHCHECK --start-period=2s --interval=1s --timeout=100ms --retries=10 \
       CMD curl -f http://localhost/health || exit 1
 
 ENTRYPOINT ["dotnet", "OpenIdConnectServerMock.dll" ]
