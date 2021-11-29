@@ -1,4 +1,4 @@
-const DefaultJestRunner = require('jest-runner');
+const DefaultJestRunner = require('jest-runner').default;
 const dockerCompose = require('docker-compose');
 const waitFor = require('./wait-for.js');
 

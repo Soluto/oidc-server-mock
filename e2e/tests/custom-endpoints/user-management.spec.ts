@@ -29,7 +29,7 @@ describe('User management', () => {
     const configUserId = 'user_with_all_claim_types';
     const configUsername = 'user_with_all_claim_types';
     const response = await axios.get(`${process.env.OIDC_MANAGE_USERS_URL}/${configUserId}`);
-    expect(response.status).toEqual(200);
+    expect(response.status).toBe(200);
     const receivedUser: User = response.data;
     expect(receivedUser).toHaveProperty('Username', configUsername);
   });
@@ -63,13 +63,13 @@ describe('User management', () => {
       ],
     };
     const response = await axios.post(process.env.OIDC_MANAGE_USERS_URL, user);
-    expect(response.status).toEqual(200);
+    expect(response.status).toBe(200);
     expect(response.data).toEqual(subjectId);
   });
 
   test('Get user', async () => {
     const response = await axios.get(`${process.env.OIDC_MANAGE_USERS_URL}/${subjectId}`);
-    expect(response.status).toEqual(200);
+    expect(response.status).toBe(200);
     const receivedUser: User = response.data;
     expect(receivedUser).toHaveProperty('Username', username);
     expect(receivedUser).toHaveProperty('IsActive', true);
