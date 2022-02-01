@@ -1,9 +1,9 @@
 import * as dotenv from 'dotenv';
 
-import users from '../../config/user-configuration.json';
 import clients from '../../config/clients-configuration.json';
-import type { Client, User } from '../../types';
+import users from '../../config/user-configuration.json';
 import { introspectEndpoint, tokenEndpoint, userInfoEndpoint } from '../../helpers';
+import type { Client, User } from '../../types';
 
 const testCases: User[] = users
   .map(u => ({

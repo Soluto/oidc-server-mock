@@ -1,12 +1,13 @@
 import * as querystring from 'querystring';
+
 import * as dotenv from 'dotenv';
 import { decode as decodeJWT } from 'jws';
-import { chromium, Page, Browser } from 'playwright-chromium';
+import { Browser, chromium, Page } from 'playwright-chromium';
 
-import type { User, Client } from '../../types';
-import users from '../../config/user-configuration.json';
 import clients from '../../config/clients-configuration.json';
+import users from '../../config/user-configuration.json';
 import { authorizationEndpoint, introspectEndpoint, userInfoEndpoint } from '../../helpers';
+import type { Client, User } from '../../types';
 
 const testCases: User[] = users
   .map(u => ({
@@ -59,7 +60,7 @@ describe('Implicit Flow', () => {
       const query = querystring.parse(hash);
 
       const tokenParameter = query['access_token'];
-      expect(typeof tokenParameter).toEqual('string');
+      expect(typeof tokenParameter).toBe('string');
       token = tokenParameter as string;
       const decodedAccessToken = decodeJWT(token);
       expect(decodedAccessToken).toMatchSnapshot();
@@ -87,7 +88,7 @@ describe('Implicit Flow', () => {
       const query = querystring.parse(hash);
 
       const tokenParameter = query['id_token'];
-      expect(typeof tokenParameter).toEqual('string');
+      expect(typeof tokenParameter).toBe('string');
       token = tokenParameter as string;
       const decodedAccessToken = decodeJWT(token);
       expect(decodedAccessToken).toMatchSnapshot();

@@ -1,6 +1,4 @@
-import Claim from './claim';
-import ApiResource from './api-resource';
-import Client from './client';
-import User from './user';
-
-export { ApiResource, Claim, Client, User };
+export { default as ApiResource } from './api-resource';
+export { default as Claim } from './claim';
+export { default as Client } from './client';
+export { default as User } from './user';

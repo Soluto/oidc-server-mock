@@ -1,6 +1,7 @@
 import { Agent } from 'https';
-import * as dotenv from 'dotenv';
+
 import axios from 'axios';
+import * as dotenv from 'dotenv';
 
 describe('Https', () => {
   beforeAll(() => {

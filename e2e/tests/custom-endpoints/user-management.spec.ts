@@ -1,11 +1,10 @@
-import * as dotenv from 'dotenv';
-
 import axios from 'axios';
 import Chance from 'chance';
-import { Client, User } from '../../types';
+import * as dotenv from 'dotenv';
 
 import clients from '../../config/clients-configuration.json';
 import { introspectEndpoint, tokenEndpoint, userInfoEndpoint } from '../../helpers';
+import { Client, User } from '../../types';
 
 describe('User management', () => {
   const chance = new Chance();

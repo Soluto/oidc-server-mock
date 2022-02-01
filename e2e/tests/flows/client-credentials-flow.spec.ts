@@ -1,8 +1,8 @@
 import * as dotenv from 'dotenv';
 
 import clients from '../../config/clients-configuration.json';
-import type { Client } from '../../types';
 import { introspectEndpoint, tokenEndpoint } from '../../helpers';
+import type { Client } from '../../types';
 
 describe('Client Credentials Flow', () => {
   let client: Client;

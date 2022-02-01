@@ -1,5 +1,7 @@
 import * as querystring from 'querystring';
+
 import axios, { AxiosRequestConfig } from 'axios';
+
 import apiResources from '../config/api-resources.json';
 
 export default async (
