@@ -1,11 +1,12 @@
 import * as crypto from 'crypto';
-import * as dotenv from 'dotenv';
-import { chromium, Page, Browser } from 'playwright-chromium';
 
-import type { User, Client } from '../../types';
-import users from '../../config/user-configuration.json';
+import * as dotenv from 'dotenv';
+import { Browser, chromium, Page } from 'playwright-chromium';
+
 import clients from '../../config/clients-configuration.json';
+import users from '../../config/user-configuration.json';
 import { authorizationEndpoint, introspectEndpoint, tokenEndpoint, userInfoEndpoint } from '../../helpers';
+import type { Client, User } from '../../types';
 
 const testCases: User[] = users
   .map(u => ({

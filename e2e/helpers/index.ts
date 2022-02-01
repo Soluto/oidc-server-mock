@@ -1,7 +1,5 @@
-import authorizationEndpoint from './authorization-endpoint';
-import grants from './grants';
-import introspectEndpoint from './introspect-endpoint';
-import tokenEndpoint from './token-endpoint';
-import userInfoEndpoint from './user-info-endpoint';
-
-export { authorizationEndpoint, introspectEndpoint, grants, tokenEndpoint, userInfoEndpoint };
+export { default as authorizationEndpoint } from './authorization-endpoint';
+export { default as grants } from './grants';
+export { default as introspectEndpoint } from './introspect-endpoint';
+export { default as tokenEndpoint } from './token-endpoint';
+export { default as userInfoEndpoint } from './user-info-endpoint';

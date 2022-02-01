@@ -1,4 +1,5 @@
 import { Page } from 'playwright-chromium';
+
 import { User } from '../types';
 
 export default async (page: Page, user: User): Promise<void> => {

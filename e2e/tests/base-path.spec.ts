@@ -1,6 +1,7 @@
 import * as querystring from 'querystring';
-import * as dotenv from 'dotenv';
+
 import axios from 'axios';
+import * as dotenv from 'dotenv';
 
 import clients from '../config/clients-configuration.json';
 import type { Client } from '../types';
