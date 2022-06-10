@@ -2,7 +2,7 @@
 
 exports[`Authorization Code Flow (with PKCE) - simple_user - Introspection Endpoint 1`] = `
 {
-  "iss": "http://localhost:8080",
+  "iss": "https://localhost:8443",
   "aud": "some-app",
   "client_id": "authorization-code-with-pkce-client-id",
   "sub": "simple_user",
@@ -17,7 +17,7 @@ exports[`Authorization Code Flow (with PKCE) - simple_user - Token Endpoint 1`] 
 {
   "alg": "RS256",
   "typ": "JWT",
-  "iss": "http://localhost:8080",
+  "iss": "https://localhost:8443",
   "aud": "some-app",
   "client_id": "authorization-code-with-pkce-client-id",
   "sub": "simple_user",
@@ -43,7 +43,7 @@ Object {
 
 exports[`Authorization Code Flow (with PKCE) - user_with_all_claim_types - Introspection Endpoint 1`] = `
 {
-  "iss": "http://localhost:8080",
+  "iss": "https://localhost:8443",
   "aud": "some-app",
   "client_id": "authorization-code-with-pkce-client-id",
   "sub": "user_with_all_claim_types",
@@ -60,7 +60,7 @@ exports[`Authorization Code Flow (with PKCE) - user_with_all_claim_types - Token
 {
   "alg": "RS256",
   "typ": "JWT",
-  "iss": "http://localhost:8080",
+  "iss": "https://localhost:8443",
   "aud": "some-app",
   "client_id": "authorization-code-with-pkce-client-id",
   "sub": "user_with_all_claim_types",
@@ -91,7 +91,7 @@ Object {
 
 exports[`Authorization Code Flow (with PKCE) - user_with_custom_api_resource_claims - Introspection Endpoint 1`] = `
 {
-  "iss": "http://localhost:8080",
+  "iss": "https://localhost:8443",
   "aud": "some-app",
   "client_id": "authorization-code-with-pkce-client-id",
   "sub": "user_with_custom_api_resource_claims",
@@ -108,7 +108,7 @@ exports[`Authorization Code Flow (with PKCE) - user_with_custom_api_resource_cla
 {
   "alg": "RS256",
   "typ": "JWT",
-  "iss": "http://localhost:8080",
+  "iss": "https://localhost:8443",
   "aud": "some-app",
   "client_id": "authorization-code-with-pkce-client-id",
   "sub": "user_with_custom_api_resource_claims",
@@ -138,7 +138,7 @@ Object {
 
 exports[`Authorization Code Flow (with PKCE) - user_with_custom_identity_claims - Introspection Endpoint 1`] = `
 {
-  "iss": "http://localhost:8080",
+  "iss": "https://localhost:8443",
   "aud": "some-app",
   "client_id": "authorization-code-with-pkce-client-id",
   "sub": "user_with_custom_identity_claims",
@@ -153,7 +153,7 @@ exports[`Authorization Code Flow (with PKCE) - user_with_custom_identity_claims 
 {
   "alg": "RS256",
   "typ": "JWT",
-  "iss": "http://localhost:8080",
+  "iss": "https://localhost:8443",
   "aud": "some-app",
   "client_id": "authorization-code-with-pkce-client-id",
   "sub": "user_with_custom_identity_claims",
@@ -182,7 +182,7 @@ Object {
 
 exports[`Authorization Code Flow (with PKCE) - user_with_standard_claims - Introspection Endpoint 1`] = `
 {
-  "iss": "http://localhost:8080",
+  "iss": "https://localhost:8443",
   "aud": "some-app",
   "client_id": "authorization-code-with-pkce-client-id",
   "sub": "user_with_standard_claims",
@@ -197,7 +197,7 @@ exports[`Authorization Code Flow (with PKCE) - user_with_standard_claims - Token
 {
   "alg": "RS256",
   "typ": "JWT",
-  "iss": "http://localhost:8080",
+  "iss": "https://localhost:8443",
   "aud": "some-app",
   "client_id": "authorization-code-with-pkce-client-id",
   "sub": "user_with_standard_claims",

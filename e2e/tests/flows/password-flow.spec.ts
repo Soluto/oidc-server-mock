@@ -26,13 +26,13 @@ describe('Password Flow', () => {
 
   describe.each(testCases)('- %s -', (user: User) => {
     test('Token Endpoint', async () => {
-      const parameters = {
+      const parameters = new URLSearchParams({
         client_id: client.ClientId,
         username: user.Username,
         password: user.Password,
         grant_type: 'password',
         scope: client.AllowedScopes.join(' '),
-      };
+      });
 
       token = await tokenEndpoint(parameters);
     });

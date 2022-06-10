@@ -1,16 +1,9 @@
-import * as querystring from 'querystring';
-
 import { Page } from 'playwright-chromium';
 
 import { User } from '../types';
 
-export default async (
-  page: Page,
-  parameters: querystring.ParsedUrlQueryInput,
-  user: User,
-  redirect_uri: string
-): Promise<URL> => {
-  const url = `${process.env.OIDC_AUTHORIZE_URL}?${querystring.stringify(parameters)}`;
+export default async (page: Page, parameters: URLSearchParams, user: User, redirect_uri: string): Promise<URL> => {
+  const url = `${process.env.OIDC_AUTHORIZE_URL}?${parameters.toString()}`;
   const response = await page.goto(url);
   expect(response.ok()).toBeTruthy();
 

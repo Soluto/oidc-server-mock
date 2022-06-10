@@ -4,7 +4,7 @@ exports[`Implicit Flow - simple_user - Authorization Endpoint (id_token only) 1`
 {
   "alg": "RS256",
   "typ": "JWT",
-  "iss": "http://localhost:8080",
+  "iss": "https://localhost:8443",
   "aud": "implicit-flow-client-id",
   "nonce": "xyz",
   "s_hash": "ungWv48Bz-pBQUDeXa4iIw",
@@ -20,7 +20,7 @@ exports[`Implicit Flow - simple_user - Authorization Endpoint 1`] = `
 {
   "alg": "RS256",
   "typ": "JWT",
-  "iss": "http://localhost:8080",
+  "iss": "https://localhost:8443",
   "aud": "some-app",
   "client_id": "implicit-flow-client-id",
   "sub": "simple_user",
@@ -40,7 +40,7 @@ exports[`Implicit Flow - simple_user - Authorization Endpoint 1`] = `
 
 exports[`Implicit Flow - simple_user - Introspection Endpoint 1`] = `
 {
-  "iss": "http://localhost:8080",
+  "iss": "https://localhost:8443",
   "aud": "some-app",
   "client_id": "implicit-flow-client-id",
   "sub": "simple_user",
@@ -61,7 +61,7 @@ exports[`Implicit Flow - user_with_all_claim_types - Authorization Endpoint (id_
 {
   "alg": "RS256",
   "typ": "JWT",
-  "iss": "http://localhost:8080",
+  "iss": "https://localhost:8443",
   "aud": "implicit-flow-client-id",
   "nonce": "xyz",
   "s_hash": "ungWv48Bz-pBQUDeXa4iIw",
@@ -80,7 +80,7 @@ exports[`Implicit Flow - user_with_all_claim_types - Authorization Endpoint 1`] 
 {
   "alg": "RS256",
   "typ": "JWT",
-  "iss": "http://localhost:8080",
+  "iss": "https://localhost:8443",
   "aud": "some-app",
   "client_id": "implicit-flow-client-id",
   "sub": "user_with_all_claim_types",
@@ -102,7 +102,7 @@ exports[`Implicit Flow - user_with_all_claim_types - Authorization Endpoint 1`] 
 
 exports[`Implicit Flow - user_with_all_claim_types - Introspection Endpoint 1`] = `
 {
-  "iss": "http://localhost:8080",
+  "iss": "https://localhost:8443",
   "aud": "some-app",
   "client_id": "implicit-flow-client-id",
   "sub": "user_with_all_claim_types",
@@ -128,7 +128,7 @@ exports[`Implicit Flow - user_with_custom_api_resource_claims - Authorization En
 {
   "alg": "RS256",
   "typ": "JWT",
-  "iss": "http://localhost:8080",
+  "iss": "https://localhost:8443",
   "aud": "implicit-flow-client-id",
   "nonce": "xyz",
   "s_hash": "ungWv48Bz-pBQUDeXa4iIw",
@@ -146,7 +146,7 @@ exports[`Implicit Flow - user_with_custom_api_resource_claims - Authorization En
 {
   "alg": "RS256",
   "typ": "JWT",
-  "iss": "http://localhost:8080",
+  "iss": "https://localhost:8443",
   "aud": "some-app",
   "client_id": "implicit-flow-client-id",
   "sub": "user_with_custom_api_resource_claims",
@@ -168,7 +168,7 @@ exports[`Implicit Flow - user_with_custom_api_resource_claims - Authorization En
 
 exports[`Implicit Flow - user_with_custom_api_resource_claims - Introspection Endpoint 1`] = `
 {
-  "iss": "http://localhost:8080",
+  "iss": "https://localhost:8443",
   "aud": "some-app",
   "client_id": "implicit-flow-client-id",
   "sub": "user_with_custom_api_resource_claims",
@@ -193,7 +193,7 @@ exports[`Implicit Flow - user_with_custom_identity_claims - Authorization Endpoi
 {
   "alg": "RS256",
   "typ": "JWT",
-  "iss": "http://localhost:8080",
+  "iss": "https://localhost:8443",
   "aud": "implicit-flow-client-id",
   "nonce": "xyz",
   "s_hash": "ungWv48Bz-pBQUDeXa4iIw",
@@ -212,7 +212,7 @@ exports[`Implicit Flow - user_with_custom_identity_claims - Authorization Endpoi
 {
   "alg": "RS256",
   "typ": "JWT",
-  "iss": "http://localhost:8080",
+  "iss": "https://localhost:8443",
   "aud": "some-app",
   "client_id": "implicit-flow-client-id",
   "sub": "user_with_custom_identity_claims",
@@ -232,7 +232,7 @@ exports[`Implicit Flow - user_with_custom_identity_claims - Authorization Endpoi
 
 exports[`Implicit Flow - user_with_custom_identity_claims - Introspection Endpoint 1`] = `
 {
-  "iss": "http://localhost:8080",
+  "iss": "https://localhost:8443",
   "aud": "some-app",
   "client_id": "implicit-flow-client-id",
   "sub": "user_with_custom_identity_claims",
@@ -256,7 +256,7 @@ exports[`Implicit Flow - user_with_standard_claims - Authorization Endpoint (id_
 {
   "alg": "RS256",
   "typ": "JWT",
-  "iss": "http://localhost:8080",
+  "iss": "https://localhost:8443",
   "aud": "implicit-flow-client-id",
   "nonce": "xyz",
   "s_hash": "ungWv48Bz-pBQUDeXa4iIw",
@@ -275,7 +275,7 @@ exports[`Implicit Flow - user_with_standard_claims - Authorization Endpoint 1`] 
 {
   "alg": "RS256",
   "typ": "JWT",
-  "iss": "http://localhost:8080",
+  "iss": "https://localhost:8443",
   "aud": "some-app",
   "client_id": "implicit-flow-client-id",
   "sub": "user_with_standard_claims",
@@ -295,7 +295,7 @@ exports[`Implicit Flow - user_with_standard_claims - Authorization Endpoint 1`] 
 
 exports[`Implicit Flow - user_with_standard_claims - Introspection Endpoint 1`] = `
 {
-  "iss": "http://localhost:8080",
+  "iss": "https://localhost:8443",
   "aud": "some-app",
   "client_id": "implicit-flow-client-id",
   "sub": "user_with_standard_claims",

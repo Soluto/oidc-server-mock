@@ -1,8 +1,12 @@
-import axios from 'axios';
+import { Agent } from 'https';
+
+import fetch from 'node-fetch';
 
 export default async (token: string, snapshotPropertyMatchers: Record<string, unknown> = {}): Promise<void> => {
-  const response = await axios.get(process.env.OIDC_USERINFO_URL, {
+  const response = await fetch(process.env.OIDC_USERINFO_URL, {
     headers: { authorization: `Bearer ${token}` },
+    agent: new Agent({ rejectUnauthorized: false }),
   });
-  expect(response.data).toMatchSnapshot(snapshotPropertyMatchers);
+  const result = await response.json();
+  expect(result).toMatchSnapshot(snapshotPropertyMatchers);
 };

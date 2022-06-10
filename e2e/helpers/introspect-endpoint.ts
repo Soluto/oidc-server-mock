@@ -1,6 +1,6 @@
-import * as querystring from 'querystring';
+import { Agent } from 'https';
 
-import axios, { AxiosRequestConfig } from 'axios';
+import fetch from 'node-fetch';
 
 import apiResources from '../config/api-resources.json';
 
@@ -12,18 +12,22 @@ export default async (
   const apiResource = apiResources.find(aR => aR.Name === apiResourceId);
   expect(apiResource).toBeDefined();
   const auth = Buffer.from(`${apiResource.Name}:${apiResource.ApiSecrets?.[0]}`).toString('base64');
-  const requestConfig: AxiosRequestConfig = {
-    headers: {
-      Authorization: `Basic ${auth}`,
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
+  const headers = {
+    Authorization: `Basic ${auth}`,
+    'Content-Type': 'application/x-www-form-urlencoded',
   };
-  const requestBody = querystring.stringify({
+  const requestBody = new URLSearchParams({
     token,
   });
 
-  const response = await axios.post(process.env.OIDC_INTROSPECTION_URL, requestBody, requestConfig);
+  const response = await fetch(process.env.OIDC_INTROSPECTION_URL, {
+    method: 'POST',
+    body: requestBody,
+    headers,
+    agent: new Agent({ rejectUnauthorized: false }),
+  });
 
   expect(response).toBeDefined();
-  expect(response.data).toMatchSnapshot(snapshotPropertyMatchers);
+  const result = await response.json();
+  expect(result).toMatchSnapshot(snapshotPropertyMatchers);
 };
