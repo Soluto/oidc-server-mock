@@ -8,8 +8,7 @@
       "testTimeout": 60000,
       "testMatch": ["<rootDir>/tests/**/*.spec.ts"],
       "testPathIgnorePatterns": ["<rootDir>/node_modules/", "<rootDir>/dist/", "<rootDir>/tests/*.e2e-spec.ts"],
-      "testEnvironment": "node",
-      "runner": "<rootDir>/utils/backend-test-runner.js"
+      "testEnvironment": "node"
     },
     {
       "displayName": "Frontend Tests",
@@ -22,8 +21,7 @@
       "transform": {
         "^.+\\.ts$": "ts-jest"
       },
-      "testEnvironment": "node",
-      "runner": "<rootDir>/utils/frontend-test-runner.js"
+      "testEnvironment": "node"
     }
   ]
 }

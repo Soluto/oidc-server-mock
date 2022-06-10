@@ -3,7 +3,7 @@ version: '3.7'
 services:
   oidc-server-mock:
     container_name: oidc-server-mock
-    build: ../src
+    image: oidc-server-mock
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_URLS: https://+:443;http://+:80

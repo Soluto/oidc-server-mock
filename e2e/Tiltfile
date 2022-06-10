@@ -1,0 +1,6 @@
+docker_compose('./docker-compose.yml')
+
+docker_build('oidc-server-mock', '../src')
+
+dc_resource('oidc-server-mock')
+local_resource('tests', cmd='npm run test', resource_deps=['oidc-server-mock'])

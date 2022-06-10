@@ -4,12 +4,15 @@ on:
   pull_request:
     paths-ignore:
       - README.md
-  push:
-    branches:
-      - master
-    paths-ignore:
-      - README.md
+
   workflow_dispatch:
+
+concurrency:
+  group: pr-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+env:
+  TILT_VERSION: '0.30.0'
 
 jobs:
   tests:
@@ -18,9 +21,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Setup Tilt
+        uses: yokawasa/action-setup-kube-tools@v0.8.0
+        with:
+          setup-tools: |
+            tilt
+          tilt: ${{ env.TILT_VERSION }}
+
       - uses: actions/setup-node@v2-beta
         with:
-          node-version: '14'
+          node-version: '16'
 
       - name: Cache node modules
         uses: actions/cache@v2
@@ -40,5 +50,5 @@ jobs:
         working-directory: ./e2e
 
       - name: Run Tests
-        run: npm run test
+        run: tilt ci
         working-directory: ./e2e
