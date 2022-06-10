@@ -2,7 +2,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0 as source
 ARG target="Release"
 
-RUN apt-get update && apt-get install unzip
+RUN apt-get update && apt-get install unzip -y
 
 WORKDIR /src
 
@@ -22,7 +22,8 @@ RUN cp -r /src/obj/docker/publish /OpenIdConnectServerMock
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 as release
 ARG target="Release"
 
-RUN if [ $target = "Debug" ]; then apt-get update && apt-get install unzip && rm -rf /var/lib/apt/lists/* && curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /vsdbg; fi
+RUN apt-get update && apt-get install curl -y && rm -rf /var/lib/apt/lists/*
+RUN if [ $target = "Debug" ]; then apt-get install unzip && rm -rf /var/lib/apt/lists/* && curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /vsdbg; fi
 
 COPY --from=source /OpenIdConnectServerMock /OpenIdConnectServerMock
 WORKDIR /OpenIdConnectServerMock

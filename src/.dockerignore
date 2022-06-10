@@ -1,7 +1,9 @@
 bin/
 obj/
-.git/
-.vs/
-.vscode/
+
+Quickstart
+Views
+wwwroot
+
 Dockerfile
 .dockerignore
