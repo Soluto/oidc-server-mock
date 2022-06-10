@@ -15,12 +15,12 @@ describe('Client Credentials Flow', () => {
   });
 
   test('Token Endpoint', async () => {
-    const parameters = {
+    const parameters = new URLSearchParams({
       client_id: client.ClientId,
-      client_secret: client.ClientSecrets?.[0],
+      client_secret: client.ClientSecrets?.[0] ?? '',
       grant_type: 'client_credentials',
       scope: client.AllowedScopes.join(' '),
-    };
+    });
 
     token = await tokenEndpoint(parameters);
   });

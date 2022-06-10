@@ -1,6 +1,8 @@
-import axios from 'axios';
+import { Agent } from 'https';
+
 import Chance from 'chance';
 import * as dotenv from 'dotenv';
+import fetch from 'node-fetch';
 
 import clients from '../../config/clients-configuration.json';
 import { introspectEndpoint, tokenEndpoint, userInfoEndpoint } from '../../helpers';
@@ -27,9 +29,11 @@ describe('User management', () => {
   test('Get user from configuration', async () => {
     const configUserId = 'user_with_all_claim_types';
     const configUsername = 'user_with_all_claim_types';
-    const response = await axios.get(`${process.env.OIDC_MANAGE_USERS_URL}/${configUserId}`);
+    const response = await fetch(`${process.env.OIDC_MANAGE_USERS_URL}/${configUserId}`, {
+      agent: new Agent({ rejectUnauthorized: false }),
+    });
     expect(response.status).toBe(200);
-    const receivedUser: User = response.data;
+    const receivedUser: User = await response.json();
     expect(receivedUser).toHaveProperty('Username', configUsername);
   });
 
@@ -61,27 +65,35 @@ describe('User management', () => {
         },
       ],
     };
-    const response = await axios.post(process.env.OIDC_MANAGE_USERS_URL, user);
+    const response = await fetch(process.env.OIDC_MANAGE_USERS_URL, {
+      method: 'POST',
+      body: JSON.stringify(user),
+      headers: { 'Content-Type': 'application/json' },
+      agent: new Agent({ rejectUnauthorized: false }),
+    });
     expect(response.status).toBe(200);
-    expect(response.data).toEqual(subjectId);
+    const result = await response.json();
+    expect(result).toEqual(subjectId);
   });
 
   test('Get user', async () => {
-    const response = await axios.get(`${process.env.OIDC_MANAGE_USERS_URL}/${subjectId}`);
+    const response = await fetch(`${process.env.OIDC_MANAGE_USERS_URL}/${subjectId}`, {
+      agent: new Agent({ rejectUnauthorized: false }),
+    });
     expect(response.status).toBe(200);
-    const receivedUser: User = response.data;
+    const receivedUser: User = await response.json();
     expect(receivedUser).toHaveProperty('Username', username);
     expect(receivedUser).toHaveProperty('IsActive', true);
   });
 
   test('Token Endpoint', async () => {
-    const parameters = {
+    const parameters = new URLSearchParams({
       client_id: client.ClientId,
       username: username,
       password: password,
       grant_type: 'password',
       scope: client.AllowedScopes.join(' '),
-    };
+    });
 
     token = await tokenEndpoint(parameters, {
       payload: {

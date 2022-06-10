@@ -1,7 +1,7 @@
 import * as crypto from 'crypto';
 
 import * as dotenv from 'dotenv';
-import { Browser, chromium, Page } from 'playwright-chromium';
+import { Browser, BrowserContext, chromium, Page } from 'playwright-chromium';
 
 import clients from '../../config/clients-configuration.json';
 import users from '../../config/user-configuration.json';
@@ -28,6 +28,7 @@ describe('Authorization Code Flow (with PKCE)', () => {
   let token: string;
 
   let browser: Browser;
+  let context: BrowserContext;
   let page: Page;
   let client: Client;
 
@@ -40,11 +41,13 @@ describe('Authorization Code Flow (with PKCE)', () => {
   });
 
   beforeEach(async () => {
-    page = await browser.newPage();
+    context = await browser.newContext({ ignoreHTTPSErrors: true });
+    page = await context.newPage();
   });
 
   afterEach(async () => {
     await page.close();
+    await context.close();
   });
 
   afterAll(async () => {
@@ -57,7 +60,7 @@ describe('Authorization Code Flow (with PKCE)', () => {
 
       const codeChallenge = base64URLEncode(sha256(codeVerifier));
 
-      const parameters = {
+      const parameters = new URLSearchParams({
         client_id: client.ClientId,
         scope: client.AllowedScopes.join(' '),
         response_type: 'code',
@@ -66,21 +69,21 @@ describe('Authorization Code Flow (with PKCE)', () => {
         code_challenge_method: 'S256',
         state: 'abc',
         nonce: 'xyz',
-      };
-      const redirectedUrl = await authorizationEndpoint(page, parameters, user, parameters.redirect_uri);
+      });
+      const redirectedUrl = await authorizationEndpoint(page, parameters, user, parameters.get('redirect_uri'));
       expect(redirectedUrl.searchParams.has('code')).toBeTruthy();
       code = redirectedUrl.searchParams.get('code');
     });
 
     test('Token Endpoint', async () => {
-      const parameters = {
+      const parameters = new URLSearchParams({
         client_id: client.ClientId,
         code,
         grant_type: 'authorization_code',
         redirect_uri: client.RedirectUris?.[0].replace('*', 'www'),
         code_verifier: codeVerifier,
         scope: client.AllowedScopes.join(' '),
-      };
+      });
 
       token = await tokenEndpoint(parameters);
     });

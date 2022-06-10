@@ -70,7 +70,6 @@
     "node": {
       "allowModules": [
         "jest-playwright-preset",
-        "jest-runner",
         "wait-on"
       ],
       "tryExtensions": [".ts", ".json", ".node"]

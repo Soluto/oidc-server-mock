@@ -2,7 +2,7 @@
 
 exports[`User management Introspection Endpoint 1`] = `
 {
-  "iss": "http://localhost:8080",
+  "iss": "https://localhost:8443",
   "aud": "some-app",
   "client_id": "password-flow-client-id",
   "sub": {
@@ -25,7 +25,7 @@ exports[`User management Token Endpoint 1`] = `
 {
   "alg": "RS256",
   "typ": "JWT",
-  "iss": "http://localhost:8080",
+  "iss": "https://localhost:8443",
   "aud": "some-app",
   "client_id": "password-flow-client-id",
   "sub": {
