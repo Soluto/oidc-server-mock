@@ -1,7 +1,7 @@
-using IdentityServer4.Extensions;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
-using IdentityServer4.Configuration;
+using Duende.IdentityServer.Extensions;
+using Duende.IdentityServer.Configuration;
 
 #pragma warning disable 1591
 

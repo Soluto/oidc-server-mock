@@ -7,7 +7,7 @@ using OpenIdConnectServer.Validation;
 using OpenIdConnectServer.JsonConverters;
 using Newtonsoft.Json.Serialization;
 using OpenIdConnectServer.Middlewares;
-using IdentityServer4.Hosting;
+using Duende.IdentityServer.Hosting;
 
 namespace OpenIdConnectServer
 {
@@ -27,7 +27,6 @@ namespace OpenIdConnectServer
                         var configuredOptions = Config.GetServerOptions();
                         MergeHelper.Merge(configuredOptions, options);
                     })
-                    .AddDeveloperSigningCredential()
                     .AddInMemoryIdentityResources(Config.GetIdentityResources())
                     .AddInMemoryApiResources(Config.GetApiResources())
                     .AddInMemoryApiScopes(Config.GetApiScopes())
