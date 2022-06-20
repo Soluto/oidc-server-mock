@@ -7,12 +7,12 @@ using Serilog;
 
 namespace OpenIdConnectServer.Helpers
 {
-    public class AccountOptionsHelper
+    public class LoginOptionsHelper
     {
-        public static void ConfigureAccountOptions(string accountOptionsStr)
+        public static void ConfigureLoginOptions(string loginOptionsStr)
         {
-            var accountOptions = JsonConvert.DeserializeObject<JObject>(accountOptionsStr);
-            var targetFields = typeof(IdentityServerHost.Quickstart.UI.AccountOptions).GetFields();
+            var accountOptions = JsonConvert.DeserializeObject<JObject>(loginOptionsStr);
+            var targetFields = typeof(IdentityServerHost.Pages.Login.LoginOptions).GetFields();
             var jValueValueProp = typeof(JValue).GetProperty(nameof(JValue.Value));
             Array.ForEach(targetFields, k => {
                 if (accountOptions.ContainsKey(k.Name)) {

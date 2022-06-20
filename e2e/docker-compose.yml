@@ -10,7 +10,8 @@ services:
       ASPNETCORE_Kestrel__Certificates__Default__Password: oidc-server-mock-pwd
       ASPNETCORE_Kestrel__Certificates__Default__Path: /https/aspnetapp.pfx
       SERVER_OPTIONS_PATH: /config/server-options.json
-      ACCOUNT_OPTIONS_PATH: /config/account-options.json
+      LOGIN_OPTIONS_PATH: /config/login-options.json
+      LOGOUT_OPTIONS_PATH: /config/logout-options.json
       API_SCOPES_PATH: /config/api-scopes.json
       API_RESOURCES_PATH: /config/api-resources.json
       USERS_CONFIGURATION_PATH: /config/user-configuration.json

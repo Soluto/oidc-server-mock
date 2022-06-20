@@ -44,19 +44,34 @@ namespace OpenIdConnectServer
             return serverOptions;
         }
 
-        public static void ConfigureAccountOptions()
+        public static void ConfigureLoginOptions()
         {
-            string accountOptionsStr = Environment.GetEnvironmentVariable("ACCOUNT_OPTIONS_INLINE");
-            if (string.IsNullOrWhiteSpace(accountOptionsStr))
+            string loginOptionsStr = Environment.GetEnvironmentVariable("LOGIN_OPTIONS_INLINE");
+            if (string.IsNullOrWhiteSpace(loginOptionsStr))
             {
-                var accountOptionsFilePath = Environment.GetEnvironmentVariable("ACCOUNT_OPTIONS_PATH");
-                if (string.IsNullOrWhiteSpace(accountOptionsFilePath))
+                var loginOptionsFilePath = Environment.GetEnvironmentVariable("LOGIN_OPTIONS_PATH");
+                if (string.IsNullOrWhiteSpace(loginOptionsFilePath))
                 {
                     return;
                 }
-                accountOptionsStr = File.ReadAllText(accountOptionsFilePath);
+                loginOptionsStr = File.ReadAllText(loginOptionsFilePath);
             }
-            AccountOptionsHelper.ConfigureAccountOptions(accountOptionsStr);
+            LoginOptionsHelper.ConfigureLoginOptions(loginOptionsStr);
+        }
+
+        public static void ConfigureLogoutOptions()
+        {
+            string logoutOptionsStr = Environment.GetEnvironmentVariable("LOGOUT_OPTIONS_INLINE");
+            if (string.IsNullOrWhiteSpace(logoutOptionsStr))
+            {
+                var logoutOptionsFilePath = Environment.GetEnvironmentVariable("LOGOUT_OPTIONS_PATH");
+                if (string.IsNullOrWhiteSpace(logoutOptionsFilePath))
+                {
+                    return;
+                }
+                logoutOptionsStr = File.ReadAllText(logoutOptionsFilePath);
+            }
+            LoginOptionsHelper.ConfigureLoginOptions(logoutOptionsStr);
         }
 
         public static IEnumerable<string> GetServerCorsAllowedOrigins()
