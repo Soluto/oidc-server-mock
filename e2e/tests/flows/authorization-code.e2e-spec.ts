@@ -22,7 +22,7 @@ describe('Authorization Code Flow', () => {
   let browser: Browser;
   let context: BrowserContext;
   let page: Page;
-  let client: Client;
+  let client: Client | undefined;
 
   beforeAll(async () => {
     dotenv.config();

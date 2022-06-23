@@ -47,8 +47,9 @@ jobs:
 
       - name: Run npm install
         run: npm ci
-        working-directory: ./e2e
+
+      - name: Eslint
+        run: npm run lint
 
       - name: Run Tests
-        run: tilt ci
-        working-directory: ./e2e
+        run: npm run tilt:ci

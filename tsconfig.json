@@ -1,16 +1,15 @@
 {
   "compilerOptions": {
     "baseUrl": "./",
-    "rootDir": ".",
-    "target": "es2017",
+    "esModuleInterop": true,
     "module": "commonjs",
     "moduleResolution": "node",
-    "lib": ["DOM", "es2017"],
-    "sourceMap": true,
-    "types": ["jest"],
     "outDir": "./dist",
-    "allowJs": true,
     "resolveJsonModule": true,
-    "esModuleInterop": true
-  }
+    "rootDir": ".",
+    "target": "ES2022",
+    "types": ["node", "jest"]
+  },
+  "include": ["e2e/**/*.ts"],
+  "exclude": ["e2e/node_modules/**/*", "e2e/dist/**/*"]
 }

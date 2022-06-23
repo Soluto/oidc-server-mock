@@ -7,7 +7,7 @@ import clients from '../config/clients-configuration.json';
 import type { Client } from '../types';
 
 describe('Base path', () => {
-  let client: Client;
+  let client: Client | undefined;
 
   beforeAll(() => {
     dotenv.config();
@@ -24,6 +24,8 @@ describe('Base path', () => {
   });
 
   test('Token Endpoint', async () => {
+    if (!client) throw new Error('Client not found');
+
     const parameters = new URLSearchParams({
       client_id: client.ClientId,
       client_secret: client.ClientSecrets?.[0] ?? '',

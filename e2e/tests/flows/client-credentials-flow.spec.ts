@@ -5,7 +5,7 @@ import { introspectEndpoint, tokenEndpoint } from '../../helpers';
 import type { Client } from '../../types';
 
 describe('Client Credentials Flow', () => {
-  let client: Client;
+  let client: Client | undefined;
   let token: string;
 
   beforeAll(() => {
@@ -15,6 +15,8 @@ describe('Client Credentials Flow', () => {
   });
 
   test('Token Endpoint', async () => {
+    if (!client) throw new Error('Client not found');
+
     const parameters = new URLSearchParams({
       client_id: client.ClientId,
       client_secret: client.ClientSecrets?.[0] ?? '',
