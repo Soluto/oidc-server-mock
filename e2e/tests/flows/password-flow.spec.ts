@@ -15,7 +15,7 @@ const testCases: User[] = users
   .sort((u1, u2) => (u1.SubjectId < u2.SubjectId ? -1 : 1));
 
 describe('Password Flow', () => {
-  let client: Client;
+  let client: Client | undefined;
   let token: string;
 
   beforeAll(() => {
@@ -26,6 +26,8 @@ describe('Password Flow', () => {
 
   describe.each(testCases)('- %s -', (user: User) => {
     test('Token Endpoint', async () => {
+      if (!client) throw new Error('Client not found');
+
       const parameters = new URLSearchParams({
         client_id: client.ClientId,
         username: user.Username,

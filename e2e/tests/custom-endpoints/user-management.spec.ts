@@ -17,7 +17,7 @@ describe('User management', () => {
   const password = chance.string({ length: 8 });
   const email = chance.email();
 
-  let client: Client;
+  let client: Client | undefined;
   let token: string;
 
   beforeAll(() => {

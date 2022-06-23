@@ -1,0 +1,9 @@
+"**/*.js":
+  - prettier --write
+"**/*.ts":
+  - bash -c "tsc --noEmit"
+  - eslint --fix
+  - prettier --write
+"**/*.{json,yaml,yml,md}":
+  - prettier --write
+

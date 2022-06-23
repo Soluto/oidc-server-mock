@@ -30,7 +30,7 @@ describe('Authorization Code Flow (with PKCE)', () => {
   let browser: Browser;
   let context: BrowserContext;
   let page: Page;
-  let client: Client;
+  let client: Client | undefined;
 
   beforeAll(async () => {
     dotenv.config();
