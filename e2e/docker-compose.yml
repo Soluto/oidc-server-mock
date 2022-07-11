@@ -11,10 +11,14 @@ services:
       ASPNETCORE_Kestrel__Certificates__Default__Path: /https/aspnetapp.pfx
       SERVER_OPTIONS_PATH: /config/server-options.json
       ACCOUNT_OPTIONS_PATH: /config/account-options.json
-      API_SCOPES_PATH: /config/api-scopes.json
-      API_RESOURCES_PATH: /config/api-resources.json
-      USERS_CONFIGURATION_PATH: /config/user-configuration.json
-      CLIENTS_CONFIGURATION_PATH: /config/clients-configuration.json
+      API_RESOURCES_PATH: /config/api-resources.yaml
+      API_SCOPES_INLINE: |
+        - Name: some-app-scope-1
+          UserClaims:
+            - some-app-scope-1-custom-user-claim
+        - Name: some-app-scope-2
+      USERS_CONFIGURATION_PATH: /config/users.yaml
+      CLIENTS_CONFIGURATION_PATH: /config/clients.json
       IDENTITY_RESOURCES_PATH: /config/identity-resources.json
       ASPNET_SERVICES_OPTIONS_INLINE: |
         {

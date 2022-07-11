@@ -3,7 +3,7 @@ import { Agent } from 'https';
 import * as dotenv from 'dotenv';
 import fetch from 'node-fetch';
 
-import clients from '../config/clients-configuration.json';
+import clients from '../config/clients.json';
 import type { Client } from '../types';
 
 describe('Base path', () => {

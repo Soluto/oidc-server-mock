@@ -1,9 +1,14 @@
-import * as dotenv from 'dotenv';
+import * as fs from 'fs';
+import path from 'path';
 
-import clients from '../../config/clients-configuration.json';
-import users from '../../config/user-configuration.json';
+import * as dotenv from 'dotenv';
+import * as yaml from 'yaml';
+
+import clients from '../../config/clients.json';
 import { introspectEndpoint, tokenEndpoint, userInfoEndpoint } from '../../helpers';
 import type { Client, User } from '../../types';
+
+const users = yaml.parse(fs.readFileSync(path.join(process.cwd(), './config/users.yaml'), { encoding: 'utf8' }));
 
 const testCases: User[] = users
   .map(u => ({
@@ -18,7 +23,7 @@ describe('Password Flow', () => {
   let client: Client | undefined;
   let token: string;
 
-  beforeAll(() => {
+  beforeAll(async () => {
     dotenv.config();
     client = clients.find(c => c.ClientId === 'password-flow-client-id');
     expect(client).toBeDefined();

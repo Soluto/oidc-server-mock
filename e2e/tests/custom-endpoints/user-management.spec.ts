@@ -4,7 +4,7 @@ import Chance from 'chance';
 import * as dotenv from 'dotenv';
 import fetch from 'node-fetch';
 
-import clients from '../../config/clients-configuration.json';
+import clients from '../../config/clients.json';
 import { introspectEndpoint, tokenEndpoint, userInfoEndpoint } from '../../helpers';
 import { Client, User } from '../../types';
 
@@ -34,7 +34,7 @@ describe('User management', () => {
     });
     expect(response.status).toBe(200);
     const receivedUser: User = await response.json();
-    expect(receivedUser).toHaveProperty('Username', configUsername);
+    expect(receivedUser).toHaveProperty('username', configUsername);
   });
 
   test('Create user', async () => {
@@ -82,8 +82,8 @@ describe('User management', () => {
     });
     expect(response.status).toBe(200);
     const receivedUser: User = await response.json();
-    expect(receivedUser).toHaveProperty('Username', username);
-    expect(receivedUser).toHaveProperty('IsActive', true);
+    expect(receivedUser).toHaveProperty('username', username);
+    expect(receivedUser).toHaveProperty('isActive', true);
   });
 
   test('Token Endpoint', async () => {

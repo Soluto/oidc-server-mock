@@ -1,0 +1,8 @@
+- Name: some-app
+  Scopes:
+    - some-app-scope-1
+    - some-app-scope-2
+  ApiSecrets:
+    - some-app-secret-1
+  UserClaims:
+    - some-app-user-custom-claim

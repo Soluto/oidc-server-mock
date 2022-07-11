@@ -18,7 +18,6 @@ namespace OpenIdConnectServer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews().AddNewtonsoftJson(options => {
-                options.SerializerSettings.ContractResolver = new DefaultContractResolver();
                 options.SerializerSettings.Converters.Add(new ClaimJsonConverter());
             });
 

@@ -15,7 +15,8 @@
     "jws": "^4.0.0",
     "node-fetch": "^2.6.7",
     "playwright-chromium": "^1.22.2",
-    "wait-on": "^6.0.1"
+    "wait-on": "^6.0.1",
+    "yaml": "^2.1.1"
   },
   "devDependencies": {
     "@types/chance": "^1.1.3",

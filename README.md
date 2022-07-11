@@ -10,133 +10,109 @@ The image is stored in `github` registry. Use the following to pull the image:
 docker pull ghcr.io/soluto/oidc-server-mock:latest
 ```
 
-
 This is the sample of using the server in `docker-compose` configuration:
 
 ```yaml
-  version: '3'
-  services:
-    oidc-server-mock:
-      container_name: oidc-server-mock
-      image: ghcr.io/soluto/oidc-server-mock:latest
-      ports:
-        - "4011:80"
-      environment:
-        ASPNETCORE_ENVIRONMENT: Development
-        SERVER_OPTIONS_INLINE: |
-          {
-            "AccessTokenJwtType": "JWT",
-            "Discovery": {
-              "ShowKeySet": true
-            },
-            "Authentication": {
-              "CookieSameSiteMode": "Lax",
-              "CheckSessionCookieSameSiteMode": "Lax"
-            }
+version: '3'
+services:
+  oidc-server-mock:
+    container_name: oidc-server-mock
+    image: ghcr.io/soluto/oidc-server-mock:latest
+    ports:
+      - '4011:80'
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      SERVER_OPTIONS_INLINE: |
+        {
+          "AccessTokenJwtType": "JWT",
+          "Discovery": {
+            "ShowKeySet": true
+          },
+          "Authentication": {
+            "CookieSameSiteMode": "Lax",
+            "CheckSessionCookieSameSiteMode": "Lax"
           }
-        ACCOUNT_OPTIONS_INLINE: |
+        }
+      ACCOUNT_OPTIONS_INLINE: |
+        {
+          "AutomaticRedirectAfterSignOut": true
+        }
+      API_SCOPES_INLINE: |
+        - Name: some-app-scope-1
+        - Name: some-app-scope-2
+      API_RESOURCES_INLINE: |
+        - Name: some-app
+          Scopes:
+            - some-app-scope-1
+            - some-app-scope-2
+      USERS_CONFIGURATION_INLINE: |
+        [
           {
-            "AutomaticRedirectAfterSignOut": true
+            "SubjectId":"1",
+            "Username":"User1",
+            "Password":"pwd",
+            "Claims": [
+              {
+                "Type": "name",
+                "Value": "Sam Tailor"
+              },
+              {
+                "Type": "email",
+                "Value": "sam.tailor@gmail.com"
+              },
+              {
+                "Type": "some-api-resource-claim",
+                "Value": "Sam's Api Resource Custom Claim"
+              },
+              {
+                "Type": "some-api-scope-claim",
+                "Value": "Sam's Api Scope Custom Claim"
+              },
+              {
+                "Type": "some-identity-resource-claim",
+                "Value": "Sam's Identity Resource Custom Claim"
+              }
+            ]
           }
-        API_SCOPES_INLINE: |
-          [
-            {
-              "Name": "some-app-scope-1"
-            },
-            {
-              "Name": "some-app-scope-2"
-            }
-          ]
-        API_RESOURCES_INLINE: |
-          [
-            {
-              "Name": "some-app",
-              "Scopes": ["some-app-scope-1", "some-app-scope-2"]
-            }
-          ]
-        USERS_CONFIGURATION_INLINE: |
-          [
-            {
-              "SubjectId":"1",
-              "Username":"User1",
-              "Password":"pwd",
-              "Claims": [
-                {
-                  "Type": "name",
-                  "Value": "Sam Tailor"
-                },
-                {
-                  "Type": "email",
-                  "Value": "sam.tailor@gmail.com"
-                },
-                {
-                  "Type": "some-api-resource-claim",
-                  "Value": "Sam's Api Resource Custom Claim"
-                },
-                {
-                  "Type": "some-api-scope-claim",
-                  "Value": "Sam's Api Scope Custom Claim"
-                },
-                {
-                  "Type": "some-identity-resource-claim",
-                  "Value": "Sam's Identity Resource Custom Claim"
-                }
-              ]
-            }
-          ]
-        CLIENTS_CONFIGURATION_PATH: /tmp/config/clients-config.json
-      volumes:
-        - .:/tmp/config:ro
+        ]
+      CLIENTS_CONFIGURATION_PATH: /tmp/config/clients-config.json
+    volumes:
+      - .:/tmp/config:ro
 ```
 
 When `clients-config.json` is as following:
 
 ```json
-[{
-        "ClientId": "implicit-mock-client",
-        "Description": "Client for implicit flow",
-        "AllowedGrantTypes": [
-            "implicit"
-        ],
-        "AllowAccessTokensViaBrowser": true,
-        "RedirectUris": [
-            "http://localhost:3000/auth/oidc",
-            "http://localhost:4004/auth/oidc"
-        ],
-        "AllowedScopes": [
-            "openid",
-            "profile",
-            "email"
-        ],
-        "IdentityTokenLifetime": 3600,
-        "AccessTokenLifetime": 3600
-    },
-    {
-        "ClientId": "client-credentials-mock-client",
-        "ClientSecrets": [
-          "client-credentials-mock-client-secret"
-        ],
-        "Description": "Client for client credentials flow",
-        "AllowedGrantTypes": [
-            "client_credentials"
-        ],
-        "AllowedScopes": [
-            "some-app"
-        ],
-        "ClientClaimsPrefix": "",
-        "Claims": [
-            {
-                "Type": "string_claim",
-                "Value": "string_claim_value"
-            },
-            {
-                "Type": "json_claim",
-                "Value": "['value1', 'value2']",
-                "ValueType": "json"
-            }
-        ]
-
-    }
+[
+  {
+    "ClientId": "implicit-mock-client",
+    "Description": "Client for implicit flow",
+    "AllowedGrantTypes": ["implicit"],
+    "AllowAccessTokensViaBrowser": true,
+    "RedirectUris": ["http://localhost:3000/auth/oidc", "http://localhost:4004/auth/oidc"],
+    "AllowedScopes": ["openid", "profile", "email"],
+    "IdentityTokenLifetime": 3600,
+    "AccessTokenLifetime": 3600
+  },
+  {
+    "ClientId": "client-credentials-mock-client",
+    "ClientSecrets": ["client-credentials-mock-client-secret"],
+    "Description": "Client for client credentials flow",
+    "AllowedGrantTypes": ["client_credentials"],
+    "AllowedScopes": ["some-app"],
+    "ClientClaimsPrefix": "",
+    "Claims": [
+      {
+        "Type": "string_claim",
+        "Value": "string_claim_value"
+      },
+      {
+        "Type": "json_claim",
+        "Value": "['value1', 'value2']",
+        "ValueType": "json"
+      }
+    ]
+  }
 ]
 ```
 
@@ -144,24 +120,25 @@ Clients configuration should be provided. Test user configuration is optional (u
 
 There are two ways to provide configuration for supported scopes, clients and users. You can either provide it inline as environment variable:
 
-* `SERVER_OPTIONS_INLINE`
-* `ACCOUNT_OPTIONS_INLINE`
-* `API_SCOPES_INLINE`
-* `USERS_CONFIGURATION_INLINE`
-* `CLIENTS_CONFIGURATION_INLINE`
-* `API_RESOURCES_INLINE`
-* `IDENTITY_RESOURCES_INLINE`
+- `SERVER_OPTIONS_INLINE`
+- `ACCOUNT_OPTIONS_INLINE`
+- `API_SCOPES_INLINE`
+- `USERS_CONFIGURATION_INLINE`
+- `CLIENTS_CONFIGURATION_INLINE`
+- `API_RESOURCES_INLINE`
+- `IDENTITY_RESOURCES_INLINE`
 
-   or mount volume and provide the path to configuration json as environment variable:
+  or mount volume and provide the path to configuration json as environment variable:
 
-* `SERVER_OPTIONS_PATH`
-* `ACCOUNT_OPTIONS_PATH`
-* `API_SCOPES_PATH`
-* `USERS_CONFIGURATION_PATH`
-* `CLIENTS_CONFIGURATION_PATH`
-* `API_RESOURCES_PATH`
-* `IDENTITY_RESOURCES_PATH`
+- `SERVER_OPTIONS_PATH`
+- `ACCOUNT_OPTIONS_PATH`
+- `API_SCOPES_PATH`
+- `USERS_CONFIGURATION_PATH`
+- `CLIENTS_CONFIGURATION_PATH`
+- `API_RESOURCES_PATH`
+- `IDENTITY_RESOURCES_PATH`
 
+The configuration format can be Yaml or JSON both for inline or file path options.
 
 ## Base path
 
@@ -175,19 +152,20 @@ Just set `BasePath` property in `ASPNET_SERVICES_OPTIONS_INLINE/PATH` env var.
 
 Users can be added (in future also removed and altered) via `user management` endpoint.
 
-* Create new user: `POST` request to `/api/v1/user` path.
+- Create new user: `POST` request to `/api/v1/user` path.
   The request body should be the `User` object. Just as in `USERS_CONFIGURATION`.
   The response is subjectId as sent in request.
 
-* Get user: `GET` request to  `/api/v1/user/{subjectId}` path.
+- Get user: `GET` request to `/api/v1/user/{subjectId}` path.
   The response is `User` object
 
-* Update user `PUT` request to `/api/v1/user` path. (**Not implemented yet**)
+- Update user `PUT` request to `/api/v1/user` path. (**Not implemented yet**)
   The request body should be the `User` object. Just as in `USERS_CONFIGURATION`.
   The response is subjectId as sent in request.
+
   > If user doesn't exits it will be created.
 
-* Delete user: `DELETE` request to  `/api/v1/user/{subjectId}` path.  (**Not implemented yet**)
+- Delete user: `DELETE` request to `/api/v1/user/{subjectId}` path. (**Not implemented yet**)
   The response is `User` object
 
 ## HTTPS
@@ -240,23 +218,23 @@ There are two ways to use `oidc-server-mock` with this change.
 
 1. Clone the repo:
 
-      ```sh
-      git clone git@github.com:Soluto/oidc-server-mock.git
-      ```
+   ```sh
+   git clone git@github.com:Soluto/oidc-server-mock.git
+   ```
 
 2. Install `npm` packages (run from `/e2e` folder):
 
-    ```sh
-    npm install
-    ```
+   ```sh
+   npm install
+   ```
 
-    > Note: During the build of Docker image UI source code is fetched from [github](https://github.com/IdentityServer/IdentityServer4.Quickstart.UI/tree/main). If you experience some issues on project compile step of Docker build or on runtime try to change the branch or commit in the [script](./src/getmain.sh).
+   > Note: During the build of Docker image UI source code is fetched from [github](https://github.com/IdentityServer/IdentityServer4.Quickstart.UI/tree/main). If you experience some issues on project compile step of Docker build or on runtime try to change the branch or commit in the [script](./src/getmain.sh).
 
 3. Run tests:
 
-    ```sh
-    npm run test
-    ```
+   ```sh
+   npm run test
+   ```
 
 ## Used by
 
