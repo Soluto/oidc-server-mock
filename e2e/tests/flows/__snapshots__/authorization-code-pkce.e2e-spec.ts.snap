@@ -4,10 +4,10 @@ exports[`Authorization Code Flow (with PKCE) - simple_user - Introspection Endpo
 {
   "iss": "https://localhost:8443",
   "aud": "some-app",
+  "amr": "pwd",
   "client_id": "authorization-code-with-pkce-client-id",
   "sub": "simple_user",
   "idp": "local",
-  "amr": "pwd",
   "active": true,
   "scope": "some-app-scope-1"
 }
@@ -19,9 +19,6 @@ exports[`Authorization Code Flow (with PKCE) - simple_user - Token Endpoint 1`] 
   "typ": "JWT",
   "iss": "https://localhost:8443",
   "aud": "some-app",
-  "client_id": "authorization-code-with-pkce-client-id",
-  "sub": "simple_user",
-  "idp": "local",
   "scope": [
     "openid",
     "profile",
@@ -31,7 +28,10 @@ exports[`Authorization Code Flow (with PKCE) - simple_user - Token Endpoint 1`] 
   ],
   "amr": [
     "pwd"
-  ]
+  ],
+  "client_id": "authorization-code-with-pkce-client-id",
+  "sub": "simple_user",
+  "idp": "local"
 }
 `;
 
@@ -45,12 +45,12 @@ exports[`Authorization Code Flow (with PKCE) - user_with_all_claim_types - Intro
 {
   "iss": "https://localhost:8443",
   "aud": "some-app",
+  "amr": "pwd",
   "client_id": "authorization-code-with-pkce-client-id",
   "sub": "user_with_all_claim_types",
   "idp": "local",
   "some-app-user-custom-claim": "Oliver's Custom User Claim",
   "some-app-scope-1-custom-user-claim": "Oliver's Scope Custom User Claim",
-  "amr": "pwd",
   "active": true,
   "scope": "some-app-scope-1"
 }
@@ -62,11 +62,6 @@ exports[`Authorization Code Flow (with PKCE) - user_with_all_claim_types - Token
   "typ": "JWT",
   "iss": "https://localhost:8443",
   "aud": "some-app",
-  "client_id": "authorization-code-with-pkce-client-id",
-  "sub": "user_with_all_claim_types",
-  "idp": "local",
-  "some-app-user-custom-claim": "Oliver's Custom User Claim",
-  "some-app-scope-1-custom-user-claim": "Oliver's Scope Custom User Claim",
   "scope": [
     "openid",
     "profile",
@@ -76,7 +71,12 @@ exports[`Authorization Code Flow (with PKCE) - user_with_all_claim_types - Token
   ],
   "amr": [
     "pwd"
-  ]
+  ],
+  "client_id": "authorization-code-with-pkce-client-id",
+  "sub": "user_with_all_claim_types",
+  "idp": "local",
+  "some-app-user-custom-claim": "Oliver's Custom User Claim",
+  "some-app-scope-1-custom-user-claim": "Oliver's Scope Custom User Claim"
 }
 `;
 
@@ -93,12 +93,12 @@ exports[`Authorization Code Flow (with PKCE) - user_with_custom_api_resource_cla
 {
   "iss": "https://localhost:8443",
   "aud": "some-app",
+  "amr": "pwd",
   "client_id": "authorization-code-with-pkce-client-id",
   "sub": "user_with_custom_api_resource_claims",
   "idp": "local",
   "some-app-user-custom-claim": "Sam's Custom User Claim",
   "some-app-scope-1-custom-user-claim": "Sam's Scope Custom User Claim",
-  "amr": "pwd",
   "active": true,
   "scope": "some-app-scope-1"
 }
@@ -110,11 +110,6 @@ exports[`Authorization Code Flow (with PKCE) - user_with_custom_api_resource_cla
   "typ": "JWT",
   "iss": "https://localhost:8443",
   "aud": "some-app",
-  "client_id": "authorization-code-with-pkce-client-id",
-  "sub": "user_with_custom_api_resource_claims",
-  "idp": "local",
-  "some-app-user-custom-claim": "Sam's Custom User Claim",
-  "some-app-scope-1-custom-user-claim": "Sam's Scope Custom User Claim",
   "scope": [
     "openid",
     "profile",
@@ -124,7 +119,12 @@ exports[`Authorization Code Flow (with PKCE) - user_with_custom_api_resource_cla
   ],
   "amr": [
     "pwd"
-  ]
+  ],
+  "client_id": "authorization-code-with-pkce-client-id",
+  "sub": "user_with_custom_api_resource_claims",
+  "idp": "local",
+  "some-app-user-custom-claim": "Sam's Custom User Claim",
+  "some-app-scope-1-custom-user-claim": "Sam's Scope Custom User Claim"
 }
 `;
 
@@ -140,10 +140,10 @@ exports[`Authorization Code Flow (with PKCE) - user_with_custom_identity_claims 
 {
   "iss": "https://localhost:8443",
   "aud": "some-app",
+  "amr": "pwd",
   "client_id": "authorization-code-with-pkce-client-id",
   "sub": "user_with_custom_identity_claims",
   "idp": "local",
-  "amr": "pwd",
   "active": true,
   "scope": "some-app-scope-1"
 }
@@ -155,9 +155,6 @@ exports[`Authorization Code Flow (with PKCE) - user_with_custom_identity_claims 
   "typ": "JWT",
   "iss": "https://localhost:8443",
   "aud": "some-app",
-  "client_id": "authorization-code-with-pkce-client-id",
-  "sub": "user_with_custom_identity_claims",
-  "idp": "local",
   "scope": [
     "openid",
     "profile",
@@ -167,7 +164,10 @@ exports[`Authorization Code Flow (with PKCE) - user_with_custom_identity_claims 
   ],
   "amr": [
     "pwd"
-  ]
+  ],
+  "client_id": "authorization-code-with-pkce-client-id",
+  "sub": "user_with_custom_identity_claims",
+  "idp": "local"
 }
 `;
 
@@ -184,10 +184,10 @@ exports[`Authorization Code Flow (with PKCE) - user_with_standard_claims - Intro
 {
   "iss": "https://localhost:8443",
   "aud": "some-app",
+  "amr": "pwd",
   "client_id": "authorization-code-with-pkce-client-id",
   "sub": "user_with_standard_claims",
   "idp": "local",
-  "amr": "pwd",
   "active": true,
   "scope": "some-app-scope-1"
 }
@@ -199,9 +199,6 @@ exports[`Authorization Code Flow (with PKCE) - user_with_standard_claims - Token
   "typ": "JWT",
   "iss": "https://localhost:8443",
   "aud": "some-app",
-  "client_id": "authorization-code-with-pkce-client-id",
-  "sub": "user_with_standard_claims",
-  "idp": "local",
   "scope": [
     "openid",
     "profile",
@@ -211,7 +208,10 @@ exports[`Authorization Code Flow (with PKCE) - user_with_standard_claims - Token
   ],
   "amr": [
     "pwd"
-  ]
+  ],
+  "client_id": "authorization-code-with-pkce-client-id",
+  "sub": "user_with_standard_claims",
+  "idp": "local"
 }
 `;
 

@@ -6,13 +6,12 @@ exports[`Implicit Flow - simple_user - Authorization Endpoint (id_token only) 1`
   "typ": "JWT",
   "iss": "https://localhost:8443",
   "aud": "implicit-flow-client-id",
-  "nonce": "xyz",
-  "s_hash": "ungWv48Bz-pBQUDeXa4iIw",
-  "sub": "simple_user",
-  "idp": "local",
   "amr": [
     "pwd"
-  ]
+  ],
+  "nonce": "xyz",
+  "sub": "simple_user",
+  "idp": "local"
 }
 `;
 
@@ -22,9 +21,6 @@ exports[`Implicit Flow - simple_user - Authorization Endpoint 1`] = `
   "typ": "JWT",
   "iss": "https://localhost:8443",
   "aud": "some-app",
-  "client_id": "implicit-flow-client-id",
-  "sub": "simple_user",
-  "idp": "local",
   "scope": [
     "openid",
     "profile",
@@ -34,7 +30,10 @@ exports[`Implicit Flow - simple_user - Authorization Endpoint 1`] = `
   ],
   "amr": [
     "pwd"
-  ]
+  ],
+  "client_id": "implicit-flow-client-id",
+  "sub": "simple_user",
+  "idp": "local"
 }
 `;
 
@@ -42,10 +41,10 @@ exports[`Implicit Flow - simple_user - Introspection Endpoint 1`] = `
 {
   "iss": "https://localhost:8443",
   "aud": "some-app",
+  "amr": "pwd",
   "client_id": "implicit-flow-client-id",
   "sub": "simple_user",
   "idp": "local",
-  "amr": "pwd",
   "active": true,
   "scope": "some-app-scope-1"
 }
@@ -63,16 +62,15 @@ exports[`Implicit Flow - user_with_all_claim_types - Authorization Endpoint (id_
   "typ": "JWT",
   "iss": "https://localhost:8443",
   "aud": "implicit-flow-client-id",
+  "amr": [
+    "pwd"
+  ],
   "nonce": "xyz",
-  "s_hash": "ungWv48Bz-pBQUDeXa4iIw",
   "sub": "user_with_all_claim_types",
   "idp": "local",
   "name": "Oliver Hunter",
   "email": "oliver.hunter@gmail.com",
-  "some-custom-identity-user-claim": "Oliver's Custom User Claim",
-  "amr": [
-    "pwd"
-  ]
+  "some-custom-identity-user-claim": "Oliver's Custom User Claim"
 }
 `;
 
@@ -82,11 +80,6 @@ exports[`Implicit Flow - user_with_all_claim_types - Authorization Endpoint 1`] 
   "typ": "JWT",
   "iss": "https://localhost:8443",
   "aud": "some-app",
-  "client_id": "implicit-flow-client-id",
-  "sub": "user_with_all_claim_types",
-  "idp": "local",
-  "some-app-user-custom-claim": "Oliver's Custom User Claim",
-  "some-app-scope-1-custom-user-claim": "Oliver's Scope Custom User Claim",
   "scope": [
     "openid",
     "profile",
@@ -96,7 +89,12 @@ exports[`Implicit Flow - user_with_all_claim_types - Authorization Endpoint 1`] 
   ],
   "amr": [
     "pwd"
-  ]
+  ],
+  "client_id": "implicit-flow-client-id",
+  "sub": "user_with_all_claim_types",
+  "idp": "local",
+  "some-app-user-custom-claim": "Oliver's Custom User Claim",
+  "some-app-scope-1-custom-user-claim": "Oliver's Scope Custom User Claim"
 }
 `;
 
@@ -104,12 +102,12 @@ exports[`Implicit Flow - user_with_all_claim_types - Introspection Endpoint 1`] 
 {
   "iss": "https://localhost:8443",
   "aud": "some-app",
+  "amr": "pwd",
   "client_id": "implicit-flow-client-id",
   "sub": "user_with_all_claim_types",
   "idp": "local",
   "some-app-user-custom-claim": "Oliver's Custom User Claim",
   "some-app-scope-1-custom-user-claim": "Oliver's Scope Custom User Claim",
-  "amr": "pwd",
   "active": true,
   "scope": "some-app-scope-1"
 }
@@ -130,15 +128,14 @@ exports[`Implicit Flow - user_with_custom_api_resource_claims - Authorization En
   "typ": "JWT",
   "iss": "https://localhost:8443",
   "aud": "implicit-flow-client-id",
+  "amr": [
+    "pwd"
+  ],
   "nonce": "xyz",
-  "s_hash": "ungWv48Bz-pBQUDeXa4iIw",
   "sub": "user_with_custom_api_resource_claims",
   "idp": "local",
   "name": "Sam Tailor",
-  "email": "sam.tailor@gmail.com",
-  "amr": [
-    "pwd"
-  ]
+  "email": "sam.tailor@gmail.com"
 }
 `;
 
@@ -148,11 +145,6 @@ exports[`Implicit Flow - user_with_custom_api_resource_claims - Authorization En
   "typ": "JWT",
   "iss": "https://localhost:8443",
   "aud": "some-app",
-  "client_id": "implicit-flow-client-id",
-  "sub": "user_with_custom_api_resource_claims",
-  "idp": "local",
-  "some-app-user-custom-claim": "Sam's Custom User Claim",
-  "some-app-scope-1-custom-user-claim": "Sam's Scope Custom User Claim",
   "scope": [
     "openid",
     "profile",
@@ -162,7 +154,12 @@ exports[`Implicit Flow - user_with_custom_api_resource_claims - Authorization En
   ],
   "amr": [
     "pwd"
-  ]
+  ],
+  "client_id": "implicit-flow-client-id",
+  "sub": "user_with_custom_api_resource_claims",
+  "idp": "local",
+  "some-app-user-custom-claim": "Sam's Custom User Claim",
+  "some-app-scope-1-custom-user-claim": "Sam's Scope Custom User Claim"
 }
 `;
 
@@ -170,12 +167,12 @@ exports[`Implicit Flow - user_with_custom_api_resource_claims - Introspection En
 {
   "iss": "https://localhost:8443",
   "aud": "some-app",
+  "amr": "pwd",
   "client_id": "implicit-flow-client-id",
   "sub": "user_with_custom_api_resource_claims",
   "idp": "local",
   "some-app-user-custom-claim": "Sam's Custom User Claim",
   "some-app-scope-1-custom-user-claim": "Sam's Scope Custom User Claim",
-  "amr": "pwd",
   "active": true,
   "scope": "some-app-scope-1"
 }
@@ -195,16 +192,15 @@ exports[`Implicit Flow - user_with_custom_identity_claims - Authorization Endpoi
   "typ": "JWT",
   "iss": "https://localhost:8443",
   "aud": "implicit-flow-client-id",
+  "amr": [
+    "pwd"
+  ],
   "nonce": "xyz",
-  "s_hash": "ungWv48Bz-pBQUDeXa4iIw",
   "sub": "user_with_custom_identity_claims",
   "idp": "local",
   "name": "Jack Sparrow",
   "email": "jack.sparrow@gmail.com",
-  "some-custom-identity-user-claim": "Jack's Custom User Claim",
-  "amr": [
-    "pwd"
-  ]
+  "some-custom-identity-user-claim": "Jack's Custom User Claim"
 }
 `;
 
@@ -214,9 +210,6 @@ exports[`Implicit Flow - user_with_custom_identity_claims - Authorization Endpoi
   "typ": "JWT",
   "iss": "https://localhost:8443",
   "aud": "some-app",
-  "client_id": "implicit-flow-client-id",
-  "sub": "user_with_custom_identity_claims",
-  "idp": "local",
   "scope": [
     "openid",
     "profile",
@@ -226,7 +219,10 @@ exports[`Implicit Flow - user_with_custom_identity_claims - Authorization Endpoi
   ],
   "amr": [
     "pwd"
-  ]
+  ],
+  "client_id": "implicit-flow-client-id",
+  "sub": "user_with_custom_identity_claims",
+  "idp": "local"
 }
 `;
 
@@ -234,10 +230,10 @@ exports[`Implicit Flow - user_with_custom_identity_claims - Introspection Endpoi
 {
   "iss": "https://localhost:8443",
   "aud": "some-app",
+  "amr": "pwd",
   "client_id": "implicit-flow-client-id",
   "sub": "user_with_custom_identity_claims",
   "idp": "local",
-  "amr": "pwd",
   "active": true,
   "scope": "some-app-scope-1"
 }
@@ -258,16 +254,15 @@ exports[`Implicit Flow - user_with_standard_claims - Authorization Endpoint (id_
   "typ": "JWT",
   "iss": "https://localhost:8443",
   "aud": "implicit-flow-client-id",
+  "amr": [
+    "pwd"
+  ],
   "nonce": "xyz",
-  "s_hash": "ungWv48Bz-pBQUDeXa4iIw",
   "sub": "user_with_standard_claims",
   "idp": "local",
   "name": "John Smith",
   "email": "john.smith@gmail.com",
-  "email_verified": "true",
-  "amr": [
-    "pwd"
-  ]
+  "email_verified": "true"
 }
 `;
 
@@ -277,9 +272,6 @@ exports[`Implicit Flow - user_with_standard_claims - Authorization Endpoint 1`] 
   "typ": "JWT",
   "iss": "https://localhost:8443",
   "aud": "some-app",
-  "client_id": "implicit-flow-client-id",
-  "sub": "user_with_standard_claims",
-  "idp": "local",
   "scope": [
     "openid",
     "profile",
@@ -289,7 +281,10 @@ exports[`Implicit Flow - user_with_standard_claims - Authorization Endpoint 1`] 
   ],
   "amr": [
     "pwd"
-  ]
+  ],
+  "client_id": "implicit-flow-client-id",
+  "sub": "user_with_standard_claims",
+  "idp": "local"
 }
 `;
 
@@ -297,10 +292,10 @@ exports[`Implicit Flow - user_with_standard_claims - Introspection Endpoint 1`] 
 {
   "iss": "https://localhost:8443",
   "aud": "some-app",
+  "amr": "pwd",
   "client_id": "implicit-flow-client-id",
   "sub": "user_with_standard_claims",
   "idp": "local",
-  "amr": "pwd",
   "active": true,
   "scope": "some-app-scope-1"
 }

@@ -1,13 +1,9 @@
-using System;
-using System.IO;
-using System.Linq;
-using System.Collections.Generic;
-using IdentityServer4.Configuration;
-using IdentityServer4.Models;
-using IdentityServer4.Test;
+using Duende.IdentityServer.Configuration;
+using Duende.IdentityServer.Models;
+using Duende.IdentityServer.Test;
 using OpenIdConnectServer.Helpers;
-using YamlDotNet.Serialization;
 using OpenIdConnectServer.YamlConverters;
+using YamlDotNet.Serialization;
 
 namespace OpenIdConnectServer
 {
@@ -44,19 +40,19 @@ namespace OpenIdConnectServer
             return serverOptions;
         }
 
-        public static void ConfigureAccountOptions()
+        public static void ConfigureOptions<T>(string optionsName)
         {
-            string accountOptionsStr = Environment.GetEnvironmentVariable("ACCOUNT_OPTIONS_INLINE");
-            if (string.IsNullOrWhiteSpace(accountOptionsStr))
+            string optionsStr = Environment.GetEnvironmentVariable($"{optionsName.ToUpper()}_OPTIONS_INLINE");
+            if (string.IsNullOrWhiteSpace(optionsStr))
             {
-                var accountOptionsFilePath = Environment.GetEnvironmentVariable("ACCOUNT_OPTIONS_PATH");
-                if (string.IsNullOrWhiteSpace(accountOptionsFilePath))
+                var optionsFilePath = Environment.GetEnvironmentVariable($"{optionsName.ToUpper()}_OPTIONS_PATH");
+                if (string.IsNullOrWhiteSpace(optionsFilePath))
                 {
                     return;
                 }
-                accountOptionsStr = File.ReadAllText(accountOptionsFilePath);
+                optionsStr = File.ReadAllText(optionsFilePath);
             }
-            AccountOptionsHelper.ConfigureAccountOptions(accountOptionsStr);
+            OptionsHelper.ConfigureOptions<T>(optionsStr);
         }
 
         public static IEnumerable<string> GetServerCorsAllowedOrigins()

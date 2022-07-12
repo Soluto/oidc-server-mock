@@ -4,6 +4,7 @@ exports[`User management Introspection Endpoint 1`] = `
 {
   "iss": "https://localhost:8443",
   "aud": "some-app",
+  "amr": "pwd",
   "client_id": "password-flow-client-id",
   "sub": {
     "inverse": false
@@ -15,7 +16,6 @@ exports[`User management Introspection Endpoint 1`] = `
   "some-app-scope-1-custom-user-claim": {
     "inverse": false
   },
-  "amr": "pwd",
   "active": true,
   "scope": "some-app-scope-1"
 }
@@ -27,6 +27,16 @@ exports[`User management Token Endpoint 1`] = `
   "typ": "JWT",
   "iss": "https://localhost:8443",
   "aud": "some-app",
+  "scope": [
+    "email",
+    "openid",
+    "profile",
+    "some-app-scope-1",
+    "some-custom-identity"
+  ],
+  "amr": [
+    "pwd"
+  ],
   "client_id": "password-flow-client-id",
   "sub": {
     "inverse": false
@@ -37,17 +47,7 @@ exports[`User management Token Endpoint 1`] = `
   },
   "some-app-scope-1-custom-user-claim": {
     "inverse": false
-  },
-  "scope": [
-    "email",
-    "openid",
-    "profile",
-    "some-app-scope-1",
-    "some-custom-identity"
-  ],
-  "amr": [
-    "pwd"
-  ]
+  }
 }
 `;
 

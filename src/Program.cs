@@ -1,32 +1,89 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
+﻿using Duende.IdentityServer.Hosting;
+using OpenIdConnectServer;
+using OpenIdConnectServer.Helpers;
+using OpenIdConnectServer.JsonConverters;
+using OpenIdConnectServer.Middlewares;
+using OpenIdConnectServer.Services;
+using OpenIdConnectServer.Validation;
 using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
 
-namespace OpenIdConnectServer
-{
-  public class Program
-    {
-        public static void Main(string[] args)
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+    .MinimumLevel.Override("Microsoft.Hosting.Lifetime", LogEventLevel.Information)
+    .MinimumLevel.Override("System", LogEventLevel.Warning)
+    .MinimumLevel.Override("Microsoft.AspNetCore.Authentication", LogEventLevel.Information)
+    .Enrich.FromLogContext()
+    .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}", theme: AnsiConsoleTheme.Code)
+    .CreateLogger();
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Configure Serilog
+builder.Host.UseSerilog();
+
+// Add services to the container.
+builder.Services.AddRazorPages();
+
+builder.Services
+    .AddControllersWithViews()
+    .AddNewtonsoftJson(options =>
         {
-            Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
-                .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
-                .MinimumLevel.Override("Microsoft.Hosting.Lifetime", LogEventLevel.Information)
-                .MinimumLevel.Override("System", LogEventLevel.Warning)
-                .MinimumLevel.Override("Microsoft.AspNetCore.Authentication", LogEventLevel.Information)
-                .Enrich.FromLogContext()
-                .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}", theme: AnsiConsoleTheme.Code)
-                .CreateLogger();
+            options.SerializerSettings.Converters.Add(new ClaimJsonConverter());
+        });
 
-            BuildWebHost(args).Run();
-        }
+builder.Services
+    .AddIdentityServer(options =>
+        {
+            var configuredOptions = Config.GetServerOptions();
+            MergeHelper.Merge(configuredOptions, options);
+        })
+    .AddDeveloperSigningCredential()
+    .AddInMemoryIdentityResources(Config.GetIdentityResources())
+    .AddInMemoryApiResources(Config.GetApiResources())
+    .AddInMemoryApiScopes(Config.GetApiScopes())
+    .AddInMemoryClients(Config.GetClients())
+    .AddTestUsers(Config.GetUsers())
+    .AddRedirectUriValidator<RedirectUriValidator>()
+    .AddProfileService<ProfileService>()
+    .AddCorsPolicyService<CorsPolicyService>();
 
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .UseSerilog()
-                .Build();
-    }
+var app = builder.Build();
+
+
+var aspNetServicesOptions = Config.GetAspNetServicesOptions();
+AspNetServicesHelper.ConfigureAspNetServices(builder.Services, aspNetServicesOptions);
+AspNetServicesHelper.UseAspNetServices(app, aspNetServicesOptions);
+
+Config.ConfigureOptions<IdentityServerHost.Pages.Login.LoginOptions>("LOGIN");
+Config.ConfigureOptions<IdentityServerHost.Pages.Logout.LogoutOptions>("LOGOUT");
+
+app.UseDeveloperExceptionPage();
+
+app.UseIdentityServer();
+
+var basePath = Config.GetAspNetServicesOptions().BasePath;
+if (!string.IsNullOrEmpty(basePath))
+{
+    app.UseWhen(ctx => ctx.Request.Path.StartsWithSegments(basePath), appBuilder => {
+        appBuilder.UseMiddleware<BasePathMiddleware>();
+        appBuilder.UseMiddleware<IdentityServerMiddleware>();
+    });
 }
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseAuthorization();
+app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapDefaultControllerRoute();
+    });
+
+app.MapRazorPages();
+
+app.Run();

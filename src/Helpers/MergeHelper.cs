@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-
 namespace OpenIdConnectServer.Helpers
 {
     public static class MergeHelper

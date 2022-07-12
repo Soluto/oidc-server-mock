@@ -1,9 +1,6 @@
-using System.Threading.Tasks;
-using IdentityServer4.Models;
-using IdentityServer4.Validation;
-using System.Linq;
+using Duende.IdentityServer.Models;
+using Duende.IdentityServer.Validation;
 using System.Text.RegularExpressions;
-using System.Collections.Generic;
 
 namespace OpenIdConnectServer.Validation
 {
