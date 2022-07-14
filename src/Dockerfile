@@ -6,8 +6,7 @@ RUN apt-get update && apt-get install unzip -y
 
 WORKDIR /src
 
-COPY ./getmain.sh ./getmain.sh
-RUN ./getmain.sh
+RUN curl -L https://raw.githubusercontent.com/DuendeSoftware/IdentityServer.Quickstart.UI/main/getmain.sh | bash
 
 COPY ./OpenIdConnectServerMock.csproj ./OpenIdConnectServerMock.csproj
 RUN dotnet restore

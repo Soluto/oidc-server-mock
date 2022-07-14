@@ -7,9 +7,9 @@ export default async (page: Page, parameters: URLSearchParams, user: User, redir
   const response = await page.goto(url);
   expect(response.ok()).toBeTruthy();
 
-  await page.waitForSelector('#Username');
-  await page.type('#Username', user.Username);
-  await page.type('#Password', user.Password);
+  await page.waitForSelector('[id=Input_Username]');
+  await page.type('[id=Input_Username]', user.Username);
+  await page.type('[id=Input_Password]', user.Password);
   await page.keyboard.press('Enter');
   await page.waitForNavigation();
   const redirectedUrl = new URL(page.url());

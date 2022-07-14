@@ -10,7 +10,14 @@ services:
       ASPNETCORE_Kestrel__Certificates__Default__Password: oidc-server-mock-pwd
       ASPNETCORE_Kestrel__Certificates__Default__Path: /https/aspnetapp.pfx
       SERVER_OPTIONS_PATH: /config/server-options.json
-      ACCOUNT_OPTIONS_PATH: /config/account-options.json
+      LOGIN_OPTIONS_INLINE: |
+        {
+          "AllowRememberLogin": false
+        }
+      LOGOUT_OPTIONS_INLINE: |
+        {
+          "AutomaticRedirectAfterSignOut": true
+        }
       API_RESOURCES_PATH: /config/api-resources.yaml
       API_SCOPES_INLINE: |
         - Name: some-app-scope-1

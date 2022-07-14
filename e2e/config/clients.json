@@ -19,11 +19,12 @@
     "Claims": [
       {
         "Type": "string_claim",
-        "Value": "string_claim_value"
+        "Value": "string_claim_value",
+        "ValueType": "string"
       },
       {
         "Type": "json_claim",
-        "Value": "['value1', 'value2']",
+        "Value": "[\"value1\", \"value2\"]",
         "ValueType": "json"
       }
     ]
@@ -38,7 +39,8 @@
     "Claims": [
       {
         "Type": "string_claim",
-        "Value": "string_claim_value"
+        "Value": "string_claim_value",
+        "ValueType": "string"
       },
       {
         "Type": "json_claim",

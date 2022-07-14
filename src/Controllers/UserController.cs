@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Security.Claims;
-using IdentityServer4.Test;
+using Duende.IdentityServer.Test;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 

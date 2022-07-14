@@ -1,13 +1,10 @@
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
 using AspNetCorsOptions = Microsoft.AspNetCore.Cors.Infrastructure.CorsOptions;
 
 namespace OpenIdConnectServer.Helpers
 {
-  public class AspNetServicesOptions
+    public class AspNetServicesOptions
     {
         public AspNetCorsOptions Cors { get; set; }
 

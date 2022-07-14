@@ -111,7 +111,7 @@ describe('User management', () => {
       email: expect.any(String),
       ['some-custom-identity-user-claim']: expect.any(String),
     });
-  });
+  }, 10000);
 
   test('Introspection Endpoint', async () => {
     await introspectEndpoint(token, 'some-app', {

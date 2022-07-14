@@ -33,7 +33,11 @@ services:
             "CheckSessionCookieSameSiteMode": "Lax"
           }
         }
-      ACCOUNT_OPTIONS_INLINE: |
+      LOGIN_OPTIONS_INLINE: |
+        {
+          "AllowRememberLogin": false
+        }
+      LOGOUT_OPTIONS_INLINE: |
         {
           "AutomaticRedirectAfterSignOut": true
         }
@@ -121,7 +125,8 @@ Clients configuration should be provided. Test user configuration is optional (u
 There are two ways to provide configuration for supported scopes, clients and users. You can either provide it inline as environment variable:
 
 - `SERVER_OPTIONS_INLINE`
-- `ACCOUNT_OPTIONS_INLINE`
+- `LOGIN_OPTIONS_INLINE`
+- `LOGOUT_OPTIONS_INLINE`
 - `API_SCOPES_INLINE`
 - `USERS_CONFIGURATION_INLINE`
 - `CLIENTS_CONFIGURATION_INLINE`
@@ -131,7 +136,8 @@ There are two ways to provide configuration for supported scopes, clients and us
   or mount volume and provide the path to configuration json as environment variable:
 
 - `SERVER_OPTIONS_PATH`
-- `ACCOUNT_OPTIONS_PATH`
+- `LOGIN_OPTIONS_PATH`
+- `LOGOUT_OPTIONS_PATH`
 - `API_SCOPES_PATH`
 - `USERS_CONFIGURATION_PATH`
 - `CLIENTS_CONFIGURATION_PATH`

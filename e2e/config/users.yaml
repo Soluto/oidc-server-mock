@@ -1,95 +1,58 @@
 [
+  { 'SubjectId': 'simple_user', 'Username': 'simple_user', 'Password': 'pwd' },
   {
-    "SubjectId": "simple_user",
-    "Username": "simple_user",
-    "Password": "pwd"
+    'SubjectId': 'user_with_standard_claims',
+    'Username': 'user_with_standard_claims',
+    'Password': 'pwd',
+    'Claims':
+      [
+        { 'Type': 'name', 'Value': 'John Smith', 'ValueType': 'string' },
+        { 'Type': 'email', 'Value': 'john.smith@gmail.com', 'ValueType': 'emailaddress' },
+        { 'Type': 'email_verified', 'Value': 'true', 'ValueType': 'boolean' },
+      ],
   },
   {
-    "SubjectId": "user_with_standard_claims",
-    "Username": "user_with_standard_claims",
-    "Password": "pwd",
-    "Claims": [
-      {
-        "Type": "name",
-        "Value": "John Smith"
-      },
-      {
-        "Type": "email",
-        "Value": "john.smith@gmail.com"
-      },
-      {
-        "Type": "email_verified",
-        "Value": "true"
-      }
-    ]
+    'SubjectId': 'user_with_custom_identity_claims',
+    'Username': 'user_with_custom_identity_claims',
+    'Password': 'pwd',
+    'Claims':
+      [
+        { 'Type': 'name', 'Value': 'Jack Sparrow', 'ValueType': 'string' },
+        { 'Type': 'email', 'Value': 'jack.sparrow@gmail.com', 'ValueType': 'emailaddress' },
+        { 'Type': 'some-custom-identity-user-claim', 'Value': "Jack's Custom User Claim", 'ValueType': 'string' },
+      ],
   },
   {
-    "SubjectId": "user_with_custom_identity_claims",
-    "Username": "user_with_custom_identity_claims",
-    "Password": "pwd",
-    "Claims": [
-      {
-        "Type": "name",
-        "Value": "Jack Sparrow"
-      },
-      {
-        "Type": "email",
-        "Value": "jack.sparrow@gmail.com"
-      },
-      {
-        "Type": "some-custom-identity-user-claim",
-        "Value": "Jack's Custom User Claim"
-      }
-    ]
+    'SubjectId': 'user_with_custom_api_resource_claims',
+    'Username': 'user_with_custom_api_resource_claims',
+    'Password': 'pwd',
+    'Claims':
+      [
+        { 'Type': 'name', 'Value': 'Sam Tailor', 'ValueType': 'string' },
+        { 'Type': 'email', 'Value': 'sam.tailor@gmail.com', 'ValueType': 'emailaddress' },
+        { 'Type': 'some-app-user-custom-claim', 'Value': "Sam's Custom User Claim", 'ValueType': 'string' },
+        {
+          'Type': 'some-app-scope-1-custom-user-claim',
+          'Value': "Sam's Scope Custom User Claim",
+          'ValueType': 'string',
+        },
+      ],
   },
   {
-    "SubjectId": "user_with_custom_api_resource_claims",
-    "Username": "user_with_custom_api_resource_claims",
-    "Password": "pwd",
-    "Claims": [
-      {
-        "Type": "name",
-        "Value": "Sam Tailor"
-      },
-      {
-        "Type": "email",
-        "Value": "sam.tailor@gmail.com"
-      },
-      {
-        "Type": "some-app-user-custom-claim",
-        "Value": "Sam's Custom User Claim"
-      },
-      {
-        "Type": "some-app-scope-1-custom-user-claim",
-        "Value": "Sam's Scope Custom User Claim"
-      }
-    ]
+    'SubjectId': 'user_with_all_claim_types',
+    'Username': 'user_with_all_claim_types',
+    'Password': 'pwd',
+    'Claims':
+      [
+        { 'Type': 'name', 'Value': 'Oliver Hunter', 'ValueType': 'string' },
+        { 'Type': 'email', 'Value': 'oliver.hunter@gmail.com', 'ValueType': 'emailaddress' },
+        { 'Type': 'some-app-user-custom-claim', 'Value': "Oliver's Custom User Claim", 'ValueType': 'string' },
+        {
+          'Type': 'some-app-scope-1-custom-user-claim',
+          'Value': "Oliver's Scope Custom User Claim",
+          'ValueType': 'string',
+        },
+        { 'Type': 'some-custom-identity-user-claim', 'Value': "Oliver's Custom User Claim", 'ValueType': 'string' },
+      ],
   },
-  {
-    "SubjectId": "user_with_all_claim_types",
-    "Username": "user_with_all_claim_types",
-    "Password": "pwd",
-    "Claims": [
-      {
-        "Type": "name",
-        "Value": "Oliver Hunter"
-      },
-      {
-        "Type": "email",
-        "Value": "oliver.hunter@gmail.com"
-      },
-      {
-        "Type": "some-app-user-custom-claim",
-        "Value": "Oliver's Custom User Claim"
-      },
-      {
-        "Type": "some-app-scope-1-custom-user-claim",
-        "Value": "Oliver's Scope Custom User Claim"
-      },
-      {
-        "Type": "some-custom-identity-user-claim",
-        "Value": "Oliver's Custom User Claim"
-      }
-    ]
-  }
 ]

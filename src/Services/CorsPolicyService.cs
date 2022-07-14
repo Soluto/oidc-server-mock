@@ -1,7 +1,5 @@
-using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using IdentityServer4.Services;
+using Duende.IdentityServer.Services;
 
 namespace OpenIdConnectServer.Services
 {
