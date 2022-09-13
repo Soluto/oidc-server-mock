@@ -4,6 +4,12 @@
 
 This project allows you to run configurable mock server with OpenId Connect functionality.
 
+## Important
+
+> Free for development, testing and personal projects. For production you need to purchase [Duende IdentityServer license](https://duendesoftware.com/products/identityserver).
+
+## Simple Configuration
+
 The image is stored in `github` registry. Use the following to pull the image:
 
 ```bash
