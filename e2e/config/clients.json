@@ -44,7 +44,7 @@
       },
       {
         "Type": "json_claim",
-        "Value": "['value1', 'value2']",
+        "Value": "[\"value1\", \"value2\"]",
         "ValueType": "json"
       }
     ],
