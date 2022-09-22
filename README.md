@@ -64,23 +64,28 @@ services:
             "Claims": [
               {
                 "Type": "name",
-                "Value": "Sam Tailor"
+                "Value": "Sam Tailor",
+                "ValueType": "string"
               },
               {
                 "Type": "email",
-                "Value": "sam.tailor@gmail.com"
+                "Value": "sam.tailor@gmail.com",
+                "ValueType": "string"
               },
               {
                 "Type": "some-api-resource-claim",
-                "Value": "Sam's Api Resource Custom Claim"
+                "Value": "Sam's Api Resource Custom Claim",
+                "ValueType": "string"
               },
               {
                 "Type": "some-api-scope-claim",
-                "Value": "Sam's Api Scope Custom Claim"
+                "Value": "Sam's Api Scope Custom Claim",
+                "ValueType": "string"
               },
               {
                 "Type": "some-identity-resource-claim",
-                "Value": "Sam's Identity Resource Custom Claim"
+                "Value": "Sam's Identity Resource Custom Claim",
+                "ValueType": "string"
               }
             ]
           }
@@ -109,16 +114,17 @@ When `clients-config.json` is as following:
     "ClientSecrets": ["client-credentials-mock-client-secret"],
     "Description": "Client for client credentials flow",
     "AllowedGrantTypes": ["client_credentials"],
-    "AllowedScopes": ["some-app"],
+    "AllowedScopes": ["some-app-scope-1"],
     "ClientClaimsPrefix": "",
     "Claims": [
       {
         "Type": "string_claim",
-        "Value": "string_claim_value"
+        "Value": "string_claim_value",
+        "ValueType": "string"
       },
       {
         "Type": "json_claim",
-        "Value": "['value1', 'value2']",
+        "Value": "[\"value1\", \"value2\"]",
         "ValueType": "json"
       }
     ]
