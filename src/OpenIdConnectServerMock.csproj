@@ -5,6 +5,18 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+
+    <IsPackable>true</IsPackable>
+    <Description>Configurable mock server with OpenId Connect functionality</Description>
+    <VersionPrefix>0.0.1</VersionPrefix>
+    <PackageProjectUrl>https://github.com/Soluto/oidc-server-mock</PackageProjectUrl>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageTags>OIDC</PackageTags>
+    <RepositoryUrl>https://github.com/Soluto/oidc-server-mock</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>oidc-mock</ToolCommandName>
+    <IncludeContentInPack>false</IncludeContentInPack>
   </PropertyGroup>
 
   <ItemGroup>
