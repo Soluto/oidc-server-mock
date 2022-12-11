@@ -20,6 +20,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="keys\**" />
     <Content Remove="wwwroot\**" />
     <EmbeddedResource Include="wwwroot\**" />
   </ItemGroup>

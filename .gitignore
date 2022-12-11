@@ -12,3 +12,7 @@ obj
 # UI
 src/Pages
 src/wwwroot
+
+# Runtime data
+keys
+tempkey.jwk
