@@ -1,11 +1,11 @@
-name: Build and push new image version
+name: Build and push new version
 
 on:
   create:
 
 jobs:
-  build_push:
-    name: Build and Push
+  build_push_docker:
+    name: Build and Push Docker image
     if: ${{ startsWith(github.ref, 'refs/tags/v') }}
     runs-on: ubuntu-latest
     steps:
@@ -15,8 +15,8 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
-          username: ${{ secrets.ORG_CR_WRITER_USER }}
-          password: ${{ secrets.ORG_CR_WRITER_PASSWORD }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - id: get_version
         name: Format docker image tag
@@ -46,3 +46,45 @@ jobs:
             ghcr.io/${{ steps.repository_owner.outputs.lowercase }}/oidc-server-mock:${{ steps.get_version.outputs.version-without-v }}
           labels: |
             org.opencontainers.image.source=${{ github.event.repository.html_url }}
+
+  build_push_nuget:
+    name: Build and Push Nuget package
+    if: ${{ startsWith(github.ref, 'refs/tags/v') }}
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    defaults:
+      run:
+        working-directory: src
+    env:
+      NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      dotnet-version: "7.0"
+      ui-url: https://raw.githubusercontent.com/DuendeSoftware/IdentityServer.Quickstart.UI/main/getmain.sh
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Download UI
+        run: curl -L ${{ env.ui-url }} | bash
+
+      - name: Setup .NET Core SDK ${{ env.dotnet-version }}
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ env.dotnet-version }}
+          source-url: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
+
+      - name: Install dependencies
+        run: dotnet restore
+
+      - id: get_version
+        name: Format nuget package version
+        uses: battila7/get-version-action@v2
+
+      - name: Build Nuget package
+        run: |
+          dotnet pack --no-restore --configuration Release \
+            /p:VersionPrefix=${{ steps.get_version.outputs.version-without-v }} \
+            /p:RepositoryCommit=${{ github.sha }}
+
+      - name: Push Nuget package
+        run: dotnet nuget push bin/Release/*.nupkg -k ${{ env.NUGET_AUTH_TOKEN }}

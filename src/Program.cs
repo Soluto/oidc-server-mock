@@ -1,4 +1,5 @@
 ﻿using Duende.IdentityServer.Hosting;
+using Microsoft.Extensions.FileProviders;
 using OpenIdConnectServer;
 using OpenIdConnectServer.Helpers;
 using OpenIdConnectServer.JsonConverters;
@@ -67,14 +68,20 @@ app.UseIdentityServer();
 var basePath = Config.GetAspNetServicesOptions().BasePath;
 if (!string.IsNullOrEmpty(basePath))
 {
-    app.UseWhen(ctx => ctx.Request.Path.StartsWithSegments(basePath), appBuilder => {
+    app.UseWhen(ctx => ctx.Request.Path.StartsWithSegments(basePath), appBuilder =>
+    {
         appBuilder.UseMiddleware<BasePathMiddleware>();
         appBuilder.UseMiddleware<IdentityServerMiddleware>();
     });
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
+
+var manifestEmbeddedProvider = new ManifestEmbeddedFileProvider(typeof(Program).Assembly, "wwwroot");
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = manifestEmbeddedProvider
+});
 
 app.UseRouting();
 
