@@ -52,7 +52,7 @@ exports[`User management Token Endpoint 1`] = `
 `;
 
 exports[`User management UserInfo Endpoint 1`] = `
-Object {
+{
   "email": Any<String>,
   "name": Any<String>,
   "some-custom-identity-user-claim": Any<String>,
