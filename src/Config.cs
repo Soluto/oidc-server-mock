@@ -9,7 +9,8 @@ namespace OpenIdConnectServer
 {
     public static class Config
     {
-        public static AspNetServicesOptions GetAspNetServicesOptions() {
+        public static AspNetServicesOptions GetAspNetServicesOptions()
+        {
             string aspNetServicesOptionsStr = Environment.GetEnvironmentVariable("ASPNET_SERVICES_OPTIONS_INLINE");
             if (string.IsNullOrWhiteSpace(aspNetServicesOptionsStr))
             {
@@ -121,13 +122,19 @@ namespace OpenIdConnectServer
 
         public static IEnumerable<IdentityResource> GetIdentityResources()
         {
-            var standardResources = new List<IdentityResource>
+            IEnumerable<IdentityResource> identityResources = new List<IdentityResource>();
+            var overrideStandardResources = Environment.GetEnvironmentVariable("OVERRIDE_STANDARD_IDENTITY_RESOURCES");
+            if (string.IsNullOrEmpty(overrideStandardResources) || Boolean.Parse(overrideStandardResources) != true)
             {
-                new IdentityResources.OpenId(),
-                new IdentityResources.Profile(),
-                new IdentityResources.Email()
-            };
-            return standardResources.Union(GetCustomIdentityResources());
+                var standardResources = new List<IdentityResource>
+                {
+                    new IdentityResources.OpenId(),
+                    new IdentityResources.Profile(),
+                    new IdentityResources.Email()
+                };
+                identityResources = identityResources.Union(standardResources);
+            }
+            return identityResources.Union(GetCustomIdentityResources());
         }
 
         public static List<TestUser> GetUsers()
