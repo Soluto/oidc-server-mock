@@ -158,6 +158,8 @@ There are two ways to provide configuration for supported scopes, clients and us
 
 The configuration format can be Yaml or JSON both for inline or file path options.
 
+In order to be able to override standard identity resources set `OVERRIDE_STANDARD_IDENTITY_RESOURCES` env var to `True`.
+
 ## Base path
 
 The server can be configured to run with base path. So all the server endpoints will be also available with some prefix segment.
