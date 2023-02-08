@@ -20,7 +20,7 @@ describe('Base path', () => {
       agent: new Agent({ rejectUnauthorized: false }),
     });
     const result = await response.json();
-    expect(result.token_endpoint).toEqual(process.env.OIDC_TOKEN_URL_WITH_BASE_PATH);
+    expect(result).toHaveProperty('token_endpoint', process.env.OIDC_TOKEN_URL_WITH_BASE_PATH);
   });
 
   test('Token Endpoint', async () => {

@@ -55,7 +55,7 @@
     "node/no-unpublished-import": [
       "error",
       {
-        "allowModules": ["playwright-chromium"]
+        "allowModules": ["@jest/types", "playwright-chromium"]
       }
     ],
     "unicorn/numeric-separators-style": "off",

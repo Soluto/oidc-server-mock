@@ -1,5 +1,5 @@
 # Stage 1: Build
-FROM mcr.microsoft.com/dotnet/sdk:7.0 as source
+FROM mcr.microsoft.com/dotnet/sdk:6.0 as source
 ARG target="Release"
 
 RUN apt-get update && apt-get install unzip -y
@@ -18,7 +18,7 @@ RUN dotnet publish -c $target -o obj/docker/publish
 RUN cp -r /src/obj/docker/publish /OpenIdConnectServerMock
 
 # Stage 2: Release
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 as release
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 as release
 ARG target="Release"
 
 RUN apt-get update && apt-get install curl -y && rm -rf /var/lib/apt/lists/*
