@@ -91,6 +91,12 @@ services:
           }
         ]
       CLIENTS_CONFIGURATION_PATH: /tmp/config/clients-config.json
+      ASPNET_SERVICES_OPTIONS_INLINE: |
+        { 
+          "ForwardedHeadersOptions": { 
+            "ForwardedHeaders" : "All"
+          }
+        }
     volumes:
       - .:/tmp/config:ro
 ```
