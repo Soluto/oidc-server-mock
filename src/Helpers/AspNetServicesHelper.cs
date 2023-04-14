@@ -45,6 +45,8 @@ namespace OpenIdConnectServer.Helpers
 
             if (config.ForwardedHeadersOptions != null)
             {
+                config.ForwardedHeadersOptions.KnownNetworks.Clear();
+                config.ForwardedHeadersOptions.KnownProxies.Clear();
                 app.UseForwardedHeaders(config.ForwardedHeadersOptions);
             }
         }
