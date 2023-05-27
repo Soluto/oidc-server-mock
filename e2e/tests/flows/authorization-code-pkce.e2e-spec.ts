@@ -22,7 +22,7 @@ const testCases: User[] = users
   .sort((u1, u2) => (u1.SubjectId < u2.SubjectId ? -1 : 1));
 
 const base64URLEncode = (buffer: Buffer) =>
-  buffer.toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
+  buffer.toString('base64').replaceAll('+', '-').replaceAll('/', '_').replaceAll('=', '');
 
 const sha256 = (buffer: crypto.BinaryLike) => crypto.createHash('sha256').update(buffer).digest();
 
