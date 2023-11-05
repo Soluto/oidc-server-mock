@@ -26,11 +26,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Duende.IdentityServer" Version="6.3.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.16" />
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="6.0.16" />
+    <PackageReference Include="Duende.IdentityServer" Version="6.3.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.24" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="6.0.24" />
     <PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
-    <PackageReference Include="YamlDotNet" Version="13.1.0" />
+    <PackageReference Include="YamlDotNet" Version="13.7.0" />
   </ItemGroup>
 
 </Project>
