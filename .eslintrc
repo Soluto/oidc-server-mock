@@ -5,7 +5,7 @@
     "ecmaVersion": 2019,
     "project": ["./tsconfig.json"]
   },
-  "plugins": ["@typescript-eslint", "simple-import-sort", "unicorn", "promise", "prettier", "jest"],
+  "plugins": ["@typescript-eslint", "simple-import-sort", "unicorn", "promise", "jest", "prettier"],
   "extends": [
     "eslint:recommended",
     "plugin:node/recommended",
@@ -14,9 +14,9 @@
     "plugin:import/warnings",
     "plugin:import/typescript",
     "plugin:unicorn/recommended",
-    "plugin:prettier/recommended",
     "plugin:promise/recommended",
-    "plugin:jest/style"
+    "plugin:jest/style",
+    "plugin:prettier/recommended"
   ],
   "rules": {
     "import/order": "error",
