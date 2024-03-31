@@ -12,28 +12,28 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  TILT_VERSION: '0.30.11'
+  TILT_VERSION: '0.33.12'
 
 jobs:
   tests:
     name: Tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup Tilt
-        uses: yokawasa/action-setup-kube-tools@v0.9.2
+        uses: yokawasa/action-setup-kube-tools@v0.11.0
         with:
           setup-tools: |
             tilt
           tilt: ${{ env.TILT_VERSION }}
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Cache node modules
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         env:
           cache-name: cache-node-modules
         with:
