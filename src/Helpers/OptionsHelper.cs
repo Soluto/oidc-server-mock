@@ -11,9 +11,9 @@ namespace OpenIdConnectServer.Helpers
             var targetFields = typeof(T).GetFields();
             var jValueValueProp = typeof(JValue).GetProperty(nameof(JValue.Value));
             Array.ForEach(targetFields, k => {
-                if (options.ContainsKey(k.Name)) {
+                if (options != null && options.ContainsKey(k.Name)) {
                     var fieldJValue = options[k.Name] as JValue;
-                    var fieldValue = jValueValueProp.GetValue(fieldJValue);
+                    var fieldValue = jValueValueProp?.GetValue(fieldJValue);
                     k.SetValue(null, fieldValue);
                 }
             });

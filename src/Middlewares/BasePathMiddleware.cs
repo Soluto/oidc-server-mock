@@ -1,5 +1,6 @@
 using Duende.IdentityServer.Extensions;
 using Duende.IdentityServer.Configuration;
+using Duende.IdentityServer.Services;
 
 #pragma warning disable 1591
 
@@ -20,10 +21,10 @@ namespace OpenIdConnectServer.Middlewares
         {
             var basePath = Config.GetAspNetServicesOptions().BasePath;
             var request = context.Request;
-            if(request.Path.Value.Length > basePath.Length)
+            if(request.Path.Value?.Length > basePath.Length)
             {
                 request.Path = request.Path.Value.Substring(basePath.Length);
-                context.SetIdentityServerBasePath(basePath);
+                context.RequestServices.GetRequiredService<IServerUrls>().BasePath = basePath;
             }
             await _next(context);
         }
