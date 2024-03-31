@@ -5,7 +5,7 @@ import fetch from 'node-fetch';
 
 export default async (
   parameters: URLSearchParams,
-  snapshotPropertyMatchers: Record<string, unknown> = {}
+  snapshotPropertyMatchers: Record<string, unknown> = {},
 ): Promise<string> => {
   const tokenEndpointResponse = await fetch(process.env.OIDC_TOKEN_URL, {
     method: 'POST',
