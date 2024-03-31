@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Login to GHCR
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -24,18 +24,18 @@ jobs:
 
       - id: repository_owner
         name: Format repository owner
-        uses: ASzc/change-string-case-action@v5
+        uses: ASzc/change-string-case-action@v6
         with:
           string: ${{ github.repository_owner }}
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
+        uses: docker/setup-qemu-action@v3
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
 
       - name: Build and push new docker image
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v5
         with:
           push: true
           context: ./src
@@ -59,16 +59,16 @@ jobs:
         working-directory: src
     env:
       NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      dotnet-version: "7.0"
+      dotnet-version: '7.0'
       ui-url: https://raw.githubusercontent.com/DuendeSoftware/IdentityServer.Quickstart.UI/main/getmain.sh
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Download UI
         run: curl -L ${{ env.ui-url }} | bash
 
       - name: Setup .NET Core SDK ${{ env.dotnet-version }}
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.dotnet-version }}
           source-url: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
