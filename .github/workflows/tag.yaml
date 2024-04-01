@@ -60,12 +60,11 @@ jobs:
     env:
       NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       dotnet-version: '8.0'
-      ui-url: https://raw.githubusercontent.com/DuendeSoftware/IdentityServer.Quickstart.UI/main/getmain.sh
     steps:
       - uses: actions/checkout@v4
 
       - name: Download UI
-        run: curl -L ${{ env.ui-url }} | bash
+        run: ./getui.sh
 
       - name: Setup .NET Core SDK ${{ env.dotnet-version }}
         uses: actions/setup-dotnet@v4
