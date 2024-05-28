@@ -138,6 +138,88 @@ When `clients-config.json` is as following:
 ]
 ```
 
+This is the sample of using the server in `Dockerfile` configuration:
+
+```
+# Use the base image
+FROM ghcr.io/soluto/oidc-server-mock:0.8.6
+
+# Set environment variables
+# additional configuration can be found in the readme
+# https://github.com/Soluto/oidc-server-mock/blob/master/README.md?plain=1#L145
+ENV ASPNETCORE_ENVIRONMENT=Development
+ENV SERVER_OPTIONS_INLINE="{ \
+  \"AccessTokenJwtType\": \"JWT\", \
+  \"Discovery\": { \
+    \"ShowKeySet\": true \
+  }, \
+  \"Authentication\": { \
+    \"CookieSameSiteMode\": \"Lax\", \
+    \"CheckSessionCookieSameSiteMode\": \"Lax\" \
+  } \
+}"
+ENV USERS_CONFIGURATION_INLINE="[ \
+  { \
+    \"SubjectId\": \"1\", \
+    \"Username\": \"User1\", \
+    \"Password\": \"pwd\", \
+    \"Claims\": [ \
+      { \
+        \"Type\": \"name\", \
+        \"Value\": \"Sam Tailor\", \
+        \"ValueType\": \"string\" \
+      }, \
+      { \
+        \"Type\": \"email\", \
+        \"Value\": \"sam.tailor@gmail.com\", \
+        \"ValueType\": \"string\" \
+      }, \
+      { \
+        \"Type\": \"some-api-resource-claim\", \
+        \"Value\": \"Sam's Api Resource Custom Claim\", \
+        \"ValueType\": \"string\" \
+      }, \
+      { \
+        \"Type\": \"some-api-scope-claim\", \
+        \"Value\": \"Sam's Api Scope Custom Claim\", \
+        \"ValueType\": \"string\" \
+      }, \
+      { \
+        \"Type\": \"some-identity-resource-claim\", \
+        \"Value\": \"Sam's Identity Resource Custom Claim\", \
+        \"ValueType\": \"string\" \
+      } \
+    ] \
+  } \
+]"
+ENV CLIENTS_CONFIGURATION_INLINE="[ \
+  { \
+    \"ClientId\": \"some-client-di\", \
+    \"ClientSecrets\": [\"some-client-Secret\"], \
+    \"Description\": \"Client for authorization code flow\", \
+    \"AllowedGrantTypes\": [\"authorization_code\"], \
+    \"RequirePkce\": false, \
+    \"AllowAccessTokensViaBrowser\": true, \
+    \"RedirectUris\": [\"http://some-callback-url"], \
+    \"AllowedScopes\": [\"openid\", \"profile\", \"email\"], \
+    \"IdentityTokenLifetime\": 3600, \
+    \"AccessTokenLifetime\": 3600, \
+    \"RequireClientSecret\": false \
+  } \
+]"
+ENV ASPNET_SERVICES_OPTIONS_INLINE="{ \
+  \"ForwardedHeadersOptions\": { \
+    \"ForwardedHeaders\": \"All\" \
+  } \
+}"
+
+# Expose the port
+EXPOSE 80
+
+# Command to run the application
+CMD ["dotnet", "Soluto.OidcServerMock.dll"]
+```
+
 Clients configuration should be provided. Test user configuration is optional (used for implicit flow only).
 
 There are two ways to provide configuration for supported scopes, clients and users. You can either provide it inline as environment variable:
