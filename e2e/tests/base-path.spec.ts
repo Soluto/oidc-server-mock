@@ -1,7 +1,4 @@
-import { Agent } from 'https';
-
 import * as dotenv from 'dotenv';
-import fetch from 'node-fetch';
 
 import clients from '../config/clients.json';
 import type { Client } from '../types';
@@ -16,9 +13,7 @@ describe('Base path', () => {
   });
 
   test('Discovery Endpoint', async () => {
-    const response = await fetch(process.env.OIDC_DISCOVERY_ENDPOINT_WITH_BASE_PATH, {
-      agent: new Agent({ rejectUnauthorized: false }),
-    });
+    const response = await fetch(process.env.OIDC_DISCOVERY_ENDPOINT_WITH_BASE_PATH);
     const result = await response.json();
     expect(result).toHaveProperty('token_endpoint', process.env.OIDC_TOKEN_URL_WITH_BASE_PATH);
   });
@@ -39,7 +34,6 @@ describe('Base path', () => {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: parameters.toString(),
-      agent: new Agent({ rejectUnauthorized: false }),
     });
     expect(response).toBeDefined();
   });

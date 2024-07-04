@@ -2,7 +2,12 @@ import { Page } from 'playwright-chromium';
 
 import { User } from '../types';
 
-export default async (page: Page, parameters: URLSearchParams, user: User, redirect_uri: string): Promise<URL> => {
+const authorizationEndpoint = async (
+  page: Page,
+  parameters: URLSearchParams,
+  user: User,
+  redirect_uri: string,
+): Promise<URL> => {
   const url = `${process.env.OIDC_AUTHORIZE_URL}?${parameters.toString()}`;
   const response = await page.goto(url);
   expect(response.ok()).toBeTruthy();
@@ -16,3 +21,5 @@ export default async (page: Page, parameters: URLSearchParams, user: User, redir
   expect(redirectedUrl.origin).toEqual(redirect_uri);
   return redirectedUrl;
 };
+
+export default authorizationEndpoint;
