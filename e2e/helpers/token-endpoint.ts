@@ -1,9 +1,6 @@
-import { Agent } from 'https';
-
 import { decode as decodeJWT } from 'jws';
-import fetch from 'node-fetch';
 
-export default async (
+const tokenEndpoint = async (
   parameters: URLSearchParams,
   snapshotPropertyMatchers: Record<string, unknown> = {},
 ): Promise<string> => {
@@ -13,7 +10,6 @@ export default async (
       'Content-Type': 'application/x-www-form-urlencoded',
     },
     body: parameters.toString(),
-    agent: new Agent({ rejectUnauthorized: false }),
   });
   const result = await tokenEndpointResponse.json();
   expect(result.access_token).toBeDefined();
@@ -23,3 +19,5 @@ export default async (
   expect(decodedToken).toMatchSnapshot(snapshotPropertyMatchers);
   return token as string;
 };
+
+export default tokenEndpoint;

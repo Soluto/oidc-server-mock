@@ -2,7 +2,7 @@ import { Page } from 'playwright-chromium';
 
 import { User } from '../types';
 
-export default async (page: Page, user: User): Promise<void> => {
+const grantsEndpoint = async (page: Page, user: User): Promise<void> => {
   const response = await page.goto(process.env.OIDC_GRANTS_URL);
   expect(response.ok()).toBeTruthy();
 
@@ -13,3 +13,5 @@ export default async (page: Page, user: User): Promise<void> => {
   await page.waitForNavigation();
   expect(await page.content()).toMatchSnapshot();
 };
+
+export default grantsEndpoint;

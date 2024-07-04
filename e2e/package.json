@@ -2,7 +2,7 @@
   "name": "e2e",
   "version": "1.0.0",
   "scripts": {
-    "test": "jest --runInBand --ci --config jest.config.ts"
+    "test": "NODE_TLS_REJECT_UNAUTHORIZED=0 jest --runInBand --ci --config jest.config.ts"
   },
   "license": "MIT",
   "engines": {
@@ -12,7 +12,6 @@
     "chance": "^1.1.11",
     "dotenv": "^16.4.5",
     "jws": "^4.0.0",
-    "node-fetch": "^2.7.0",
     "playwright-chromium": "^1.39.0",
     "wait-on": "^7.2.0",
     "yaml": "^2.4.5"
@@ -23,7 +22,6 @@
     "@types/jest": "^29.5.12",
     "@types/jws": "^3.2.10",
     "@types/node": "^20.14.8",
-    "@types/node-fetch": "^2.6.11",
     "@types/wait-on": "^5.3.4",
     "jest": "^29.7.0",
     "jest-playwright-preset": "^4.0.0",

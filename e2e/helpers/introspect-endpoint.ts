@@ -1,11 +1,9 @@
 import * as fs from 'fs/promises';
-import { Agent } from 'https';
 import path from 'path';
 
-import fetch from 'node-fetch';
 import * as yaml from 'yaml';
 
-export default async (
+const introspectEndpoint = async (
   token: string,
   apiResourceId: string,
   snapshotPropertyMatchers: Record<string, unknown> = {},
@@ -28,10 +26,11 @@ export default async (
     method: 'POST',
     body: requestBody,
     headers,
-    agent: new Agent({ rejectUnauthorized: false }),
   });
 
   expect(response).toBeDefined();
   const result = await response.json();
   expect(result).toMatchSnapshot(snapshotPropertyMatchers);
 };
+
+export default introspectEndpoint;

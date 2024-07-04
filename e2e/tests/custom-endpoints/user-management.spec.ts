@@ -1,8 +1,5 @@
-import { Agent } from 'https';
-
 import Chance from 'chance';
 import * as dotenv from 'dotenv';
-import fetch from 'node-fetch';
 
 import clients from '../../config/clients.json';
 import { introspectEndpoint, tokenEndpoint, userInfoEndpoint } from '../../helpers';
@@ -29,9 +26,7 @@ describe('User management', () => {
   test('Get user from configuration', async () => {
     const configUserId = 'user_with_all_claim_types';
     const configUsername = 'user_with_all_claim_types';
-    const response = await fetch(`${process.env.OIDC_MANAGE_USERS_URL}/${configUserId}`, {
-      agent: new Agent({ rejectUnauthorized: false }),
-    });
+    const response = await fetch(`${process.env.OIDC_MANAGE_USERS_URL}/${configUserId}`);
     expect(response.status).toBe(200);
     const receivedUser: User = await response.json();
     expect(receivedUser).toHaveProperty('username', configUsername);
@@ -69,7 +64,6 @@ describe('User management', () => {
       method: 'POST',
       body: JSON.stringify(user),
       headers: { 'Content-Type': 'application/json' },
-      agent: new Agent({ rejectUnauthorized: false }),
     });
     expect(response.status).toBe(200);
     const result = await response.json();
@@ -77,9 +71,7 @@ describe('User management', () => {
   });
 
   test('Get user', async () => {
-    const response = await fetch(`${process.env.OIDC_MANAGE_USERS_URL}/${subjectId}`, {
-      agent: new Agent({ rejectUnauthorized: false }),
-    });
+    const response = await fetch(`${process.env.OIDC_MANAGE_USERS_URL}/${subjectId}`);
     expect(response.status).toBe(200);
     const receivedUser: User = await response.json();
     expect(receivedUser).toHaveProperty('username', username);
