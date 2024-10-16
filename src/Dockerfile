@@ -1,8 +1,8 @@
 # Stage 1: Build
-FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0 as source
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0-alpine as source
 ARG target="Release"
 
-RUN apt-get update && apt-get install unzip -y
+RUN apk add --no-cache unzip curl bash
 
 WORKDIR /src
 
@@ -19,11 +19,11 @@ RUN dotnet publish -c $target -o obj/docker/publish
 RUN cp -r /src/obj/docker/publish /OpenIdConnectServerMock
 
 # Stage 2: Release
-FROM  --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/aspnet:8.0 as release
+FROM  --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/aspnet:8.0-alpine as release
 ARG target="Release"
 
-RUN apt-get update && apt-get install curl -y && rm -rf /var/lib/apt/lists/*
-RUN if [ $target = "Debug" ]; then apt-get install unzip && rm -rf /var/lib/apt/lists/* && curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /vsdbg; fi
+RUN apk add --no-cache curl
+RUN if [ $target = "Debug" ]; then apk add --no-cache bash unzip && curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /vsdbg; fi
 
 COPY --from=source /OpenIdConnectServerMock /OpenIdConnectServerMock
 WORKDIR /OpenIdConnectServerMock
