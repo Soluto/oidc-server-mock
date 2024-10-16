@@ -1,5 +1,6 @@
 # Stage 1: Build
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0 as source
+ARG TARGETARCH
 ARG target="Release"
 
 RUN apt-get update && apt-get install unzip -y
@@ -14,7 +15,7 @@ RUN dotnet restore
 
 COPY . .
 
-RUN dotnet publish -c $target -o obj/docker/publish
+RUN dotnet publish -a $TARGETARCH -c $target -o obj/docker/publish
 
 RUN cp -r /src/obj/docker/publish /OpenIdConnectServerMock
 
