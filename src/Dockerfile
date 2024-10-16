@@ -1,5 +1,5 @@
 # Stage 1: Build
-FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0 as source
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0 AS source
 ARG TARGETARCH
 ARG target="Release"
 
@@ -20,7 +20,7 @@ RUN dotnet publish -a $TARGETARCH -c $target -o obj/docker/publish
 RUN cp -r /src/obj/docker/publish /OpenIdConnectServerMock
 
 # Stage 2: Release
-FROM  --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/aspnet:8.0 as release
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/aspnet:8.0 AS release
 ARG target="Release"
 
 RUN apt-get update && apt-get install curl -y && rm -rf /var/lib/apt/lists/*
