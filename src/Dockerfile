@@ -11,7 +11,7 @@ COPY ./getui.sh ./getui.sh
 RUN ./getui.sh
 
 COPY ./OpenIdConnectServerMock.csproj ./OpenIdConnectServerMock.csproj
-RUN dotnet restore
+RUN dotnet restore -a $TARGETARCH
 
 COPY . .
 
@@ -20,7 +20,7 @@ RUN dotnet publish -a $TARGETARCH -c $target -o obj/docker/publish
 RUN cp -r /src/obj/docker/publish /OpenIdConnectServerMock
 
 # Stage 2: Release
-FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/aspnet:8.0 AS release
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS release
 ARG target="Release"
 
 RUN apt-get update && apt-get install curl -y && rm -rf /var/lib/apt/lists/*
