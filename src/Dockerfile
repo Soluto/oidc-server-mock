@@ -1,5 +1,8 @@
 # Stage 1: Build
-FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0-alpine as source
+
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS source
+ARG TARGETARCH
+
 ARG target="Release"
 
 RUN apk add --no-cache unzip curl bash
@@ -10,16 +13,17 @@ COPY ./getui.sh ./getui.sh
 RUN ./getui.sh
 
 COPY ./OpenIdConnectServerMock.csproj ./OpenIdConnectServerMock.csproj
-RUN dotnet restore
+RUN dotnet restore -a $TARGETARCH
 
 COPY . .
 
-RUN dotnet publish -c $target -o obj/docker/publish
+RUN dotnet publish -a $TARGETARCH -c $target -o obj/docker/publish
 
 RUN cp -r /src/obj/docker/publish /OpenIdConnectServerMock
 
 # Stage 2: Release
-FROM  --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/aspnet:8.0-alpine as release
+FROM  --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/aspnet:8.0-alpine AS release
+
 ARG target="Release"
 
 RUN apk add --no-cache curl
