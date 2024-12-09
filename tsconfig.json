@@ -7,8 +7,7 @@
     "outDir": "./dist",
     "resolveJsonModule": true,
     "rootDir": ".",
-    "target": "ES2022",
-    "types": ["node", "jest"]
+    "target": "ES2022"
   },
   "include": ["e2e/**/*.ts"],
   "exclude": ["e2e/node_modules/**/*", "e2e/dist/**/*"]

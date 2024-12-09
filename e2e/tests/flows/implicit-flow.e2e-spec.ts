@@ -1,3 +1,5 @@
+import { describe, test, beforeAll, afterAll, beforeEach, afterEach, expect } from '@jest/globals';
+
 import * as fs from 'fs';
 import path from 'path';
 
@@ -10,13 +12,15 @@ import clients from '../../config/clients.json';
 import { authorizationEndpoint, introspectEndpoint, userInfoEndpoint } from '../../helpers';
 import type { Client, User } from '../../types';
 
-const users = yaml.parse(fs.readFileSync(path.join(process.cwd(), './config/users.yaml'), { encoding: 'utf8' }));
+const users = yaml.parse(
+  fs.readFileSync(path.join(process.cwd(), './config/users.yaml'), { encoding: 'utf8' }),
+) as User[];
 
 const testCases: User[] = users
   .map(u => ({
     ...u,
     toString: function () {
-      return this.SubjectId;
+      return (this as User).SubjectId;
     },
   }))
   .sort((u1, u2) => (u1.SubjectId < u2.SubjectId ? -1 : 1));
@@ -68,7 +72,7 @@ describe('Implicit Flow', () => {
 
       const tokenParameter = query.get('access_token');
       expect(typeof tokenParameter).toBe('string');
-      token = tokenParameter as string;
+      token = tokenParameter;
       const decodedAccessToken = decodeJWT(token);
       expect(decodedAccessToken).toMatchSnapshot();
     });
@@ -96,7 +100,7 @@ describe('Implicit Flow', () => {
 
       const tokenParameter = query.get('id_token');
       expect(typeof tokenParameter).toBe('string');
-      token = tokenParameter as string;
+      token = tokenParameter;
       const decodedAccessToken = decodeJWT(token);
       expect(decodedAccessToken).toMatchSnapshot();
     });

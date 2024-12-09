@@ -1,3 +1,4 @@
+import { expect } from '@jest/globals';
 import { Page } from 'playwright-chromium';
 
 import { User } from '../types';

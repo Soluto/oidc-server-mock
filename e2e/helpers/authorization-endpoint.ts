@@ -1,3 +1,4 @@
+import { expect } from '@jest/globals';
 import { Page } from 'playwright-chromium';
 
 import { User } from '../types';
@@ -16,9 +17,8 @@ const authorizationEndpoint = async (
   await page.type('[id=Input_Username]', user.Username);
   await page.type('[id=Input_Password]', user.Password);
   await page.keyboard.press('Enter');
-  await page.waitForNavigation();
+  await page.waitForURL(url => url.origin === redirect_uri);
   const redirectedUrl = new URL(page.url());
-  expect(redirectedUrl.origin).toEqual(redirect_uri);
   return redirectedUrl;
 };
 

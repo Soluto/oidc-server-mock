@@ -1,3 +1,4 @@
+import { describe, test, beforeAll, expect } from '@jest/globals';
 import * as dotenv from 'dotenv';
 
 import clients from '../config/clients.json';
@@ -14,7 +15,7 @@ describe('Base path', () => {
 
   test('Discovery Endpoint', async () => {
     const response = await fetch(process.env.OIDC_DISCOVERY_ENDPOINT_WITH_BASE_PATH);
-    const result = await response.json();
+    const result = (await response.json()) as unknown;
     expect(result).toHaveProperty('token_endpoint', process.env.OIDC_TOKEN_URL_WITH_BASE_PATH);
   });
 

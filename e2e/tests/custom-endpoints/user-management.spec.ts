@@ -1,3 +1,4 @@
+import { describe, test, beforeAll, expect } from '@jest/globals';
 import Chance from 'chance';
 import * as dotenv from 'dotenv';
 
@@ -28,7 +29,7 @@ describe('User management', () => {
     const configUsername = 'user_with_all_claim_types';
     const response = await fetch(`${process.env.OIDC_MANAGE_USERS_URL}/${configUserId}`);
     expect(response.status).toBe(200);
-    const receivedUser: User = await response.json();
+    const receivedUser = (await response.json()) as User;
     expect(receivedUser).toHaveProperty('username', configUsername);
   });
 
@@ -66,14 +67,14 @@ describe('User management', () => {
       headers: { 'Content-Type': 'application/json' },
     });
     expect(response.status).toBe(200);
-    const result = await response.json();
+    const result = (await response.json()) as unknown;
     expect(result).toEqual(subjectId);
   });
 
   test('Get user', async () => {
     const response = await fetch(`${process.env.OIDC_MANAGE_USERS_URL}/${subjectId}`);
     expect(response.status).toBe(200);
-    const receivedUser: User = await response.json();
+    const receivedUser = (await response.json()) as User;
     expect(receivedUser).toHaveProperty('username', username);
     expect(receivedUser).toHaveProperty('isActive', true);
   });
@@ -89,9 +90,9 @@ describe('User management', () => {
 
     token = await tokenEndpoint(parameters, {
       payload: {
-        sub: expect.any(String),
-        ['some-app-user-custom-claim']: expect.any(String),
-        ['some-app-scope-1-custom-user-claim']: expect.any(String),
+        sub: expect.any(String) as unknown,
+        ['some-app-user-custom-claim']: expect.any(String) as unknown,
+        ['some-app-scope-1-custom-user-claim']: expect.any(String) as unknown,
       },
     });
   });
@@ -101,15 +102,15 @@ describe('User management', () => {
       sub: expect.any(String),
       name: expect.any(String),
       email: expect.any(String),
-      ['some-custom-identity-user-claim']: expect.any(String),
+      ['some-custom-identity-user-claim']: expect.any(String) as unknown,
     });
   }, 10000);
 
   test('Introspection Endpoint', async () => {
     await introspectEndpoint(token, 'some-app', {
       sub: expect.any(String),
-      ['some-app-user-custom-claim']: expect.any(String),
-      ['some-app-scope-1-custom-user-claim']: expect.any(String),
+      ['some-app-user-custom-claim']: expect.any(String) as unknown,
+      ['some-app-scope-1-custom-user-claim']: expect.any(String) as unknown,
     });
   });
 });
