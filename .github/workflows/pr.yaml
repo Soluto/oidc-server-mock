@@ -7,36 +7,12 @@ on:
 
   workflow_dispatch:
 
-concurrency:
-  group: pr-${{ github.head_ref || github.run_id }}
-  cancel-in-progress: true
-
-env:
-  TILT_VERSION: 'v0.33.21'
-
 jobs:
-  tests:
+  checks-ubuntu:
     name: Tests
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Tilt
-        run: curl -fsSL https://raw.githubusercontent.com/tilt-dev/tilt/${TILT_VERSION}/scripts/install.sh | bash
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: .nvmrc
-          cache: pnpm
-
-      - name: Run npm install
-        run: pnpm install --frozen-lockfile
-
-      - name: Eslint
-        run: pnpm run lint
-
-      - name: Run Tests
-        run: pnpm run tilt:ci
+    strategy:
+      matrix:
+        runner: [ubuntu-latest, macos-latest]
+    uses: ./.github/workflows/reusable-pr.yaml
+    with:
+      runner: ${{ matrix.runner }}

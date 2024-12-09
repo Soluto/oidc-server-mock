@@ -1,0 +1,42 @@
+name: checks
+
+on:
+  workflow_call:
+    inputs:
+      runner:
+        required: true
+        type: string
+
+concurrency:
+  group: pr-${{ inputs.runner }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+env:
+  TILT_VERSION: 'v0.33.21'
+
+jobs:
+  tests:
+    name: Tests - ${{ inputs.runner }}
+    runs-on: ${{ inputs.runner }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Tilt
+        run: curl -fsSL https://raw.githubusercontent.com/tilt-dev/tilt/${TILT_VERSION}/scripts/install.sh | bash
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Run npm install
+        run: pnpm install --frozen-lockfile
+
+      - name: Eslint
+        run: pnpm run lint
+
+      - name: Run Tests
+        run: DOCKER_HOST="$(docker context inspect colima -f '{{ .Endpoints.docker.Host }}')" pnpm run tilt:ci
