@@ -1,0 +1,58 @@
+name: checks
+
+on:
+  workflow_call:
+    inputs:
+      runner:
+        required: true
+        type: string
+
+concurrency:
+  group: pr-${{ inputs.runner }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+env:
+  TILT_VERSION: '0.33.21'
+
+jobs:
+  tests:
+    name: Tests
+    runs-on: ${{ inputs.runner }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Tilt
+        if: ${{ inputs.runner == 'ubuntu-latest' }}
+        uses: yokawasa/action-setup-kube-tools@v0.11.2
+        with:
+          setup-tools: |
+            tilt
+          tilt: ${{ env.TILT_VERSION }}
+
+      - name: Set up Homebrew
+        if: ${{ inputs.runner == 'macos-latest' }}
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Install Tilt
+        if: ${{ inputs.runner == 'macos-latest' }}
+        run: |
+          brew install docker colima tilt
+          brew services start colima
+          docker run hello-world
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Run npm install
+        run: pnpm install --frozen-lockfile
+
+      - name: Eslint
+        run: pnpm run lint
+
+      - name: Run Tests
+        run: DOCKER_HOST="$(docker context inspect colima -f '{{ .Endpoints.docker.Host }}')" pnpm run tilt:ci
