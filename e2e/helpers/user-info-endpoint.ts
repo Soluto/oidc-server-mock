@@ -1,3 +1,5 @@
+import { expect } from '@jest/globals';
+
 const userInfoEndpoint = async (
   token: string,
   snapshotPropertyMatchers: Record<string, unknown> = {},
@@ -5,7 +7,7 @@ const userInfoEndpoint = async (
   const response = await fetch(process.env.OIDC_USERINFO_URL, {
     headers: { authorization: `Bearer ${token}` },
   });
-  const result = await response.json();
+  const result = (await response.json()) as unknown;
   expect(result).toMatchSnapshot(snapshotPropertyMatchers);
 };
 

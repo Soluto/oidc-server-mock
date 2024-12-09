@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "license": "MIT",
+  "type": "module",
   "engines": {
     "node": ">=20.0.0"
   },
@@ -10,30 +11,29 @@
     "tilt:up": "tilt up",
     "tilt:down": "tilt down",
     "tilt:ci": "tilt ci",
-    "lint": "eslint . --ext .ts",
-    "format": "prettier --write **/*.ts"
+    "lint": "eslint .",
+    "format": "prettier --write **/*.ts",
+    "prepare": "husky"
   },
   "workspaces": [
     "e2e"
   ],
   "devDependencies": {
-    "@commitlint/cli": "^19.3.0",
-    "@commitlint/config-conventional": "^19.2.2",
-    "@typescript-eslint/eslint-plugin": "^7.13.1",
-    "@typescript-eslint/parser": "^7.13.1",
-    "eslint": "^8.57.0",
+    "@commitlint/cli": "^19.6.0",
+    "@commitlint/config-conventional": "^19.6.0",
+    "@eslint/js": "^9.16.0",
+    "@jest/globals": "^29.7.0",
+    "eslint": "^9.16.0",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-jest": "^28.6.0",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^5.1.3",
-    "eslint-plugin-promise": "^6.2.0",
-    "eslint-plugin-simple-import-sort": "^12.1.0",
-    "eslint-plugin-unicorn": "^54.0.0",
-    "husky": "^9.0.11",
-    "lint-staged": "^15.2.7",
-    "prettier": "^3.3.2",
+    "eslint-plugin-prettier": "^5.2.1",
+    "globals": "^15.13.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.4.2",
+    "prettier-plugin-packagejson": "^2.5.6",
     "pretty-quick": "^4.0.0",
-    "typescript": "^5.5.2"
-  }
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.17.0"
+  },
+  "packageManager": "pnpm@9.15.0"
 }

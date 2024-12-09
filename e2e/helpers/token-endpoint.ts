@@ -1,3 +1,4 @@
+import { expect } from '@jest/globals';
 import { decode as decodeJWT } from 'jws';
 
 const tokenEndpoint = async (
@@ -11,13 +12,13 @@ const tokenEndpoint = async (
     },
     body: parameters.toString(),
   });
-  const result = await tokenEndpointResponse.json();
+  const result = (await tokenEndpointResponse.json()) as { access_token: string };
   expect(result.access_token).toBeDefined();
   const token = result.access_token;
   const decodedToken = decodeJWT(token);
 
   expect(decodedToken).toMatchSnapshot(snapshotPropertyMatchers);
-  return token as string;
+  return token;
 };
 
 export default tokenEndpoint;
