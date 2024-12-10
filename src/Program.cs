@@ -1,9 +1,7 @@
-﻿using Duende.IdentityServer.Hosting;
-using Microsoft.Extensions.FileProviders;
+﻿using Microsoft.Extensions.FileProviders;
 using OpenIdConnectServer;
 using OpenIdConnectServer.Helpers;
 using OpenIdConnectServer.JsonConverters;
-using OpenIdConnectServer.Middlewares;
 using OpenIdConnectServer.Services;
 using OpenIdConnectServer.Validation;
 using Serilog;
@@ -53,6 +51,7 @@ builder.Services
 
 var app = builder.Build();
 
+app.UsePathBase(Config.GetAspNetServicesOptions().BasePath);
 
 var aspNetServicesOptions = Config.GetAspNetServicesOptions();
 AspNetServicesHelper.ConfigureAspNetServices(builder.Services, aspNetServicesOptions);
@@ -64,16 +63,6 @@ Config.ConfigureOptions<IdentityServerHost.Pages.Logout.LogoutOptions>("LOGOUT")
 app.UseDeveloperExceptionPage();
 
 app.UseIdentityServer();
-
-var basePath = Config.GetAspNetServicesOptions().BasePath;
-if (!string.IsNullOrEmpty(basePath))
-{
-    app.UseWhen(ctx => ctx.Request.Path.StartsWithSegments(basePath), appBuilder =>
-    {
-        appBuilder.UseMiddleware<BasePathMiddleware>();
-        appBuilder.UseMiddleware<IdentityServerMiddleware>();
-    });
-}
 
 app.UseHttpsRedirection();
 
