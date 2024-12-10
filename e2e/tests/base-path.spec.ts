@@ -19,6 +19,16 @@ describe('Base path', () => {
     expect(result).toHaveProperty('token_endpoint', process.env.OIDC_TOKEN_URL_WITH_BASE_PATH);
   });
 
+  test('CORS', async () => {
+    const origin = 'https://google.com';
+    const response = await fetch(process.env.OIDC_DISCOVERY_ENDPOINT_WITH_BASE_PATH, {
+      headers: {
+        origin,
+      },
+    });
+    expect(response.headers.get('access-control-allow-origin')).toEqual(origin);
+  });
+
   test('Token Endpoint', async () => {
     if (!client) throw new Error('Client not found');
 
