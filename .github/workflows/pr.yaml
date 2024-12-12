@@ -7,40 +7,12 @@ on:
 
   workflow_dispatch:
 
-concurrency:
-  group: pr-${{ github.head_ref || github.run_id }}
-  cancel-in-progress: true
-
-env:
-  TILT_VERSION: '0.33.21'
-
 jobs:
-  tests:
-    name: Tests
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Tilt
-        uses: yokawasa/action-setup-kube-tools@v0.11.2
-        with:
-          setup-tools: |
-            tilt
-          tilt: ${{ env.TILT_VERSION }}
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: .nvmrc
-          cache: pnpm
-
-      - name: Run npm install
-        run: pnpm install --frozen-lockfile
-
-      - name: Eslint
-        run: pnpm run lint
-
-      - name: Run Tests
-        run: pnpm run tilt:ci
+  checks-ubuntu:
+    uses: ./.github/workflows/reusable-pr.yaml
+    with:
+      runner: ubuntu-latest
+  checks-macos:
+    uses: ./.github/workflows/reusable-pr.yaml
+    with:
+      runner: macos-latest
