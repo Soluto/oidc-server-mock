@@ -41,6 +41,8 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           load: true
+          context: ./src
+          file: ./src/Dockerfile
           tags: ${{ steps.get_version.outputs.version-without-v }}-test
 
       - name: Setup Tilt
