@@ -65,8 +65,8 @@ importers:
         specifier: ^4.0.0
         version: 4.0.0
       playwright-chromium:
-        specifier: ^1.49.0
-        version: 1.49.0
+        specifier: ^1.49.1
+        version: 1.49.1
       wait-on:
         specifier: ^8.0.1
         version: 8.0.1
@@ -2545,15 +2545,15 @@ packages:
       { integrity: sha512-HRDzbaKjC+AOWVXxAU/x54COGeIv9eb+6CkDSQoNTt4XyWoIJvuPsXizxu/Fr23EiekbtZwmh1IcIG/l/a10GQ== }
     engines: { node: '>=8' }
 
-  playwright-chromium@1.49.0:
+  playwright-chromium@1.49.1:
     resolution:
-      { integrity: sha512-xU+nOHawNFKfJsHTTGyWqSJ5nRGGHQq1wTsc49H9rM+hDNnoKZi+3m12mGoLpqvJP7vRjZQ3uvU9/UJZbrJ1AA== }
+      { integrity: sha512-XAQDkZ1Eem1OONhfS8B2LM2mgHG/i5jIxooxjvqjbF/9GnLnRTJHdQamNjo1e4FZvt7J0BFD/15+qAcT0eKlfA== }
     engines: { node: '>=18' }
     hasBin: true
 
-  playwright-core@1.49.0:
+  playwright-core@1.49.1:
     resolution:
-      { integrity: sha512-R+3KKTQF3npy5GTiKH/T+kdhoJfJojjHESR1YEWhYuEKRVfVaxH3+4+GvXE5xyCngCxhxnykk0Vlah9v8fs3jA== }
+      { integrity: sha512-BzmpVcs4kE2CH15rWfzpjzVGhWERJfmnXmniSyKeRZUs9Ws65m+RGIi7mjJK/euCegfn3i7jvqWeWyHe9y3Vgg== }
     engines: { node: '>=18' }
     hasBin: true
 
@@ -4966,7 +4966,7 @@ snapshots:
       jest-process-manager: 0.4.0
       jest-runner: 29.7.0
       nyc: 15.1.0
-      playwright-core: 1.49.0
+      playwright-core: 1.49.1
       rimraf: 3.0.2
       uuid: 8.3.2
     transitivePeerDependencies:
@@ -5489,11 +5489,11 @@ snapshots:
     dependencies:
       find-up: 4.1.0
 
-  playwright-chromium@1.49.0:
+  playwright-chromium@1.49.1:
     dependencies:
-      playwright-core: 1.49.0
+      playwright-core: 1.49.1
 
-  playwright-core@1.49.0: {}
+  playwright-core@1.49.1: {}
 
   prelude-ls@1.2.1: {}
 
