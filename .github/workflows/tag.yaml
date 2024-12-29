@@ -43,7 +43,7 @@ jobs:
           load: true
           context: ./src
           file: ./src/Dockerfile
-          tags: ${{ steps.get_version.outputs.version-without-v }}-test
+          tags: ghcr.io/${{ steps.repository_owner.outputs.lowercase }}/oidc-server-mock:${{ steps.get_version.outputs.version-without-v }}-test
 
       - name: Setup Tilt
         run: curl -fsSL https://raw.githubusercontent.com/tilt-dev/tilt/${TILT_VERSION}/scripts/install.sh | bash
