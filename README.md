@@ -19,7 +19,6 @@ docker pull ghcr.io/soluto/oidc-server-mock:latest
 This is the sample of using the server in `docker-compose` configuration:
 
 ```yaml
-version: '3'
 services:
   oidc-server-mock:
     container_name: oidc-server-mock
@@ -92,8 +91,8 @@ services:
         ]
       CLIENTS_CONFIGURATION_PATH: /tmp/config/clients-config.json
       ASPNET_SERVICES_OPTIONS_INLINE: |
-        { 
-          "ForwardedHeadersOptions": { 
+        {
+          "ForwardedHeadersOptions": {
             "ForwardedHeaders" : "All"
           }
         }
