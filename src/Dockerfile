@@ -17,7 +17,7 @@ RUN dotnet restore -a $TARGETARCH
 
 COPY . .
 
-RUN dotnet publish -a $TARGETARCH -c $target -o obj/docker/publish
+RUN dotnet publish -a $TARGETARCH --no-restore -c $target -o obj/docker/publish
 
 RUN cp -r /src/obj/docker/publish /OpenIdConnectServerMock
 
@@ -38,6 +38,6 @@ EXPOSE 80
 EXPOSE 443
 
 HEALTHCHECK --start-period=2s --interval=1s --timeout=100ms --retries=10 \
-      CMD curl -k --location https://localhost/health || exit 1
+    CMD curl -k --location https://localhost/health || exit 1
 
 ENTRYPOINT ["dotnet", "OpenIdConnectServerMock.dll" ]
