@@ -3,7 +3,6 @@ import { describe, test, beforeAll, expect } from '@jest/globals';
 import * as fs from 'fs';
 import path from 'path';
 
-import * as dotenv from 'dotenv';
 import * as yaml from 'yaml';
 
 import clients from '../../config/clients.json';
@@ -28,7 +27,6 @@ describe('Password Flow', () => {
   let token: string;
 
   beforeAll(() => {
-    dotenv.config();
     client = clients.find(c => c.ClientId === 'password-flow-client-id');
     expect(client).toBeDefined();
   });

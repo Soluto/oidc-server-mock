@@ -2,7 +2,6 @@ import { describe, test, beforeAll, afterAll, beforeEach, afterEach, expect } fr
 import * as fs from 'fs';
 import path from 'path';
 
-import * as dotenv from 'dotenv';
 import { Browser, BrowserContext, chromium, Page } from 'playwright-chromium';
 import * as yaml from 'yaml';
 
@@ -33,8 +32,6 @@ describe('Authorization Code Flow', () => {
   let client: Client | undefined;
 
   beforeAll(async () => {
-    dotenv.config();
-
     browser = await chromium.launch();
     client = clients.find(c => c.ClientId === 'authorization-code-client-id');
     expect(client).toBeDefined();

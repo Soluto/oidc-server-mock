@@ -3,7 +3,6 @@ import * as crypto from 'crypto';
 import * as fs from 'fs';
 import path from 'path';
 
-import * as dotenv from 'dotenv';
 import { Browser, BrowserContext, chromium, Page } from 'playwright-chromium';
 import * as yaml from 'yaml';
 
@@ -40,8 +39,6 @@ describe('Authorization Code Flow (with PKCE)', () => {
   let client: Client | undefined;
 
   beforeAll(async () => {
-    dotenv.config();
-
     browser = await chromium.launch();
     client = clients.find(c => c.ClientId === 'authorization-code-with-pkce-client-id');
     expect(client).toBeDefined();

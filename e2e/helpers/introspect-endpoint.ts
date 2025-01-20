@@ -4,6 +4,7 @@ import * as fs from 'fs/promises';
 import path from 'path';
 
 import * as yaml from 'yaml';
+import { oidcIntrospectionUrl } from './endpoints';
 
 const introspectEndpoint = async (
   token: string,
@@ -24,13 +25,13 @@ const introspectEndpoint = async (
     token,
   });
 
-  const response = await fetch(process.env.OIDC_INTROSPECTION_URL, {
+  const response = await fetch(oidcIntrospectionUrl, {
     method: 'POST',
     body: requestBody,
     headers,
   });
 
-  expect(response).toBeDefined();
+  expect(response.ok).toBe(true);
   const result = (await response.json()) as unknown;
   expect(result).toMatchSnapshot(snapshotPropertyMatchers);
 };

@@ -11,6 +11,7 @@
   "dependencies": {
     "chance": "^1.1.12",
     "dotenv": "^16.4.7",
+    "env-var": "^7.5.0",
     "jws": "^4.0.0",
     "playwright-chromium": "^1.49.1",
     "wait-on": "^8.0.1",
