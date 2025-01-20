@@ -2,10 +2,11 @@ import { expect } from '@jest/globals';
 import { Page } from 'playwright-chromium';
 
 import { User } from '../types';
+import { oidcGrantsUrl } from './endpoints';
 
 const grantsEndpoint = async (page: Page, user: User): Promise<void> => {
-  const response = await page.goto(process.env.OIDC_GRANTS_URL);
-  expect(response.ok()).toBeTruthy();
+  const response = await page.goto(oidcGrantsUrl.toString());
+  expect(response.ok()).toBe(true);
 
   await page.waitForSelector('[id=Input_Username]');
   await page.type('[id=Input_Username]', user.Username);

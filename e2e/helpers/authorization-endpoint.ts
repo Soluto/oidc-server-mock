@@ -2,6 +2,7 @@ import { expect } from '@jest/globals';
 import { Page } from 'playwright-chromium';
 
 import { User } from '../types';
+import { oidcAuthorizeUrl } from './endpoints';
 
 const authorizationEndpoint = async (
   page: Page,
@@ -9,9 +10,9 @@ const authorizationEndpoint = async (
   user: User,
   redirect_uri: string,
 ): Promise<URL> => {
-  const url = `${process.env.OIDC_AUTHORIZE_URL}?${parameters.toString()}`;
+  const url = `${oidcAuthorizeUrl.href}?${parameters.toString()}`;
   const response = await page.goto(url);
-  expect(response.ok()).toBeTruthy();
+  expect(response.ok()).toBe(true);
 
   await page.waitForSelector('[id=Input_Username]');
   await page.type('[id=Input_Username]', user.Username);

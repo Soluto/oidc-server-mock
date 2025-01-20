@@ -3,7 +3,6 @@ import { describe, test, beforeAll, afterAll, beforeEach, afterEach, expect } fr
 import * as fs from 'fs';
 import path from 'path';
 
-import * as dotenv from 'dotenv';
 import { decode as decodeJWT } from 'jws';
 import { Browser, BrowserContext, chromium, Page } from 'playwright-chromium';
 import * as yaml from 'yaml';
@@ -34,8 +33,6 @@ describe('Implicit Flow', () => {
   let client: Client | undefined;
 
   beforeAll(async () => {
-    dotenv.config();
-
     browser = await chromium.launch();
     client = clients.find(c => c.ClientId === 'implicit-flow-client-id');
     expect(client).toBeDefined();

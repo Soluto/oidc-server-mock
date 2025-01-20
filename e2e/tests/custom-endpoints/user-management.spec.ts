@@ -1,10 +1,10 @@
 import { describe, test, beforeAll, expect } from '@jest/globals';
 import Chance from 'chance';
-import * as dotenv from 'dotenv';
 
 import clients from '../../config/clients.json';
 import { introspectEndpoint, tokenEndpoint, userInfoEndpoint } from '../../helpers';
 import { Client, User } from '../../types';
+import { oidcUserManagementUrl } from 'e2e/helpers/endpoints';
 
 describe('User management', () => {
   const chance = new Chance();
@@ -19,15 +19,13 @@ describe('User management', () => {
   let token: string;
 
   beforeAll(() => {
-    dotenv.config();
-
     client = clients.find(c => c.ClientId === 'password-flow-client-id');
   });
 
   test('Get user from configuration', async () => {
     const configUserId = 'user_with_all_claim_types';
     const configUsername = 'user_with_all_claim_types';
-    const response = await fetch(`${process.env.OIDC_MANAGE_USERS_URL}/${configUserId}`);
+    const response = await fetch(`${oidcUserManagementUrl.href}/${configUserId}`);
     expect(response.status).toBe(200);
     const receivedUser = (await response.json()) as User;
     expect(receivedUser).toHaveProperty('username', configUsername);
@@ -61,7 +59,7 @@ describe('User management', () => {
         },
       ],
     };
-    const response = await fetch(process.env.OIDC_MANAGE_USERS_URL, {
+    const response = await fetch(oidcUserManagementUrl, {
       method: 'POST',
       body: JSON.stringify(user),
       headers: { 'Content-Type': 'application/json' },
@@ -72,7 +70,7 @@ describe('User management', () => {
   });
 
   test('Get user', async () => {
-    const response = await fetch(`${process.env.OIDC_MANAGE_USERS_URL}/${subjectId}`);
+    const response = await fetch(`${oidcUserManagementUrl.href}/${subjectId}`);
     expect(response.status).toBe(200);
     const receivedUser = (await response.json()) as User;
     expect(receivedUser).toHaveProperty('username', username);

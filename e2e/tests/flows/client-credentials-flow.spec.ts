@@ -1,5 +1,4 @@
 import { describe, test, beforeAll, expect } from '@jest/globals';
-import * as dotenv from 'dotenv';
 
 import clients from '../../config/clients.json';
 import { introspectEndpoint, tokenEndpoint } from '../../helpers';
@@ -10,7 +9,6 @@ describe('Client Credentials Flow', () => {
   let token: string;
 
   beforeAll(() => {
-    dotenv.config();
     client = clients.find(c => c.ClientId === 'client-credentials-flow-client-id');
     expect(client).toBeDefined();
   });
