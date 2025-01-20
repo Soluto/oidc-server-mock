@@ -53,6 +53,7 @@ builder.Services
 
 var app = builder.Build();
 
+app.UsePathBase(Config.GetAspNetServicesOptions().BasePath);
 
 var aspNetServicesOptions = Config.GetAspNetServicesOptions();
 AspNetServicesHelper.ConfigureAspNetServices(builder.Services, aspNetServicesOptions);
@@ -65,16 +66,6 @@ app.UseDeveloperExceptionPage();
 
 app.UseIdentityServer();
 
-var basePath = Config.GetAspNetServicesOptions().BasePath;
-if (!string.IsNullOrEmpty(basePath))
-{
-    app.UseWhen(ctx => ctx.Request.Path.StartsWithSegments(basePath), appBuilder =>
-    {
-        appBuilder.UseMiddleware<BasePathMiddleware>();
-        appBuilder.UseMiddleware<IdentityServerMiddleware>();
-    });
-}
-
 app.UseHttpsRedirection();
 
 var manifestEmbeddedProvider = new ManifestEmbeddedFileProvider(typeof(Program).Assembly, "wwwroot");
@@ -84,13 +75,8 @@ app.UseStaticFiles(new StaticFileOptions
 });
 
 app.UseRouting();
-
 app.UseAuthorization();
-app.UseEndpoints(endpoints =>
-    {
-        endpoints.MapDefaultControllerRoute();
-    });
-
+app.MapDefaultControllerRoute();
 app.MapRazorPages();
 
 app.Run();

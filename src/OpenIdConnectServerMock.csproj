@@ -8,7 +8,7 @@
 
     <IsPackable>true</IsPackable>
     <Description>Configurable mock server with OpenId Connect functionality</Description>
-    <VersionPrefix>0.10.1</VersionPrefix>
+    <VersionPrefix>0.11.1</VersionPrefix>
     <PackageProjectUrl>https://github.com/Soluto/oidc-server-mock</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageTags>OIDC</PackageTags>
