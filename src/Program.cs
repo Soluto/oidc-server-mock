@@ -58,8 +58,8 @@ var aspNetServicesOptions = Config.GetAspNetServicesOptions();
 AspNetServicesHelper.ConfigureAspNetServices(builder.Services, aspNetServicesOptions);
 AspNetServicesHelper.UseAspNetServices(app, aspNetServicesOptions);
 
-Config.ConfigureOptions<IdentityServerHost.Pages.Login.LoginOptions>("LOGIN");
-Config.ConfigureOptions<IdentityServerHost.Pages.Logout.LogoutOptions>("LOGOUT");
+// Config.ConfigureOptions<IdentityServerHost.Pages.Login.LoginOptions>("LOGIN");
+// Config.ConfigureOptions<IdentityServerHost.Pages.Logout.LogoutOptions>("LOGOUT");
 
 app.UseDeveloperExceptionPage();
 

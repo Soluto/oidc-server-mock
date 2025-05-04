@@ -4,15 +4,19 @@ set -e
 
 TAG="6.3.0"
 
-SOURCE="https://github.com/DuendeSoftware/IdentityServer.Quickstart.UI/archive/refs/tags/$TAG.zip"
-curl -L -o ui.zip "$SOURCE"
+git clone -n --depth=1 --filter=tree:0 \
+  -b is-7.2.2 --single-branch \
+  https://github.com/DuendeSoftware/products
+cd products
+git sparse-checkout set --no-cone /identity-server/hosts/main
+git checkout
 
-unzip -d ui ui.zip
+cd -
 
 [[ -d Pages ]] || mkdir Pages
 [[ -d wwwroot ]] || mkdir wwwroot
 
-cp -r ./ui/IdentityServer.Quickstart.UI-$TAG/Pages/* Pages
-cp -r ./ui/IdentityServer.Quickstart.UI-$TAG/wwwroot/* wwwroot
+cp -r ./products/identity-server/hosts/main/Pages/* Pages
+cp -r ./products/identity-server/hosts/main/wwwroot/* wwwroot
 
-rm -rf ui ui.zip
+rm -rf products
