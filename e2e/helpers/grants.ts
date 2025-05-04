@@ -5,7 +5,7 @@ import { User } from '../types';
 import { oidcGrantsUrl } from './endpoints';
 
 const grantsEndpoint = async (page: Page, user: User): Promise<void> => {
-  const response = await page.goto(oidcGrantsUrl.toString());
+  const response = await page.goto(oidcGrantsUrl.href);
   expect(response.ok()).toBe(true);
 
   await page.waitForSelector('[id=Input_Username]');

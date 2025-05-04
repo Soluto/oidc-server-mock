@@ -12,7 +12,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  TILT_VERSION: 'v0.33.21'
+  TILT_VERSION: 'v0.34.2'
 
 jobs:
   tests:
@@ -34,6 +34,9 @@ jobs:
 
       - name: Run npm install
         run: pnpm install --frozen-lockfile
+
+      - name: Install playwright dependencies
+        run: pnpm --filter e2e exec playwright install --with-deps chromium
 
       - name: Eslint
         run: pnpm run lint
