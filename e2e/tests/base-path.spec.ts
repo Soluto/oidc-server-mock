@@ -13,10 +13,15 @@ describe('Base path', () => {
   });
 
   test('Discovery Endpoint', async () => {
-    const response = await fetch(oidcDiscoveryEndpointWithBasePath);
+    const response = await fetch(oidcDiscoveryEndpointWithBasePath, {
+      headers: {
+        origin: 'https://google.com',
+      },
+    });
     expect(response.ok).toBe(true);
     const result = (await response.json()) as unknown;
     expect(result).toHaveProperty('token_endpoint', oidcTokenUrlWithBasePath.href);
+    expect(Object.fromEntries(response.headers.entries())).toMatchSnapshot({ date: expect.any(String) });
   });
 
   test('Token Endpoint', async () => {

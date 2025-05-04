@@ -6,19 +6,19 @@ namespace OpenIdConnectServer.Helpers
 {
     public class AspNetServicesOptions
     {
-        public AspNetCorsOptions Cors { get; set; }
+        public AspNetCorsOptions? Cors { get; set; }
 
-        public IDictionary<string, AuthenticationOptions> Authentication { get; set; }
-        public SessionOptions Session { get; set; }
+        public IDictionary<string, AuthenticationOptions>? Authentication { get; set; }
+        public SessionOptions? Session { get; set; }
 
-        public ForwardedHeadersOptions ForwardedHeadersOptions { get; set; }
+        public ForwardedHeadersOptions? ForwardedHeadersOptions { get; set; }
 
-        public string BasePath { get; set; }
+        public string? BasePath { get; set; }
     }
 
     public class AuthenticationOptions
     {
-        public CookieAuthenticationOptions CookieAuthenticationOptions { get; set; }
+        public CookieAuthenticationOptions? CookieAuthenticationOptions { get; set; }
     }
 
     public static class AspNetServicesHelper

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Base path Discovery Endpoint 1`] = `
+{
+  "access-control-allow-origin": "https://google.com",
+  "content-type": "application/json; charset=UTF-8",
+  "date": Any<String>,
+  "server": "Kestrel",
+  "transfer-encoding": "chunked",
+}
+`;
