@@ -57,3 +57,54 @@ jobs:
 
       - name: Run Tests
         run: pnpm run tilt:ci
+
+  smoke-docker:
+    name: Smoke test Docker image
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./src
+          file: ./src/Dockerfile
+          push: false
+          load: true
+          tags: oidc-server-mock:pr-smoke
+
+      - name: Start container
+        run: |
+          docker run -d \
+            --name oidc-smoke \
+            -p 8080:80 \
+            -e ASPNETCORE_URLS=http://+:80 \
+            -e ASPNETCORE_ENVIRONMENT=Development \
+            oidc-server-mock:pr-smoke
+
+      # Note: the container's own HEALTHCHECK directive probes https://localhost/health
+      # and will report "unhealthy" under this HTTP-only configuration. That does not
+      # affect this job's pass/fail — the external probe over port 8080 is what matters.
+      - name: Probe /health
+        run: |
+          echo "Probing http://localhost:8080/health (up to 30 attempts, 1s interval)"
+          for i in $(seq 1 30); do
+            STATUS=$(curl -fsS -o /dev/null -w "%{http_code}" http://localhost:8080/health 2>/dev/null || true)
+            if [ "$STATUS" = "200" ]; then
+              echo "Health probe succeeded on attempt $i (HTTP 200)"
+              exit 0
+            fi
+            echo "Attempt $i: got '$STATUS', retrying in 1s..."
+            sleep 1
+          done
+          echo "Health probe failed after 30 attempts. Container logs:"
+          docker logs oidc-smoke
+          exit 1
+
+      - name: Remove container
+        if: always()
+        run: docker rm -f oidc-smoke || true
