@@ -16,12 +16,6 @@ export default tseslint.config(
       },
     },
     extends: [js.configs.recommended, ...tseslint.configs.recommendedTypeChecked],
-    settings: {
-      node: {
-        allowModules: ['jest-playwright-preset', 'wait-on'],
-        tryExtensions: ['.ts', '.json', '.node'],
-      },
-    },
     ignores: ['**/node_modules/**', '**/dist/**', '**/coverage/**'],
   },
   eslintConfigPrettier,
