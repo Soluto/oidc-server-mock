@@ -82,6 +82,16 @@ jobs:
         env:
           IMAGE_TAG: ${{ steps.get_version.outputs.version-without-v }}-test
 
+      - name: Scan Docker image for vulnerabilities
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          image-ref: ghcr.io/${{ steps.repository_owner.outputs.lowercase }}/oidc-server-mock:${{ steps.get_version.outputs.version-without-v }}-test
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: 'true'
+          severity: 'CRITICAL,HIGH'
+          vuln-type: 'os,library'
+
       - name: Build and push new docker image
         uses: docker/build-push-action@v6
         with:
