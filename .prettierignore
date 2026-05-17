@@ -1,3 +1,7 @@
 **/node_modules
 **/dist
 coverage
+.worktrees
+wwwroot
+Pages
+pnpm-lock.yaml
