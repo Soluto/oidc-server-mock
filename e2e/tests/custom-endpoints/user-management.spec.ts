@@ -100,15 +100,15 @@ describe('User management', () => {
       sub: expect.any(String),
       name: expect.any(String),
       email: expect.any(String),
-      ['some-custom-identity-user-claim']: expect.any(String) as unknown,
+      ['some-custom-identity-user-claim']: expect.any(String),
     });
   }, 10000);
 
   test('Introspection Endpoint', async () => {
     await introspectEndpoint(token, 'some-app', {
       sub: expect.any(String),
-      ['some-app-user-custom-claim']: expect.any(String) as unknown,
-      ['some-app-scope-1-custom-user-claim']: expect.any(String) as unknown,
+      ['some-app-user-custom-claim']: expect.any(String),
+      ['some-app-scope-1-custom-user-claim']: expect.any(String),
     });
   });
 });
