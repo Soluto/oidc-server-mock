@@ -2,8 +2,12 @@
   "compilerOptions": {
     "baseUrl": "./",
     "esModuleInterop": true,
-    "module": "commonjs",
-    "moduleResolution": "node",
+    // "Bundler" resolution is used instead of "NodeNext" because this project never runs
+    // tsc-emitted JS through Node directly — ts-jest transpiles independently at test time
+    // and there is no tsc build step. If a Node-consumed build is ever added, migrate to
+    // "NodeNext" with explicit .js import extensions and with { type: "json" } on JSON imports.
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "outDir": "./dist",
     "resolveJsonModule": true,
     "rootDir": ".",
