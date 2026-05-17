@@ -12,6 +12,11 @@ jobs:
   build_push_docker:
     name: Build and Push Docker image
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      attestations: write
+      packages: write
+      contents: read
     steps:
       - uses: actions/checkout@v4
 
@@ -68,7 +73,8 @@ jobs:
         env:
           IMAGE_TAG: ${{ steps.get_version.outputs.version-without-v }}-test
 
-      - name: Build and push new docker image
+      - id: build_push
+        name: Build and push new docker image
         uses: docker/build-push-action@v6
         with:
           push: true
@@ -80,6 +86,30 @@ jobs:
             ghcr.io/${{ steps.repository_owner.outputs.lowercase }}/oidc-server-mock:${{ steps.get_version.outputs.version-without-v }}
           labels: |
             org.opencontainers.image.source=${{ github.event.repository.html_url }}
+
+      - name: Generate SBOM
+        uses: anchore/sbom-action@e22c389904149dbc22b58101806040fa8d37a610 # v0.24.0
+        with:
+          image: ghcr.io/${{ steps.repository_owner.outputs.lowercase }}/oidc-server-mock:${{ steps.get_version.outputs.version-without-v }}
+          format: spdx-json
+          output-file: sbom.spdx.json
+          upload-artifact: true
+          upload-artifact-retention: 90
+
+      - name: Attest SBOM
+        uses: actions/attest-sbom@c604332985a26aa8cf1bdc465b92731239ec6b9e # v4.1.0
+        with:
+          subject-name: ghcr.io/${{ steps.repository_owner.outputs.lowercase }}/oidc-server-mock
+          subject-digest: ${{ steps.build_push.outputs.digest }}
+          sbom-path: sbom.spdx.json
+          push-to-registry: true
+
+      - name: Attest build provenance
+        uses: actions/attest-build-provenance@a2bbfa25375fe432b6a289bc6b6cd05ecd0c4c32 # v4.1.0
+        with:
+          subject-name: ghcr.io/${{ steps.repository_owner.outputs.lowercase }}/oidc-server-mock
+          subject-digest: ${{ steps.build_push.outputs.digest }}
+          push-to-registry: true
 
   build_push_nuget:
     name: Build and Push Nuget package
