@@ -87,6 +87,7 @@ jobs:
           labels: |
             org.opencontainers.image.source=${{ github.event.repository.html_url }}
 
+        # Note: SBOM covers the amd64 variant only (Syft limitation with a single image: reference on ubuntu-latest).
       - name: Generate SBOM
         uses: anchore/sbom-action@e22c389904149dbc22b58101806040fa8d37a610 # v0.24.0
         with:
@@ -96,6 +97,7 @@ jobs:
           upload-artifact: true
           upload-artifact-retention: 90
 
+        # Note: actions/attest-sbom v4 is a deprecated wrapper around actions/attest; functional, migrate separately.
       - name: Attest SBOM
         uses: actions/attest-sbom@c604332985a26aa8cf1bdc465b92731239ec6b9e # v4.1.0
         with:
@@ -104,6 +106,7 @@ jobs:
           sbom-path: sbom.spdx.json
           push-to-registry: true
 
+        # Note: actions/attest-build-provenance v4 is a deprecated wrapper around actions/attest; functional, migrate separately.
       - name: Attest build provenance
         uses: actions/attest-build-provenance@a2bbfa25375fe432b6a289bc6b6cd05ecd0c4c32 # v4.1.0
         with:
