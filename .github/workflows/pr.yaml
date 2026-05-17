@@ -12,7 +12,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  TILT_VERSION: 'v0.34.2'
+  TILT_VERSION: '0.34.2'
 
 jobs:
   tests:
@@ -21,8 +21,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Tilt
-        run: curl -fsSL https://raw.githubusercontent.com/tilt-dev/tilt/${TILT_VERSION}/scripts/install.sh | bash
+      - name: Cache Tilt binary
+        id: cache-tilt
+        uses: actions/cache@v4
+        with:
+          path: ~/.local/bin/tilt
+          key: tilt-${{ runner.os }}-${{ env.TILT_VERSION }}  # arch assumed x86_64; update key if ARM runners added
+
+      - name: Install Tilt
+        if: steps.cache-tilt.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p ~/.local/bin
+          curl -fsSL "https://github.com/tilt-dev/tilt/releases/download/v${TILT_VERSION}/tilt.${TILT_VERSION}.linux.x86_64.tar.gz" \
+            | tar -xz -C ~/.local/bin tilt
+
+      - name: Add Tilt to PATH
+        run: echo "$HOME/.local/bin" >> "$GITHUB_PATH"
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
