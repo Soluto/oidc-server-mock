@@ -49,6 +49,9 @@ jobs:
       - name: Run npm install
         run: pnpm install --frozen-lockfile
 
+      - name: Audit dependencies
+        run: pnpm audit --audit-level=high
+
       - name: Install playwright dependencies
         run: pnpm --filter e2e exec playwright install --with-deps chromium
 
