@@ -12,7 +12,7 @@
     "tilt:down": "tilt down",
     "tilt:ci": "tilt ci",
     "lint": "eslint .",
-    "format": "prettier --write **/*.ts",
+    "format": "prettier --write \"**/*.{js,ts,json,yaml,yml,md}\"",
     "prepare": "husky"
   },
   "workspaces": [

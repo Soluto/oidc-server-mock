@@ -15,7 +15,7 @@ A configurable mock OIDC/OAuth2 server for development and testing, built on Due
 ```bash
 pnpm install                                              # install all workspace dependencies
 pnpm lint                                                 # ESLint on all TS files
-pnpm format                                               # Prettier --write on all TS files
+pnpm format                                               # Prettier --write on all JS/TS/JSON/YAML/MD files
 pnpm --filter e2e exec playwright install --with-deps chromium  # install Playwright browser
 ```
 
